@@ -35,7 +35,7 @@ common.toggleMenuHover = function() {
 	}
 }
 
-common.httpsRedirect() {
+common.httpsRedirect = function() {
 	// Redirects all HTTP request to the HTTPS website
 	if (location.protocol == 'http:' && location.href.indexOf('murraywhiteins') > -1) {
 		location.href = location.href.replace('http:', 'https:');
