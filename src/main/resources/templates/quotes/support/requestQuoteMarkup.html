@@ -1,0 +1,17 @@
+<div th:fragment="markup" xmlns:th="http://www.thymeleaf.org">
+	<h2>Request a Quote</h2>
+	<form th:action="@{/quotes/type}" class="form" id="quoteForm">
+		<select name="type" class="form-control">
+			<option value="auto">Auto</option>
+			<option value="specialEvents">Special Events</option>
+			<option value="homeowners">Homeowners</option>
+			<option value="umbrella">Umbrella</option>
+			<option value="life">Life</option>
+			<option value="renters">Renters</option>
+			<option value="flood">Flood</option>
+			<option value="business">Business</option>
+			<option value="other">Other Insurance</option>
+		</select>
+		<input type="submit" value="Request Quote" class="btn btn-primary pull-right" />
+	</form>
+</div>

@@ -1,0 +1,7 @@
+dependencies {
+	// Use MySQL Connector-J
+    compile('mysql:mysql-connector-java')
+    
+    // Use developer tools so the project automatically rebuilds when files change
+	compile("org.springframework.boot:spring-boot-devtools")
+}

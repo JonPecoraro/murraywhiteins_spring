@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/default"
+	th:with="title=${'Quotes'},pageHeading=${'Quotes'}">
+	
+	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/quotes.css}" />
+	<section layout:fragment="additionalScripts">
+		<script th:src="@{/js/quotes.js}"></script>
+	</section>
+	
+	<div layout:fragment="content" th:inline="text">
+		<div th:if="${success}" class="row text-center">
+			<div class="col-xs-12">
+				<h3 class="text-success">
+					<span class="glyphicon glyphicon-ok"></span>
+					Thank you, your quote request has been received.
+				</h3>
+				<p>
+					An agent from Murray White Insurance Agency will be in touch with you shortly.
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-7">
+				<img th:src="@{/img/quote.png}" alt="meeting photo" class="img-responsive img-rounded" align="left" />
+			</div>
+			<div class="col-sm-5">
+				<div th:replace="quotes/support/requestQuoteMarkup :: markup"></div>
+				<p id="quoteDescription">
+					The diligent workers at Murray White Insurance Agency will query their large database of represented
+					companies in search of the perfect quote for you. Our agents are dedicated to finding quotes with the
+					most coverage and at the most affordable price that will meet your needs. Fill out an insurance quote, and an
+					agent will be in touch with you shortly.
+				</p>
+			</div>
+		</div>
+	</div>
+</html>

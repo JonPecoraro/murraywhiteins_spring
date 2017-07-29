@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/default"
+	th:with="title=${'Team'},pageHeading=${'Our Team'}">
+	
+	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/team.css}" />
+
+	<div layout:fragment="content" th:inline="text">
+		<div class="row">
+			<div class="col-sm-6">
+				<ul class="listing">
+					<li class="clearfix"
+						th:each="i : ${#numbers.sequence(0, T(Math).ceil(teamMembersWithImage.size() / 2.0) -1)}"
+						th:with="teamMember=${teamMembersWithImage[i]}"
+						th:include="team/teamMemberMarkup :: markup" />
+				</ul>
+			</div>
+			<div class="col-sm-6">
+				<ul class="listing">
+					<li class="clearfix"
+						th:each="i : ${#numbers.sequence(T(Math).ceil(teamMembersWithImage.size() / 2.0), teamMembersWithImage.size() - 1)}"
+						th:with="teamMember=${teamMembersWithImage[i]}"
+						th:include="team/teamMemberMarkup :: markup" />
+				</ul>
+			</div>
+		</div>
+		<h3 th:if="${teamMembersWithoutImage.size() > 0}">Not Pictured</h3>
+		<div th:if="${teamMembersWithoutImage.size() > 0}" class="row">
+			<div class="col-sm-6">
+				<ul class="listing">
+					<li class="clearfix"
+						th:each="i : ${#numbers.sequence(0, teamMembersWithoutImage.size() / 2.0)}"
+						th:with="teamMember=${teamMembersWithoutImage[i]}"
+						th:include="team/teamMemberMarkup :: markup" />
+				</ul>
+			</div>
+			<div class="col-sm-6">
+				<ul class="listing">
+					<li class="clearfix"
+						th:each="i : ${#numbers.sequence(T(Math).ceil(teamMembersWithoutImage.size() / 2.0), teamMembersWithoutImage.size() - 1)}"
+						th:with="teamMember=${teamMembersWithoutImage[i]}"
+						th:include="team/teamMemberMarkup :: markup" />
+				</ul>
+			</div>
+		</div>
+	</div>
+</html>

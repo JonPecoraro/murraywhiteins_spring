@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/default"
+	th:with="title=${'Auto Insurance'},pageHeading=${'Auto Insurance Quote'}">
+	
+	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/quotes.css}" />
+	<section layout:fragment="additionalScripts">
+		<script th:src="@{/js/quotes/autoQuote.js}"></script>
+	</section>
+	
+	<div layout:fragment="content" th:inline="text">
+		<form id="autoQuoteForm" th:action="@{/quotes/submitAuto}" th:object="${quoteForm}" method="post" class="form">
+			<div th:replace="common/errorMessageMarkup :: markup"></div>
+		
+			<!-- top row -->
+			<div th:replace="quotes/support/contactMarkup :: markup"></div>
+			
+			<!-- second row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Coverage Details</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4">
+									<label for="currentPremium">Current Auto Policy Premium &amp; Coverage</label>
+									<div class="input-group">
+										<span class="input-group-addon">$</span>
+										<input type="text" th:field="*{currentPremium}" class="form-control" />
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-4">
+									<label for="garagingAddress">Garaging Address</label>
+									<input type="text" th:field="*{garagingAddress}" class="form-control" />
+								</div>
+								<div class="col-sm-6 col-md-4">
+									<label for="nonDrivers">Any non-drivers in the household?</label> <br />
+									<label th:for="${#ids.next('nonDrivers')}">Yes</label>
+									<input type="radio" th:field="*{nonDrivers}" value="Yes" />&nbsp;
+									<label th:for="${#ids.next('nonDrivers')}">No</label>
+									<input type="radio" th:field="*{nonDrivers}" value="No" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- bottom row -->
+			<div class="row">
+				<!-- left side -->
+				<div class="col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Insured Drivers</h3>
+						</div>
+						<div class="panel-body">
+							<div id="insuredDrivers">
+								<div class="insuredDriver" data-driver-id="1">
+									<div class="panel panel-default readOnly hide">
+										<div class="panel-body">
+											<span class="driverName pull-left">&nbsp;</span>
+											<span title="Remove" class="removeDriver glyphicon glyphicon-remove pull-right"></span>
+											<span title="Edit" class="editDriver glyphicon glyphicon-pencil pull-right">&nbsp;</span>
+										</div>
+									</div>
+									<div class="edit">
+										<div class="row">
+											<div class="col-sm-6">
+												<label for="firstName_1">* First Name</label>
+												<input type="text" name="firstName_1" id="firstName_1" class="form-control required" />
+											</div>
+											<div class="col-sm-6">
+												<label for="lastName_1">* Last Name</label>
+												<input type="text" name="lastName_1" id="lastName_1" class="form-control required" />
+											</div>
+										</div>
+										<div class="row dateOfBirthRow">
+											<div class="col-xs-12">
+												<label for="dateOfBirth_1" class="dateOfBirthLabel">* Date of Birth</label>
+												<div class="row">
+													<div class="col-xs-4">
+														<select name="dateOfBirthMonth_1" id="dateOfBirthMonth_1" class="form-control dateOfBirthMonth required">
+															<option value="1">January</option>
+															<option value="2">February</option>
+															<option value="3">March</option>
+															<option value="4">April</option>
+															<option value="5">May</option>
+															<option value="6">June</option>
+															<option value="7">July</option>
+															<option value="8">August</option>
+															<option value="9">September</option>
+															<option value="10">October</option>
+															<option value="11">November</option>
+															<option value="12">December</option>
+														</select>
+													</div>
+													<div class="col-xs-4">
+														<select name="dateOfBirthDay_1" id="dateOfBirthDay_1" class="form-control dateOfBirthDay required">
+															<option value="">Day</option>
+														</select>
+													</div>
+													<div class="col-xs-4">
+														<select name="dateOfBirthYear_1" id="dateOfBirthYear_1" class="form-control dateOfBirthYear required">
+															<option th:each="i : ${#numbers.sequence(currentYear, currentYear-100, -1)}" value="${i}">[[${i}]]</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-4">
+												<label for="social_1">Social Security #</label>
+												<input type="text" name="social_1" id="social_1" placeholder="xxx-xx-xxxx" class="form-control" />
+											</div>
+											<div class="col-sm-5">
+												<label for="license_1">* License Number</label>
+												<input type="text" name="license_1" id="license_1" class="form-control required" />
+											</div>
+											<div class="col-sm-3">
+												<label for="state_1">State</label>
+												<select name="state_1" id="state_1" class="form-control state">
+													<option value=""></option>
+													<option th:each="state : ${states}" th:value="${state.abbreviation}">[[${state.name}]]</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<button id="addDriver" class="btn btn-default pull-right" type="button">Add Another Driver</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- right side -->
+				<div class="col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Vehicle Information</h3>
+						</div>
+						<div class="panel-body">
+							<div id="vehicles">
+								<div class="vehicle" data-vehicle-id="1">
+									<div class="panel panel-default readOnlyVehicle hide">
+										<div class="panel-body">
+											<span class="vehicleDescription pull-left">&nbsp;</span>
+											<span title="Remove" class="removeVehicle glyphicon glyphicon-remove pull-right"></span>
+											<span title="Edit" class="editVehicleIcon glyphicon glyphicon-pencil pull-right">&nbsp;</span>
+										</div>
+									</div>
+									<div class="editVehicle">
+										<div class="row">
+											<div class="col-sm-4">
+												<label for="vehicleYear_1">* Year</label>
+												<input type="text" name="vehicleYear_1" id="vehicleYear_1" class="form-control required" />
+											</div>
+											<div class="col-sm-4">
+												<label for="make_1">* Make</label>
+												<input type="text" name="make_1" id="make_1" class="form-control required" />
+											</div>
+											<div class="col-sm-4">
+												<label for="model_1">* Model</label>
+												<input type="text" name="model_1" id="model_1" class="form-control required" />
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-6">
+												<label for="vinNumber_1">* VIN Number</label>
+												<input type="text" name="vinNumber_1" id="vinNumber_1" class="form-control required" />
+											</div>
+											<div class="col-sm-6">
+												<label for="mileage_1">* Mileage</label>
+												<input type="text" name="mileage_1" id="mileage_1" class="form-control required" />
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-12">
+												<label for="usage_1">Usage</label>
+												<input type="text" name="usage_1" id="usage_1" class="form-control" />
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-12">
+												<label for="features_1">Special Features</label>
+												<input type="text" name="features_1" id="features_1" class="form-control" />
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<button id="addVehicle" class="btn btn-default pull-right" type="button">Add Another Vehicle</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div th:replace="quotes/support/buttonRowMarkup:: markup"></div>
+		</form>
+		
+		<!-- insured driver template -->
+		<div id="insuredDriversTemplate" class="hide" data-driver-id="1">
+			<div class="panel panel-default readOnly hide">
+				<div class="panel-body">
+					<span class="driverName pull-left">&nbsp;</span>
+					<span title="Remove" class="removeDriver glyphicon glyphicon-remove pull-right"></span>
+					<span title="Edit" class="editDriver glyphicon glyphicon-pencil pull-right">&nbsp;</span>
+				</div>
+			</div>
+			<div class="edit">
+				<div class="row">
+					<div class="col-xs-6">
+						<label for="firstName_0">* First Name</label>
+						<input type="text" name="firstName_0" class="form-control required" />
+					</div>
+					<div class="col-xs-6">
+						<label for="lastName_0">* Last Name</label>
+						<input type="text" name="lastName_0" class="form-control required" />
+					</div>
+				</div>
+				<div class="row dateOfBirthRow">
+					<div class="col-xs-12">
+						<label for="dateOfBirth_0" class="dateOfBirthLabel">* Date of Birth</label>
+						<div class="row">
+							<div class="col-xs-4">
+								<select name="dateOfBirthMonth_0" id="dateOfBirthMonth_0" class="form-control dateOfBirthMonth required">
+									<option value="1">January</option>
+									<option value="2">February</option>
+									<option value="3">March</option>
+									<option value="4">April</option>
+									<option value="5">May</option>
+									<option value="6">June</option>
+									<option value="7">July</option>
+									<option value="8">August</option>
+									<option value="9">September</option>
+									<option value="10">October</option>
+									<option value="11">November</option>
+									<option value="12">December</option>
+								</select>
+							</div>
+							<div class="col-xs-4">
+								<select name="dateOfBirthDay_0" id="dateOfBirthDay_0" class="form-control dateOfBirthDay required">
+									<option value="">Day</option>
+								</select>
+							</div>
+							<div class="col-xs-4">
+								<select name="dateOfBirthYear_0" id="dateOfBirthYear_0" class="form-control dateOfBirthYear required">
+									 <option th:each="i : ${#numbers.sequence(currentYear, currentYear-100, -1)}" value="${i}">[[${i}]]</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-4">
+						<label for="social_0">Social Security #</label>
+						<input type="text" name="social_0" placeholder="xxx-xx-xxxx" class="form-control" />
+					</div>
+					<div class="col-xs-5">
+						<label for="license_0">* License Number</label>
+						<input type="text" name="license_0" class="form-control required" />
+					</div>
+					<div class="col-xs-3">
+						<label for="state_0">State</label>
+						<select name="state_0" id="state_0" class="form-control state">
+							<option value=""></option>
+							<option th:each="state : ${states}" value="${state.abbreviation}">[[${state.name}]]</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</html>

@@ -1,0 +1,17 @@
+<li class="clearfix" th:fragment="markup" xmlns:th="http://www.thymeleaf.org">
+	<div class="pull-left" th:if="${teamMember.image != null}">
+		<a th:href="@{/team/profile(id=${teamMember.id})}">
+			<img th:src="${teamMember.image}" th:alt="${teamMember.fullName}" />
+		</a>
+	</div>
+	<div>
+		<ul th:classappend="${(teamMember.image != null) ? 'teamMemberInfo' : ''}">
+			<li>
+				[[${teamMember.fullName}]]
+			</li>
+			<li>[[${teamMember.position}]]</li>
+			<li th:if="${teamMember.extension != null}">Extension: [[${teamMember.extension}]]</li>
+			<li><a th:href="${'mailto:' + teamMember.email}">Email [[${teamMember.firstName}]]</a></li>
+		</ul>
+	</div>
+</li>

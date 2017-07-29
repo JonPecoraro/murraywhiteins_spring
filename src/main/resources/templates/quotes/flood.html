@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/default"
+	th:with="title=${'Flood Insurance'},pageHeading=${'Flood Insurance Quote'}">
+	
+	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/quotes.css}" />
+	<section layout:fragment="additionalScripts">
+		<script th:src="@{/js/quotes/floodQuote.js}"></script>
+	</section>
+	
+	<div layout:fragment="content" th:inline="text">
+		<form th:action="@{/quotes/submitFlood}" th:object="${quoteForm}" method="post" class="form">
+			<div th:replace="common/errorMessageMarkup :: markup"></div>
+
+			<!-- top row -->
+			<div th:replace="quotes/support/contactMarkup :: markup"></div>
+			
+			<!-- second row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Property Details</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-sm-6">
+									<label for="propertyAddress" th:classappend="${#fields.hasErrors('propertyAddress') ? 'errorLabel' : ''}">* Property Address</label>
+									<label for="propertyAddressSameAsAddress" class="form-check-label pull-right">
+										<input type="checkbox" id="propertyAddressSameAsAddress" class="form-check-input" />
+										Same as mailing address
+									</label>
+									<input type="text" th:field="*{propertyAddress}" class="form-control required" th:classappend="${#fields.hasErrors('propertyAddress') ? 'errorField' : ''}" />
+								</div>
+								<div class="col-sm-6 col-md-3">
+									<label for="yearBuilt" th:classappend="${#fields.hasErrors('yearBuilt') ? 'errorLabel' : ''}">* Year Built</label>
+									<input type="text" th:field="*{yearBuilt}" class="form-control required" th:classappend="${#fields.hasErrors('yearBuilt') ? 'errorField' : ''}" />
+								</div>
+								<div class="col-sm-12 col-md-3">
+									<label for="squareFootage" th:classappend="${#fields.hasErrors('squareFootage') ? 'errorLabel' : ''}">* Square Footage</label>
+									<input type="text" th:field="*{squareFootage}" class="form-control required" th:classappend="${#fields.hasErrors('squareFootage') ? 'errorField' : ''}" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<label for="structureType">Structure Type</label>
+									<select th:field="*{structureType}" class="form-control">
+										<option value="">Select item</option>
+										<option value="Frame">Frame</option>
+										<option value="Masonry">Masonry</option>
+										<option value="Masonry veneer">Masonry veneer</option>
+										<option value="Other">Other</option>
+										<option value="Not known">I do not know</option>
+									</select>
+								</div>
+								<div class="col-sm-6">
+									<label for="homeType">Type of Home</label>
+									<select th:field="*{homeType}" class="form-control required">
+										<option value="">Select item</option>
+										<option value="Townhouse">Townhouse</option>
+										<option value="Single family">Single family</option>
+										<option value="Row house">Row house</option>
+										<option value="Condo">Condo</option>
+										<option value="Apartment">Apartment</option>
+										<option value="Other">Other</option>
+										<option value="Not Known">I do not know</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div th:replace="quotes/support/buttonRowMarkup:: markup"></div>
+		</form>
+	</div>
+</html>

@@ -1,0 +1,34 @@
+#quoteDescription {
+	padding-top: 50px;
+}
+#addDriver,
+#addVehicle {
+	margin-top: 15px;
+}
+div.insuredDriver.expanded,
+div.vehicle.expanded {
+	background-color: #F5F5F5;
+	border-radius: 4px;
+}
+div.insuredDriver.expanded .edit,
+div.vehicle.expanded .editVehicle  {
+	padding: 0 10px;
+	margin-bottom: 10px;
+}
+div.readOnly,
+div.readOnlyVehicle {
+    background: linear-gradient(to bottom, #F5F5F5 0, #E8E8E8 100%);
+}
+div.readOnly .glyphicon,
+div.readOnlyVehicle .glyphicon {
+	padding-top: 3px;
+}
+div.readOnly .glyphicon:hover,
+div.readOnlyVehicle .glyphicon:hover {
+	cursor: pointer;
+	color: #337AB7;
+}
+div.buttonRow {
+	border-top: 1px solid #CCC;
+	padding: 10px 0;
+}

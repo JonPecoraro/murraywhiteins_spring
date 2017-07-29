@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/default"
+	th:with="title=${'Contact'},pageHeading=${'Contact Us'}">
+	
+	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/contact.css}" />
+	<section layout:fragment="additionalScripts">
+		<script src="https://maps.googleapis.com/maps/api/js"></script>
+		<script th:src="@{/js/contact.js}"></script>
+	</section>
+	
+	<div layout:fragment="content" th:inline="text">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Address &amp; Office Hours</h3>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-xs-3">
+								<p>Address</p>
+							</div>
+							<div class="col-xs-7">
+								<p>
+									Murray White Insurance Agency, Inc.<br />
+									1911 N Main St<br />
+									High Point, North Carolina 27262
+								</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-3">
+								<p>Office hours</p>
+							</div>
+							<div class="col-xs-7">
+								<p>Monday - Friday, 8:00AM - 4:30PM</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-3">
+								<p>Map</p>
+							</div>
+							<div class="col-xs-7">
+								<div id="map"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Send Us a Message</h3>
+					</div>
+					<div class="panel-body">
+						<div th:if="${success} != null">
+							<p class="bg-success successBg">
+								<span class="glyphicon glyphicon-ok"></span>
+								[[${success}]]
+							</p>
+						</div>
+						<div th:if="${error} != null">
+							<p class="bg-danger errorBg">
+								<span class="glyphicon glyphicon-remove"></span>
+								[[${error}]]
+							</p>
+						</div>
+						<form th:action="@{/contact/submitContactForm}" method="post" class="form" id="contactForm" name="contactForm">
+							<p class="bg-danger errorBg hide">
+								<span class="glyphicon glyphicon-remove"></span>
+								Please fill out the required fields highlighted below
+							</p>
+							<label for="firstName">* First Name</label>
+							<input type="text" name="firstName" value="" placeholder="First Name" class="form-control required" />
+							<label for="lastName">* Last Name</label>
+							<input type="text" name="lastName" value="" placeholder="Last Name" class="form-control required" />
+							<label for="email">Email Address</label>
+							<input type="text" name="email" value="" placeholder="Email Address" class="form-control" />
+							<label for="contactMessage">* Message</label>
+							<textarea name="contactMessage" class="form-control required"></textarea>
+							<input type="submit" name="btnSubmit" value="Send Message" class="btn btn-primary pull-right" />
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Contact Information</h3>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-xs-3">
+								<p>Phone</p>
+							</div>
+							<div class="col-xs-7">
+								<p>(336) 889-4747</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-3">
+								<p>Email</p>
+							</div>
+							<div class="col-xs-7">
+								<p><a href="mailto:murraywhite@murraymwhiteinc.com">murraywhite@murraymwhiteinc.com</a></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-3">
+								<p>Social media</p>
+							</div>
+							<div class="col-xs-7">
+								<p><a href="https://www.facebook.com/MurrayWhiteInsuranceAgency">https://www.facebook.com/MurrayWhiteInsuranceAgency</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</html>

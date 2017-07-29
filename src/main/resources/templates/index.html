@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layouts/default" th:with="title=${'Home'}">
+	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/index.css}" />
+	<section layout:fragment="additionalScripts">
+		<script th:src="@{/js/index.js}"></script>
+	</section>
+	
+	<div layout:fragment="content" th:inline="text">
+		<div class="row">
+			<div class="col-sm-7">
+				<img th:src="@{/img/buildingScaled.jpg}" alt="Murray White Insurance Agency, Inc. office building" class="img-responsive img-rounded" />
+			</div>
+			<div class="col-sm-5">
+				<div class="clearfix" th:include="quotes/support/requestQuoteMarkup :: markup"></div>
+				<div>
+					<div th:if="${success}" class="row text-center">
+						<div class="col-xs-12">
+							<h3 class="text-success">
+								<span class="glyphicon glyphicon-ok"></span>
+								Thank you, your appointment request has been received.
+							</h3>
+							<p>
+								An agent from Murray White Insurance Agency will be in touch with you shortly.
+							</p>
+						</div>
+					</div>
+					<h2>Request an Appointment</h2>
+					<form th:action="@{/appointments/showAppointmentForm}" class="form">
+						<select id="category" name="category" class="form-control">
+							<option value="personal">Personal</option>
+							<option value="commercial">Commercial</option>
+						</select>
+						<a id="btnRequestAppointment" href="#requestAppointmentModal" class="btn btn-primary pull-right" data-toggle="modal">Request Appointment</a>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Request Appointment modal -->
+		<div id="requestAppointmentModal" class="modal fade">
+			<form id="appointmentForm" th:action="@{/submitAppointment}" th:object="${appointmentForm}" method="post" class="form">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h3 class="modal-title">Request Appointment</h3>
+						</div>
+						<div class="modal-body">
+							<div th:replace="common/errorMessageMarkup :: markup"></div>
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="row">
+										<div class="col-sm-6">
+											<label for="name">* Name</label>
+											<input type="text" th:field="*{name}" class="form-control required" />
+										</div>
+										<div class="col-sm-6">
+											<label for="phone">* Phone Number</label>
+											<input type="text" th:field="*{phone}" placeholder="xxx-xxx-xxxx" class="form-control required" />
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<label for="email">* Email Address</label>
+											<label th:for="${#ids.next('emailUserAppointmentDetails')}" class="form-check-label pull-right">
+												<input type="checkbox" th:field="*{emailUserAppointmentDetails}" class="form-check-input" />
+												Email me a copy of the appointment request
+											</label>
+											<input type="text" th:field="*{email}" class="form-control required" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h3 class="panel-title">Appointment Specifics</h3>
+										</div>
+										<div class="panel-body">
+											<div class="row">
+												<div class="col-sm-6">
+													<label for="appointmentDate">* Date</label>
+													<input type="text" th:field="*{appointmentDate}" placeholder="mm/dd/yyyy" class="form-control required dateField" />
+												</div>
+												<div class="col-sm-6">
+													<label for="appointmentTime">* Time</label>
+													<select th:field="*{appointmentTime}" class="form-control required">
+														<option value="">Select time</option>
+														<option th:each="timeInterval : ${timeIntervals}" th:value="${timeInterval}">[[${timeInterval}]]</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<input type="hidden" th:field="*{type}" />
+							<input type="submit" name="btnScheduleAppointment" value="Schedule Appointment" class="btn btn-default" />
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</html>

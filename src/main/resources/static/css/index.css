@@ -1,0 +1,9 @@
+#quoteHint {
+	border-top: 2px solid #DDD;
+	margin-top: 20px;
+	color: #AAA;
+	clear: both;
+}
+#contentRow {
+	background: url('/img/buildingScaled.jpg') no-repeat;
+}

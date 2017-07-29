@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/default"
+	th:with="title=${'Umbrella Insurance'},pageHeading=${'Umbrella Insurance Quote'}">
+	
+	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/quotes.css}" />
+	<section layout:fragment="additionalScripts">
+		<script th:src="@{/js/umbrellaQuote.js}"></script>
+	</section>
+	
+	<div layout:fragment="content" th:inline="text">
+		<form th:action="@{/quotes/submitUmbrella}" th:object="${quoteForm}" method="post" class="form">
+			<div th:replace="common/errorMessageMarkup :: markup"></div>
+
+			<!-- top row -->
+			<div th:replace="quotes/support/contactMarkup :: markup"></div>
+			
+			<!-- second row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Request Details</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-xs-12">
+									<label for="umbrellaLimit" th:classappend="${#fields.hasErrors('umbrellaLimit') ? 'errorLabel' : ''}">* Requested Umbrella Limit <small>(1 million up to 10 million)</small></label>
+									<div class="input-group">
+										<span class="input-group-addon">$</span>
+										<input type="text" th:field="*{umbrellaLimit}" class="form-control required" th:classappend="${#fields.hasErrors('umbrellaLimit') ? 'errorField' : ''}" />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div id="currentPoliciesRow" class="col-xs-12">
+									<label for="currentPolicies" th:classappend="${#fields.hasErrors('currentPolicies') ? 'errorLabel' : ''}">* Current Insurance Policies <small>(with our agency or not)</small></label>
+									<div class="well required" th:classappend="${#fields.hasErrors('currentPolicies') ? 'errorField' : ''}">
+										<span class="form-check">
+											<label th:for="${#ids.next('currentPolicies')}" class="form-check-label">Home</label>
+											<input type="checkbox" th:field="*{currentPolicies}" value="Home" class="form-check-input" />
+										</span>&nbsp;
+										<span class="form-check">
+											<label th:for="${#ids.next('currentPolicies')}" class="form-check-label">Auto</label>
+											<input type="checkbox" th:field="*{currentPolicies}" value="Auto" class="form-check-input" />
+										</span>&nbsp;
+										<span class="form-check">
+											<label th:for="${#ids.next('currentPolicies')}" class="form-check-label">Rental Property</label>
+											<input type="checkbox" th:field="*{currentPolicies}" value="Rental Property" class="form-check-input" />
+										</span>&nbsp;
+										<span class="form-check">
+											<label th:for="${#ids.next('currentPolicies')}" class="form-check-label">Watercraft</label>
+											<input type="checkbox" th:field="*{currentPolicies}" value="Watercraft" class="form-check-input" />
+										</span>&nbsp;
+										<span class="form-check">
+											<label th:for="${#ids.next('currentPolicies')}" class="form-check-label">Life</label>
+											<input type="checkbox" th:field="*{currentPolicies}" value="Life" class="form-check-input" />
+										</span>&nbsp;
+										<span class="form-check">
+											<label th:for="${#ids.next('currentPolicies')}" class="form-check-label">Flood</label>
+											<input type="checkbox" th:field="*{currentPolicies}" value="Flood" class="form-check-input" />
+										</span>&nbsp;
+										<span class="form-check">
+											<label th:for="${#ids.next('currentPolicies')}" class="form-check-label">Business</label>
+											<input type="checkbox" th:field="*{currentPolicies}" value="Business" class="form-check-input" />
+										</span>&nbsp;
+										<span class="form-check">
+											<label th:for="${#ids.next('currentPolicies')}" class="form-check-label">Other</label>
+											<input type="checkbox" th:field="*{currentPolicies}" value="Other" class="form-check-input" />
+										</span>&nbsp;
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<label for="propertyAndWatercraft">Property and Watercraft</label>
+									<textarea th:field="*{propertyAndWatercraft}" class="form-control"></textarea>
+								</div>
+								<div class="col-md-6">
+									<label for="liabilityLimits">Liability Limits <small>(for home, auto, rental property, and watercraft)</small></label>
+									<textarea th:field="*{liabilityLimits}" class="form-control"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div th:replace="quotes/support/buttonRowMarkup:: markup"></div>
+		</form>
+	</div>
+</html>

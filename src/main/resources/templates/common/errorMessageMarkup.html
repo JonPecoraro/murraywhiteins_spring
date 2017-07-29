@@ -1,0 +1,15 @@
+<div class="row" th:fragment="markup" xmlns:th="http://www.thymeleaf.org">
+	<div class="col-xs-12" th:classappend="${#fields.hasAnyErrors() ? '' : 'hide'}">
+		<p class="bg-danger errorBg">
+			<span class="glyphicon glyphicon-remove"></span>			
+			Please fill out the required fields highlighted below.<br />
+			If a highlighted field is filled out, the format of the value needs to be corrected.
+		</p>
+	</div>
+	<div class="col-xs-12" th:if="${error} != null">
+		<p class="bg-danger errorBg">
+			<span class="glyphicon glyphicon-remove"></span>
+			[[${error}]]
+		</p>
+	</div>
+</div>

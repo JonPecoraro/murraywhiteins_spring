@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/default"
+	th:with="title=${'Life Insurance'},pageHeading=${'Life Insurance Quote'}">
+	
+	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/quotes.css}" />
+	
+	<div layout:fragment="content" th:inline="text">
+		<form th:action="@{/quotes/submitLife}" th:object="${quoteForm}" method="post" class="form">
+			<div th:replace="common/errorMessageMarkup :: markup"></div>
+
+			<!-- top row -->
+			<div th:replace="quotes/support/contactMarkup :: markup"></div>
+			
+			<!-- second row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Request Details</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-sm-6">
+									<label for="lifeInsuranceType" th:classappend="${#fields.hasErrors('lifeInsuranceType') ? 'errorLabel' : ''}">* Life Quote Requested</label>
+									<select th:field="*{lifeInsuranceType}" class="form-control required" th:classappend="${#fields.hasErrors('lifeInsuranceType') ? 'errorField' : ''}">
+										<option value="">Select item</option>
+										<option value="Term Life">Term Life</option>
+										<option value="Whole Life">Whole Life</option>
+										<option value="Universal Life">Universal Life</option>
+										<option value="Discuss">Discuss with an agent</option>
+									</select>
+								</div>
+								<div class="col-sm-6">
+									<label for="requestedLimit">Insurance Limit Requested</label>
+									<div class="input-group">
+										<span class="input-group-addon">$</span>
+										<input type="text" th:field="*{requestedLimit}" class="form-control" />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<label for="annualIncome" th:classappend="${#fields.hasErrors('annualIncome') ? 'errorLabel' : ''}">* Annual Income</label>
+									<div class="input-group">
+										<span class="input-group-addon">$</span>
+										<input type="text" th:field="*{annualIncome}" class="form-control required" th:classappend="${#fields.hasErrors('annualIncome') ? 'errorField' : ''}" />
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<label for="beneficiary" th:classappend="${#fields.hasErrors('beneficiary') ? 'errorLabel' : ''}">* Beneficiary</label>
+									<input type="text" th:field="*{beneficiary}" class="form-control required" th:classappend="${#fields.hasErrors('beneficiary') ? 'errorField' : ''}" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div th:replace="quotes/support/buttonRowMarkup:: markup"></div>
+		</form>
+	</div>
+</html>

@@ -1,0 +1,10 @@
+ul.listing > li {
+	padding: 10px 0;
+	list-style-type: none;
+}
+ul.companyInfo  {
+	margin-left: 185px;
+}
+ul.companyInfo > li {
+	list-style-type: none;
+}

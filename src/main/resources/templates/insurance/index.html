@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/default"
+	th:with="title=${'Insurance'},pageHeading=${'Insurance Options'}">
+	
+	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/insurance.css}" />
+	
+	<div layout:fragment="content" th:inline="text">
+		<div class="row">
+			<div class="col-xs-12">
+				<ul id="insuranceTabs" class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active">
+						<a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Personal Lines</a>
+					</li>
+					<li role="presentation">
+						<a href="#commercial" aria-controls="commercial" role="tab" data-toggle="tab">Commercial Lines</a>
+					</li>
+					<li role="presentation">
+						<a href="#life" aria-controls="life" role="tab" data-toggle="tab">Life &amp; Health Lines</a>
+					</li>
+					<li role="presentation">
+						<a href="#specialEvents" aria-controls="specialEvents" role="tab" data-toggle="tab">Special Events</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="personal">
+						
+							Personal insurance is the type of insurance commonly sold to individuals and families. Our
+							personal lines of insurance encompass a wide variety of coverage; anything from buying your first
+							house to trying out a new boat. Personal lines of insurance may include:
+							<ul>
+								<li>Auto</li>
+								<li>Homeowners</li>
+								<li>Renters</li>
+								<li>Farms</li>
+								<li>Personal Umbrella (Excess Liability)</li>
+								<li>Watercraft</li>
+								<li>Personal Article Floaters</li>
+							</ul>
+							If you have a need for personal insurance that is not listed, <a href="contact">contact us</a>
+							and we'll let you know if we can find a solution for your insurance coverage.
+						
+					</div>
+					<div role="tabpanel" class="tab-pane" id="commercial">
+						<div class="row">
+							<div class="col-sm-6">
+								
+									Commercial insurance is offered for business and commercial enterprise owners. Our high quality
+									commercial insurance lines remove the stress from business owners so they don't have to worry if
+									their assets are covered when unique situations arise. Commercial lines of insurance may include:
+									<ul>
+										<li>Auto dealers</li>
+										<li>Restaurants</li>
+										<li>Garages</li>
+										<li>Colleges</li>
+										<li>Universities</li>
+										<li>Churches</li>
+										<li>Schools</li>
+										<li>Contractors</li>
+										<li>Printers</li>
+										<li>Manufacturers</li>
+										<li>Machine shops</li>
+										<li>Environmental and Hazardous Waste</li>
+										<li>Warehouses</li>
+										<li>Retails and Wholesale</li>
+										<li>Airports and Aircraft</li>
+									</ul>
+								
+								If you have a need for commercial insurance that is not listed, contact us and we'll let you know if we can find a solution for your insurance coverage.
+							</div>
+							<div class="col-sm-6">
+								<img class="img-responsive img-rounded pull-right" th:src="@{/img/commercialBuildingScaled.jpg}" alt="Commercial Building" />
+							</div>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="life">
+						
+							Life and health insurance gives you and your family the satisfaction to know that they will be
+							covered in the case of a misfortune. The value of protecting your loved ones during trying times is
+							priceless. Life and health insurance lines commonly cover situations such as:
+							
+							<h5>Employee Benefits: Employer Sponsored / Voluntary</h5>
+							<ul>
+								<li>Medical (self-funded/fully-insured)</li>
+								<li>Consumer Driven Health Strategies (HRA/HSA)</li>
+								<li>ACA Compliance Assistance</li>
+								<li>Dental</li>
+								<li>Vision</li>
+								<li>Life Insurance Plans</li>
+								<li>Accidental Death and Dismemberment Plans</li>
+								<li>Short-Term and Long-Term Disability Plans</li>
+								<li>Voluntary Benefits</li>
+								<li>Long-Term Care Plans</li>
+								<li>Employee Assistance Programs</li>
+								<li>Worksite Benefits</li>
+								<li>Flexible Spending Accounts</li>
+								<li>Customizable Employer Specific Plans</li>
+							</ul>
+	
+							<h5>Individual Coverage</h5>
+							<ul>
+								<li>Term &amp; Whole Life Insurance</li>
+								<li>Long Term Care</li>
+								<li>Short Term Disability</li>
+								<li>Dental</li>
+								<li>Short Term Medical</li>
+								<li>Medical (including on and off exchange assistance)</li>
+								<li>Medicare Plan Options (Part A, B, and C)</li>
+								<li>Medicare Prescription Drug Plans (Part D)</li>
+								<li>Travel Accident</li>
+							</ul>
+	
+							<h5>Accident Coverage</h5>
+							<ul>
+								<li>Camps</li>
+								<li>Clubs</li>
+								<li>Youth Groups</li>
+								<li>Mission Trips</li>
+								<li>Athletic Teams</li>
+								<li>College &amp; University Student</li>
+								<li>College &amp; University Athletic</li>
+							</ul>
+	
+							If you have a need for life or health insurance that is not listed, contact us and we'll let you know if we can find a solution for your insurance coverage.
+						
+					</div>
+					<div role="tabpanel" class="tab-pane" id="specialEvents">
+						<div class="row">
+							<div class="col-sm-8">
+								
+									Whether it is a wedding, gold tournament or another event with a general or liquor liability exposure,
+									USLI offers four products to cover a variety of special event coverage needs. In addition to
+									competitive coverage, they can offer the stability of an A++ A.M. Best rated company. Consider USLI
+									for your special event business to make each event perfect for your customers!
+									<ul>
+										<li>Main Event</li>
+										<li>Wedding Plus</li>
+										<li>The Host</li>
+										<li>The Long Shot</li>
+									</ul>
+									Details about the options from USLI are available from the <a href="http://customers.usli.com/SpecialEvents/index.html" target="_blank">USLI website</a>.<br />
+									<a href="https://services.usli.com/InstantQuote/?id=4709&amp;templateID=53&amp;mode=spe" target="_blank">Request a quote</a> for a special event today!
+								
+							</div>
+							<div class="col-sm-4">
+								<img class="img-responsive img-rounded pull-right" th:src="@{/img/specialEvent.jpg}" alt="Special Event" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</html>

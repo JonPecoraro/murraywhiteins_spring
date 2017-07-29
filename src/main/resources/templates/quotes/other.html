@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/default"
+	th:with="title=${'Other Insurance'},pageHeading=${'Other Insurance Quote'}">
+	
+	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/quotes.css}" />
+	
+	<div layout:fragment="content" th:inline="text">
+		<form th:action="@{/quotes/submitOther}" th:object="${quoteForm}" method="post" class="form">
+			<div th:replace="common/errorMessageMarkup :: markup"></div>
+
+			<!-- top row -->
+			<div th:replace="quotes/support/contactMarkup :: markup"></div>
+			
+			<!-- second row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Request Details</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-sm-6">
+									<label for="insuranceTypeRequested" th:classappend="${#fields.hasErrors('insuranceTypeRequested') ? 'errorLabel' : ''}">* Requested Insurance Type</label>
+									<input type="text" th:field="*{insuranceTypeRequested}" class="form-control required" th:classappend="${#fields.hasErrors('insuranceTypeRequested') ? 'errorField' : ''}" />
+								</div>
+								<div class="col-sm-6">
+									<label for="reasonForRequest" th:classappend="${#fields.hasErrors('reasonForRequest') ? 'errorLabel' : ''}">* Reason For Request</label>
+									<textarea th:field="*{reasonForRequest}" class="form-control required" th:classappend="${#fields.hasErrors('reasonForRequest') ? 'errorField' : ''}"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div th:replace="quotes/support/buttonRowMarkup:: markup"></div>
+		</form>
+	</div>
+</html>

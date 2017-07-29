@@ -1,0 +1,50 @@
+<div class="row" th:fragment="markup" xmlns:th="http://www.thymeleaf.org">
+	<div class="col-xs-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Contact Information</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-6">
+						<label for="name" th:classappend="${#fields.hasErrors('name') ? 'errorLabel' : ''}">* Primary Contact Name</label>
+						<input type="text" th:field="*{name}" class="form-control required" th:classappend="${#fields.hasErrors('name') ? 'errorField' : ''}" />
+					</div>
+					<div class="col-md-6">
+						<label for="mailingAddress" th:classappend="${#fields.hasErrors('mailingAddress') ? 'errorLabel' : ''}">* Mailing Address</label>
+						<input type="text" th:field="*{mailingAddress}" class="form-control required" th:classappend="${#fields.hasErrors('mailingAddress') ? 'errorField' : ''}" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label for="phone" th:classappend="${#fields.hasErrors('phone') ? 'errorLabel' : ''}">* Phone Number</label>
+						<input type="text" th:field="*{phone}" placeholder="xxx-xxx-xxxx" class="form-control required" th:classappend="${#fields.hasErrors('phone') ? 'errorField' : ''}" />
+					</div>
+					<div class="col-sm-3">
+						<label for="birthday" th:classappend="${#fields.hasErrors('birthday') ? 'errorLabel' : ''}">* Date of Birth</label>
+						<input type="text" th:field="*{birthday}" class="form-control required dateField" th:classappend="${#fields.hasErrors('birthday') ? 'errorField' : ''}" />
+					</div>
+					<div class="col-sm-6">
+						<label for="county">County</label>
+						<input type="text" th:field="*{county}" class="form-control" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<label for="email" th:classappend="${#fields.hasErrors('email') ? 'errorLabel' : ''}">* Email Address</label>
+						<input type="text" th:field="*{email}" class="form-control required" th:classappend="${#fields.hasErrors('email') ? 'errorField' : ''}" />
+					</div>
+					<div class="col-sm-6">
+						<label for="contactPreference">Contact Preference</label> <br />
+						<label th:for="${#ids.next('contactPreference')}">Morning</label>
+						<input type="radio" th:field="*{contactPreference}" value="Morning" />&nbsp;
+						<label th:for="${#ids.next('contactPreference')}">Afternoon</label>
+						<input type="radio" th:field="*{contactPreference}" value="Afternoon" />&nbsp;
+						<label th:for="${#ids.next('contactPreference')}">Through Email</label>
+						<input type="radio" th:field="*{contactPreference}" value="Email" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/default"
+	th:with="title=${'Homeowners Insurance'},pageHeading=${'Homeowners Insurance Quote'}">
+	
+	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/quotes.css}" />
+	<section layout:fragment="additionalScripts">
+		<script th:src="@{/js/quotes/homeownersQuote.js}"></script>
+	</section>
+	
+	<div layout:fragment="content" th:inline="text">
+		<form th:action="@{/quotes/submitHomeowners}" th:object="${quoteForm}" method="post" class="form">
+			<div th:replace="common/errorMessageMarkup :: markup"></div>
+
+			<!-- top row -->
+			<div th:replace="quotes/support/contactMarkup :: markup"></div>
+			
+			<!-- second row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Property Details</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-6">
+									<label for="propertyAddress" th:classappend="${#fields.hasErrors('propertyAddress') ? 'errorLabel' : ''}">* Property Address</label>
+									<label for="propertyAddressSameAsAddress" class="form-check-label pull-right">
+										<input type="checkbox" id="propertyAddressSameAsAddress" class="form-check-input" />
+										Same as mailing address
+									</label>
+									<input type="text" th:field="*{propertyAddress}" class="form-control required" th:classappend="${#fields.hasErrors('propertyAddress') ? 'errorField' : ''}" />
+								</div>
+								<div class="col-md-3">
+									<label for="yearBuilt" th:classappend="${#fields.hasErrors('yearBuilt') ? 'errorLabel' : ''}">* Year Built</label>
+									<input type="text" th:field="*{yearBuilt}" class="form-control required" th:classappend="${#fields.hasErrors('yearBuilt') ? 'errorField' : ''}" />
+								</div>
+								<div class="col-md-3">
+									<label for="squareFootage" th:classappend="${#fields.hasErrors('squareFootage') ? 'errorLabel' : ''}">* Square Footage</label>
+									<input type="text" th:field="*{squareFootage}" class="form-control required" th:classappend="${#fields.hasErrors('squareFootage') ? 'errorField' : ''}" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6 col-md-3">
+									<label for="structureType">Structure Type</label>
+									<select th:field="*{structureType}" class="form-control">
+										<option value="">Select item</option>
+										<option value="Frame">Frame</option>
+										<option value="Masonry">Masonry</option>
+										<option value="Masonry veneer">Masonry veneer</option>
+										<option value="Other">Other</option>
+										<option value="Not known">I do not know</option>
+									</select>
+								</div>
+								<div class="col-sm-6 col-md-3">
+									<label for="homeType">Type of Home</label>
+									<select th:field="*{homeType}" class="form-control required">
+										<option value="">Select item</option>
+										<option value="Townhouse">Townhouse</option>
+										<option value="Single family">Single family</option>
+										<option value="Row house">Row house</option>
+										<option value="Condo">Condo</option>
+										<option value="Apartment">Apartment</option>
+										<option value="Other">Other</option>
+										<option value="Not Known">I do not know</option>
+									</select>
+								</div>
+								<div class="col-sm-6 col-md-3">
+									<label for="foundation">Foundation</label>
+									<select th:field="*{foundation}" class="form-control">
+										<option value="">Select item</option>
+										<option value="Crawl space">Crawl space</option>
+										<option value="Slab">Slab</option>
+										<option value="Walk out basement">Walk out basement</option>
+										<option value="Other">Other</option>
+										<option value="Not known">I do not know</option>
+									</select>
+								</div>
+								<div class="col-sm-6 col-md-3">
+									<label for="heatingAndCoolingType">Type of Heating &amp; Cooling</label>
+									<input type="text" th:field="*{heatingAndCoolingType}" class="form-control" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<label for="amenities">Amenities</label>
+									<div class="well">
+										<div class="row">
+											<div class="col-sm-6">
+												<label for="fireplace">Is there a fireplace?</label><br />
+												<label th:for="${#ids.next('fireplace')}">Regular</label>
+												<input type="radio" th:field="*{fireplace}" value="Regular" />&nbsp;
+												<label th:for="${#ids.next('fireplace')}">Gas</label>
+												<input type="radio" th:field="*{fireplace}" value="Gas" />&nbsp;
+												<label th:for="${#ids.next('fireplace')}">No fireplace</label>
+												<input type="radio" th:field="*{fireplace}" value="No" />
+											</div>
+											<div class="col-sm-6">
+												<label for="alarmSystem">Alarm system?</label><br />
+												<label th:for="${#ids.next('alarmSystem')}">Yes</label>
+												<input type="radio" th:field="*{alarmSystem}" value="Yes" />&nbsp;
+												<label th:for="${#ids.next('alarmSystem')}">No</label>
+												<input type="radio" th:field="*{alarmSystem}" value="No" />
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-6">
+												<label for="jewelry">Do you have jewelry and fine arts?</label><br />
+												<label th:for="${#ids.next('jewelry')}">Yes</label>
+												<input type="radio" th:field="*{jewelry}" value="Yes" />&nbsp;
+												<label th:for="${#ids.next('jewelry')}">No</label>
+												<input type="radio" th:field="*{jewelry}" value="No" />
+												<div id="hasJewelry" class="hide">
+													<label for="jewelryWorth">What is the estimated worth of your jewelry?</label>
+													<div class="input-group col-sm-6">
+														<span class="input-group-addon">$</span>
+														<input type="text" th:field="*{jewelryWorth}" class="form-control" />
+													</div>
+												</div>
+											</div>
+											<div class="col-sm-6">
+												<label for="pets">Any pets?</label><br />
+												<label th:for="${#ids.next('pets')}">Yes</label>
+												<input type="radio" th:field="*{pets}" value="Yes" />&nbsp;
+												<label th:for="${#ids.next('pets')}">No</label>
+												<input type="radio" th:field="*{pets}" value="No" />
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-12">
+												<label for="homeLoan">Do you have a home loan?</label><br />
+												<label th:for="${#ids.next('homeLoan')}">Yes</label>
+												<input type="radio" th:field="*{homeLoan}" value="Yes" />&nbsp;
+												<label th:for="${#ids.next('homeLoan')}">No</label>
+												<input type="radio" th:field="*{homeLoan}" value="No" />
+												<div id="hasHomeLoan" class="hide">
+													<label for="homeLoanAmount">How much is owed?</label>
+													<div class="input-group col-sm-6 col-md-3">
+														<span class="input-group-addon">$</span>
+														<input type="text" th:field="*{homeLoanAmount}" class="form-control" />
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<label for="updates">Any Updates <small>(Roof, Electrical, Plumbing, Heat &amp; Air, add year that it was updated)</small></label>
+									<textarea th:field="*{updates}" class="form-control"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- bottom row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Include An Auto Insurance Quote</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-xs-12">
+									<label for="quoteAuto">Do you have auto insurance? If so we can quote home and auto to get you up to a possible 10% discount</label><br />
+									<label th:for="${#ids.next('quoteAuto')}">Yes</label>
+									<input type="radio" th:field="*{quoteAuto}" value="Yes" />&nbsp;
+									<label th:for="${#ids.next('quoteAuto')}">No</label>
+									<input type="radio" th:field="*{quoteAuto}" value="No" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div th:replace="quotes/support/buttonRowMarkup:: markup"></div>
+		</form>
+	</div>
+</html>

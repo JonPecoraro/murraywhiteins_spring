@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/default"
+	th:with="title=${'Companies'},pageHeading=${'Represented Companies'}">
+	
+	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/companies.css}" />
+	
+	<div layout:fragment="content" th:inline="text">
+		<div class="row">
+			<div class="col-sm-6">
+				<ul class="listing">
+					<li class="clearfix"
+						th:each="i : ${#numbers.sequence(0, T(Math).ceil(companies.size() / 2.0) - 1)}"
+						th:with="company=${companies[i]}"
+						th:include="companies/companyMarkup :: markup" />
+				</ul>
+			</div>
+			<div class="col-sm-6">
+				<ul class="listing">
+					<li class="clearfix"
+						th:each="i : ${#numbers.sequence(T(Math).ceil(companies.size() / 2.0), companies.size() - 1)}"
+						th:with="company=${companies[i]}"
+						th:include="companies/companyMarkup :: markup" />
+				</ul>
+			</div>
+		</div>
+	</div>
+</html>

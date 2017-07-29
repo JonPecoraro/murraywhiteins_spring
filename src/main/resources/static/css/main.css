@@ -1,0 +1,183 @@
+body {
+	background-color: #202020;
+}
+header {
+	background-color: #FFF;
+	padding: 30px 0; /* top & bottom padding of 30px, right & left padding of 0 */
+}
+header h1 {
+	margin-top: 10px;
+}
+header h1 a {
+	color: #222;
+	text-decoration: none;
+}
+header .contact {
+	margin-top: 15px;
+}
+header .contact .phone {
+	padding-right: 10px;
+	border-right: 2px solid #4A1144;
+}
+header .contact a,
+header .contact .phone,
+header .contact .genericon {
+	font-size: 22px;
+	color: #4A1144;
+}
+header .navbar-nav li>a {
+	padding: 20px 0; /* top & bottom padding of 20px, right & left padding of 0 */
+}
+#nav {
+	background: linear-gradient(to bottom, #732b6b 0%,#45033e 100%);
+	border-radius: 0; /* override bootstrap style */
+	margin-bottom: 0; /* override bootstrap style */
+}
+#nav a {
+	font-size: 20px;
+	color: #FFF;
+}
+#nav a:hover {
+	color: #CCC;
+}
+#nav .active a,
+#nav .active-dropdown,
+#nav .dropdown.open .dropdown-toggle {
+	background: linear-gradient(to bottom, #470540 0%,#45033e 100%);
+}
+#nav .dropdown-menu {
+	background: linear-gradient(to bottom, #F5F2FF 0, #F1F0FF 100%);
+}
+#nav .dropdown-menu a {
+	color: #4A1144;
+}
+#nav .dropdown-menu .active a {
+	color: #FFF;
+}
+main {
+	background-color: #FFF;
+	padding: 20px 0; /* top & bottom padding of 20px, right & left padding of 0 */
+}
+/* override bootstrap styles */
+main .panel-default>.panel-heading {
+	background-image: linear-gradient(to bottom, #F5F2FF 0, #F1F0FF 100%);
+}
+main .btn-default {
+	background-image: linear-gradient(to bottom, #FFF 0, #F1F0FF 100%);
+}
+main .btn-default:hover,
+main .input-group-addon,
+main .nav>li>a:hover,
+main .nav>li>a:focus {
+	background-color: #F1F0FF;
+}
+main .btn-primary {
+	background-image: linear-gradient(to bottom, #732b6b 0%,#45033e 100%);
+}
+main .btn-primary:hover {
+	background-color: #45033e;
+}
+input.form-control,
+select.form-control,
+div.input-group {
+	margin-bottom: 10px;
+}
+div.well,
+div.ui-datepicker .ui-datepicker-header,
+div.ui-datepicker tbody td,
+div.ui-datepicker tbody td a.ui-state-default {
+	background: linear-gradient(to bottom, #F5F2FF 0, #F1F0FF 100%);
+}
+div.ui-datepicker tbody td a.ui-state-highlight {
+	background: #fffa90;
+}
+div.ui-datepicker tbody td a.ui-state-active {
+	color: #2b2b2b;
+}
+div.ui-datepicker tbody td:last-child {
+  border-right: 0px;
+}
+div.ui-datepicker {
+	z-index: 2 !important; /* because jQuery adds z-index: 1 to the element's style. Using !important is the only way I can think of to override this style */
+}
+/* end override bootstrap styles */
+h2.pageTitle {
+	color: #4A1144;
+	margin-top: 0; /* because main already has top padding of 20px; */
+	padding-bottom: 5px;
+	border-bottom: 1px solid #AAA;
+}
+footer {
+	text-align: center;
+	background-color: #4d1347;
+	color: #FFF;
+}
+footer a,
+footer a:hover,
+footer a:active {
+	color: #FFF;
+}
+footer .information {
+	padding: 5px;
+}
+footer .information a,
+footer .information .phone,
+footer .information .address,
+footer .information .social {
+	display: block;
+	padding: 20px;
+	font-size: 18px;
+}
+footer .information .testimonial {
+	min-height: 135px;
+	background-color: #380233;
+	border: 1px solid #380233;
+	border-radius: 15px;
+	padding: 10px;
+}
+footer .information .social a {
+	padding: 5px;
+	display: inline;
+}
+footer .information .social a:focus {
+	text-decoration: none;
+}
+footer .information .social .genericon {
+	font-size: 25px;
+}
+footer .copywright {
+	background-color: #202020;
+	padding: 10px 0 20px;
+}
+.genericon {
+	text-decoration: none;
+	margin-top: 2px;
+}
+/* Generic styles that all pages can use */
+.display-inline {
+	display: inline;
+}
+.display-inline-block {
+	display: inline-block;
+}
+.display-block {
+	display: block;
+}
+.errorField,
+.errorBg {
+	border: 1px solid #801818;
+}
+.errorLabel {
+	color: #801818;
+}
+.errorBg,
+.successBg {
+	padding: 10px;
+	border-radius: 4px;
+}
+.hide {
+	display: none;
+}
+.successBg {
+	border: 1px solid #090;
+}

@@ -1,0 +1,14 @@
+<li class="clearfix" th:fragment="markup" xmlns:th="http://www.thymeleaf.org">
+	<div class="pull-left">
+		<a th:href="${company.url}" target="_blank">
+			<img th:src="${company.image}" th:alt="${company.name}" />
+		</a>
+	</div>
+	<div>
+		<ul class="companyInfo">
+			<li>[[${company.name}]]</li>
+			<li>[[${company.phone}]]</li>
+			<li><a th:href="${company.url}" target="_blank">Visit website</a></li>
+		</ul>
+	</div>
+</li>
