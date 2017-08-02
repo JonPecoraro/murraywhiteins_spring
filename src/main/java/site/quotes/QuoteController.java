@@ -2,8 +2,11 @@ package site.quotes;
 
 import java.time.Year;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import site.common.StateRepository;
@@ -30,6 +35,8 @@ import site.util.EmailUtil;
 @Controller
 @RequestMapping(path="quotes")
 public class QuoteController {
+	static final Logger logger = LoggerFactory.getLogger(QuoteController.class);
+	
 	@Autowired
 	StateRepository stateRepository;
 	
@@ -185,10 +192,13 @@ public class QuoteController {
 	
 	private void emailQuoteRequest(String quoteType, String emailBody, RedirectAttributes redirectAttributes) {
 		try {
+			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+
 			String title = "New " + quoteType + " Quote Request"; 
-			EmailUtil.sendEmail(sender, emailTo, title, emailBody);
+			EmailUtil.sendEmail(sender, emailTo, title, emailBody, request.getRemoteAddr());
 			redirectAttributes.addFlashAttribute("success", true);
 		} catch(Exception ex) {
+			logger.error("There was a problem sending the email message: {}", ex);
 			redirectAttributes.addFlashAttribute("error", "There was a problem sending your quote request. Plase contact us directly at murraywhite@murraymwhiteinc.com.<br>" + ex);
 		}
 	}
