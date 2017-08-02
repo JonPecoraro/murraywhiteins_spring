@@ -7,6 +7,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -24,6 +28,8 @@ import site.util.EmailUtil;
 @Controller
 @RequestMapping(path="")
 public class IndexController {
+	static final Logger logger = LoggerFactory.getLogger(IndexController.class);
+	
 	@Autowired
 	private JavaMailSender sender;
 	
@@ -38,7 +44,7 @@ public class IndexController {
 	}
 	
 	@RequestMapping(value="/submitAppointment", method=RequestMethod.POST)
-	public String submitAppointment(@ModelAttribute("appointmentForm") AppointmentForm appointmentForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {		
+	public String submitAppointment(@ModelAttribute("appointmentForm") AppointmentForm appointmentForm, BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpServletRequest request) {		
 		String dateString = appointmentForm.getAppointmentDate();
 		String timeString = appointmentForm.getAppointmentTime();
 		DateFormat dateFormat = new SimpleDateFormat();
@@ -59,7 +65,7 @@ public class IndexController {
 				appointmentEndDate
 			);
 			
-			EmailUtil.sendEmail(sender, emailTo, "New Appointment Request", appointmentForm.toEmailString(), appointmentEvent);
+			EmailUtil.sendEmail(sender, emailTo, "New Appointment Request", appointmentForm.toEmailString(), request.getRemoteAddr(), appointmentEvent);
 			
 			// If user wants a copy of the appointment request emailed to them
 			if (appointmentForm.getEmailUserAppointmentDetails()) {
@@ -70,11 +76,12 @@ public class IndexController {
 					appointmentEndDate
 				);
 				
-				EmailUtil.sendEmail(sender, appointmentForm.getEmail(), "Appointment with Murray White Insurance Agency, Inc.", appointmentForm.toEmailString(), customerAppointmentEvent);
+				EmailUtil.sendEmail(sender, appointmentForm.getEmail(), "Appointment with Murray White Insurance Agency, Inc.", appointmentForm.toEmailString(), request.getRemoteAddr(), customerAppointmentEvent);
 			}
 			
 			redirectAttributes.addFlashAttribute("success", true);
 		} catch(Exception ex) {
+			logger.error("There was a problem sending the email message: {}", ex);
 			redirectAttributes.addFlashAttribute("error", "There was a problem sending the email message. Plase contact us directly at murraywhite@murraymwhiteinc.com.<br>" + ex);
 		}
 		

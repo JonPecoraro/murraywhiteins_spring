@@ -1,5 +1,9 @@
 package site.contact;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,6 +18,8 @@ import site.util.EmailUtil;
 @Controller
 @RequestMapping(path="contact")
 public class ContactController {
+	static final Logger logger = LoggerFactory.getLogger(ContactController.class);
+	
 	@Autowired
 	private JavaMailSender sender;
 	
@@ -26,7 +32,7 @@ public class ContactController {
 	}
 	
 	@RequestMapping(value="submitContactForm", params = {"firstName", "lastName", "email", "contactMessage"}, method=RequestMethod.POST)
-	public String submitContactForm(String firstName, String lastName, String email, String contactMessage, RedirectAttributes redirectAttributes) {
+	public String submitContactForm(String firstName, String lastName, String email, String contactMessage, RedirectAttributes redirectAttributes, HttpServletRequest request) {
 		String emailInformation = "<p>";
 		
 		emailInformation += "<b>First name:</b> " + firstName + "<br />";
@@ -36,9 +42,10 @@ public class ContactController {
 		emailInformation += "</p>";
 		
 		try {
-			EmailUtil.sendEmail(sender, emailTo, "Website Contact Form Submitted", emailInformation);
+			EmailUtil.sendEmail(sender, emailTo, "Website Contact Form Submitted", emailInformation, request.getRemoteAddr());
 			redirectAttributes.addFlashAttribute("success", "Thank you for your feedback. We have received your message.");
 		} catch(Exception ex) {
+			logger.error("There was a problem sending the email message: {}", ex);
 			redirectAttributes.addFlashAttribute("error", "There was a problem sending the email message. Plase contact us directly at murraywhite@murraymwhiteinc.com.<br>" + ex);
 		}
 		
