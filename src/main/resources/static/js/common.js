@@ -46,6 +46,24 @@ common.httpsRedirect = function() {
 	}
 }
 
+common.getTestimonial = function() {
+	$.ajax({
+		url: '/getTestimonial',
+		dataType: 'json'
+	}).done(function(data) {
+		$('footer .information .testimonial')
+			.find('.testimonialText').text(data.testimonial).end()
+			.find('.testimonialSignature').text('- ' + data.author);
+		
+	}).fail(function(jqXHR, textStatus, errorThrown) {
+		var defaultTestimonial = 'I love Murray White Insurance Agency. They have been serving me well for many years. The agents are always quick to respond and willing to work with my limited budget. They have helped my family and I get back on our feet during trying times.';
+		var defaultAuthor = '- Jonathan Pecoraro'
+		$('footer .information .testimonial')
+			.find('.testimonialText').text(defaultTestimonial).end()
+			.find('.testimonialSignature').text(defaultAuthor);
+	});
+}
+
 $(function() {
 	// Redirect HTTP requests to HTTPS website
 	common.httpsRedirect();
@@ -56,4 +74,7 @@ $(function() {
 	
 	// Turn all inputs with the dateField class into date pickers
 	$('input.dateField').datepicker();
+	
+	// Display a random testimonial
+	common.getTestimonial();
 });
