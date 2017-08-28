@@ -52,5 +52,13 @@ CREATE TABLE team_member (
 	date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE testimonial (
+	id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	author VARCHAR(255) NOT NULL,
+	testimonial VARCHAR(4095) NOT NULL,
+	date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 REVOKE all ON murraywhiteins.* FROM 'springuser'@'localhost';
 GRANT select, insert, update ON murraywhiteins.* TO 'springuser'@'localhost';
