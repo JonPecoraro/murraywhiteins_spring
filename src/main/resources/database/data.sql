@@ -95,3 +95,8 @@ INSERT INTO `team_member` (`id`, `first_name`, `last_name`, `suffix`, `email`, `
 (10, 'Suzanne', 'Hedgecock', NULL, 'suzanne@murraymwhiteinc.com', '633', 'Commercial Lines Customer Service', NULL, 'Suzanne is a new employee at Murray White Insurance. We gladly welcome her to the company!', '/img/team/suzanne_hedgecock.jpg', null),
 (11, 'Ricky', 'DeLappe', NULL, 'ricky@murraymwhiteinc.com', '648', 'Account Executive', NULL, 'Ricky is a new employee at Murray White Insurance. We gladly welcome him to the company!', '/img/team/ricky_deLappe.jpg', null),
 (12, 'Emily', 'Smith', NULL, 'emily@murraymwhiteinc.com', '639', 'Personal Lines Customer Service Representative', NULL, 'Emily is a new employee at Murray White Insurance. We gladly welcome her to the company!', '/img/team/emily_smith.jpg', null);
+
+INSERT INTO `testimonial` (`id`,  `author`, `testimonial`) VALUES
+(1, 'Jonathan Pecoraro', 'I love Murray White Insurance Agency. They have been serving me well for many years. The agents are always quick to respond and willing to work with my limited budget. They have helped my family and I get back on our feet during trying times.'),
+(2, 'Linda Trivetta', 'Knowledgeable and always willing to help when you call them. Very friendly staff.'),
+(3, 'Dr. Joseph Fonke', 'Very helpful staff. Helped me find what our family needed as far as health insurance was concerned. Great team, great people and a group of some of the best people in all of High Point.');
