@@ -31,6 +31,9 @@ dependencies {
 	// Email support
 	compile('org.springframework.boot:spring-boot-starter-mail')
 	
+	// Spring security
+	compile("org.springframework.boot:spring-boot-starter-security")
+	
 	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

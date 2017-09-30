@@ -1,4 +1,28 @@
+#sideNav {
+	height: 100%; /* reset in JavaScript */
+	padding: 0;
+	margin: 0;
+	background: linear-gradient(to bottom, #732b6b 0%,#45033e 100%);
+}
+#sideNav a {
+	padding: 5px 0;
+	font-size: 20px;
+	color: #FFF;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+}
+#sideNav a.active {
+	background: linear-gradient(to bottom, #470540 0%,#45033e 100%);
+}
+#sideNav a:hover {
+	color: #CCC;
+}
 div.buttonRow {
 	border-top: 1px solid #CCC;
 	padding: 10px 0;
 }
+
+/* override bootstrap styles */
+
+/* end override bootstrap styles */
