@@ -80,6 +80,7 @@
 							<input type="text" name="email" value="" placeholder="Email Address" class="form-control" />
 							<label for="contactMessage">* Message</label>
 							<textarea name="contactMessage" class="form-control required"></textarea>
+							<div th:replace="common/protectionMarkup :: markup"></div>
 							<input type="submit" name="btnSubmit" value="Send Message" class="btn btn-primary pull-right" />
 						</form>
 					</div>
