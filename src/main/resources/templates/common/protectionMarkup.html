@@ -1,0 +1,6 @@
+<!-- This is part of the bot protection markup that adds a hidden form field. If the form field is filled out, then
+it was most likely from a bot, so we will not process the request -->
+<div class="protection" th:fragment="markup" xmlns:th="http://www.thymeleaf.org">
+	<label for="contactMessage">* Protection</label>
+	<input type="text" name="protection" maxlength="10" class="form-control" />
+</div>
