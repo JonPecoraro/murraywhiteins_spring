@@ -189,7 +189,7 @@ footer .copywright {
 	padding: 10px;
 	border-radius: 4px;
 }
-.hide {
+.hide, .protection {
 	display: none;
 }
 .successBg {
