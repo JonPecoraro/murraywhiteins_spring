@@ -13,6 +13,7 @@
 					<li class="clearfix"
 						th:each="i : ${#numbers.sequence(0, T(Math).ceil(companies.size() / 2.0) - 1)}"
 						th:with="company=${companies[i]}"
+						th:attr="data-sort-order=${company.sortOrder}"
 						th:include="companies/companyMarkup :: markup" />
 				</ul>
 			</div>
@@ -21,6 +22,7 @@
 					<li class="clearfix"
 						th:each="i : ${#numbers.sequence(T(Math).ceil(companies.size() / 2.0), companies.size() - 1)}"
 						th:with="company=${companies[i]}"
+						th:attr="data-sort-order=${company.sortOrder}"
 						th:include="companies/companyMarkup :: markup" />
 				</ul>
 			</div>

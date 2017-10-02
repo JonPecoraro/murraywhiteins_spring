@@ -22,6 +22,7 @@ public class TeamMember {
 	private String description;
 	private String image;
 	private Date employmentDate;
+	private int sortOrder;
 	private Date dateCreated;
 	private Date dateUpdated;
 	
@@ -36,6 +37,7 @@ public class TeamMember {
 	public String getDescription() { return description; }
 	public String getImage() { return image; }
 	public Date getEmploymentDate() { return employmentDate; }
+	public int getSortOrder() { return sortOrder; }
 	public Date getDateCreated() { return dateCreated; }
 	public Date getDateUpdated() { return dateUpdated; }
 	
@@ -49,6 +51,7 @@ public class TeamMember {
 	public void setDescription(String newValue) { this.description = newValue; }
 	public void setImage(String newValue) { this.image = newValue; }
 	public void setEmploymentDate(Date newValue) { this.employmentDate = newValue; }
+	public void setSortOrder(int newValue) { this.sortOrder = newValue; }
 	public void setDateCreated(Date newValue) { this.dateCreated = newValue; }
 	public void setDateUpdated(Date newValue) { this.dateUpdated = newValue; }
 	
@@ -65,5 +68,10 @@ public class TeamMember {
 	
 	public String getLargeImageUrl() {
 		return image.replace(".jpg", "_large.jpg");
+	}
+	
+	public String toString()
+	{
+		return "{id:" + id + ", name: " + getFullName() + ", sortOrder:" + sortOrder + "}";
 	}
 }

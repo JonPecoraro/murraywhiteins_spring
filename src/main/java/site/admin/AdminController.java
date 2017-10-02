@@ -5,14 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import site.team.TeamMember;
-
 @Controller
 @RequestMapping(path="admin")
 public class AdminController {	
 	@RequestMapping(value= {"", "/", "index"}, method=RequestMethod.GET)
 	public String getAdminIndex(Model model) {
-		model.addAttribute("teamMember", new TeamMember());
+		model.addAttribute("page", "admin/dashboard");
 		return "admin/index";
 	}
 	

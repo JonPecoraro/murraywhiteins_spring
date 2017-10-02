@@ -1,91 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layouts/default"
-	th:with="title=${'Admin'},pageHeading=${'Admin Home'}">
+	layout:decorator="layouts/admin"
+	th:with="title=${'Admin'}">
 	
-	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/admin.css}" />
-	<section layout:fragment="additionalScripts">
-		<script th:src="@{/js/admin.js}"></script>
-	</section>
-	
-	<div layout:fragment="content" th:inline="text">
-		<div class="row">
-			<div id="sideNav" class="col-xs-2">
-				<a href="#">Companies</a>
-				<a href="#">Quotes</a>
-				<a href="#">Team</a>
-				<a href="#">Users</a>
-			</div>
-			<div class="col-xs-10">
-				<form th:action="@{/admin/saveTeamMember(id=0)}" th:object="${teamMember}" method="post" class="form">				
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">Team Member Details</h3>
-						</div>
-						<div class="panel-body">
-							<div class="row">
-								<div class="col-sm-5">
-									<label for="firstName">First Name</label>
-									<input type="text" th:field="*{firstName}" class="form-control" />
-								</div>
-								<div class="col-sm-5">
-									<label for="lastName">Last Name</label>
-									<input type="text" th:field="*{lastName}" class="form-control" />
-								</div>
-								<div class="col-sm-2">
-									<label for="suffix">Suffix</label>
-									<select th:fielf="*{suffix}" class="form-control">
-										<option value=""></option>
-										<option value="Sr.">Sr.</option>
-										<option value="Jr.">Jr.</option>
-										<option value="lll">lll</option>
-										<option value="lV">lV</option>
-										<option value="V">V</option>
-									</select>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-6">
-									<label for="email">Email</label>
-									<input type="text" th:field="*{email}" class="form-control" />
-								</div>
-								<div class="col-sm-6">
-									<label for="extension">Extension</label>
-									<input type="text" th:field="*{extension}" class="form-control" />
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-6">
-									<label for="position">Position</label>
-									<input type="text" th:field="*{position}" class="form-control" />
-								</div>
-								<div class="col-sm-6">
-									<label for="qualifications">Qualifications</label>
-									<input type="text" th:field="*{qualifications}" class="form-control" />
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-6">
-									<label for="image">Image</label>
-									<input type="text" th:field="*{image}" class="form-control" />
-								</div>
-								<div class="col-sm-6">
-									<label for="employmentDate">Employment Date</label>
-									<input type="text" th:field="*{employmentDate}" class="form-control dateField" />
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-12">
-									<label for="description">Description</label>
-									<textarea th:field="*{description}" class="form-control" rows="5"></textarea>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div th:replace="admin/support/buttonRowMarkup:: markup"></div>
-				</form>
-			</div>
-		</div>	
+	<div layout:fragment="adminContent" th:inline="text">
+		This is the dashboard	
 	</div>
 </html>
