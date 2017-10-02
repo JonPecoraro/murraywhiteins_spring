@@ -34,6 +34,9 @@ dependencies {
 	// Spring security
 	compile("org.springframework.boot:spring-boot-starter-security")
 	
+	// RESTful actuator service
+	compile("org.springframework.boot:spring-boot-starter-actuator")
+	
 	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

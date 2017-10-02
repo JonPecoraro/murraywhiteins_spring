@@ -87,100 +87,156 @@ public class QuoteController {
 		return view;
 	}
 	
-	@RequestMapping(value = "/submitAuto", method=RequestMethod.POST)
-	public String submitAuto(@Valid @ModelAttribute("quoteForm") AutoQuoteForm quoteForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/submitAuto", params = {"protection"}, method=RequestMethod.POST)
+	public String submitAuto(@Valid @ModelAttribute("quoteForm") AutoQuoteForm quoteForm, String protection, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			redirectAttributes.addFlashAttribute("currentYear", Year.now().getValue());
 			return "quotes/auto";
 		}
 		
-		// No errors, send email and return to view
-		emailQuoteRequest("Auto", quoteForm.toEmailString(), redirectAttributes);
-				
+		if (protection.isEmpty())
+		{
+			// No errors, send email and return to view
+			emailQuoteRequest("Auto", quoteForm.toEmailString(), redirectAttributes);
+		}
+		else
+		{
+			redirectAttributes.addFlashAttribute("success", true);
+		}
+		
 		redirectAttributes.addFlashAttribute("success", true);
 		return "redirect:/quotes/index";
 	}
 	
-	@RequestMapping(value = "/submitHomeowners", method=RequestMethod.POST)
-	public String submitAuto(@Valid @ModelAttribute("quoteForm") HomeownersQuoteForm quoteForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/submitHomeowners", params = {"protection"}, method=RequestMethod.POST)
+	public String submitAuto(@Valid @ModelAttribute("quoteForm") HomeownersQuoteForm quoteForm, String protection, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			return "quotes/homeowners";
 		}
 		
-		// No errors, send email and return to view
-		emailQuoteRequest("Homeowners", quoteForm.toEmailString(), redirectAttributes);
+		if (protection.isEmpty())
+		{
+			// No errors, send email and return to view
+			emailQuoteRequest("Homeowners", quoteForm.toEmailString(), redirectAttributes);
+		}
+		else
+		{
+			redirectAttributes.addFlashAttribute("success", true);
+		}
 		
 		return "redirect:/quotes/index";
 	}
 	
-	@RequestMapping(value = "/submitUmbrella", method=RequestMethod.POST)
-	public String submitAuto(@Valid @ModelAttribute("quoteForm") UmbrellaQuoteForm quoteForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/submitUmbrella", params = {"protection"}, method=RequestMethod.POST)
+	public String submitAuto(@Valid @ModelAttribute("quoteForm") UmbrellaQuoteForm quoteForm, String protection, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			return "quotes/umbrella";
 		}
 		
-		// No errors, send email and return to view
-		emailQuoteRequest("Umbrella", quoteForm.toEmailString(), redirectAttributes);
+		if (protection.isEmpty())
+		{
+			// No errors, send email and return to view
+			emailQuoteRequest("Umbrella", quoteForm.toEmailString(), redirectAttributes);
+		}
+		else
+		{
+			redirectAttributes.addFlashAttribute("success", true);
+		}
 		
 		return "redirect:/quotes/index";
 	}
 	
-	@RequestMapping(value = "/submitLife", method=RequestMethod.POST)
-	public String submitLife(@Valid @ModelAttribute("quoteForm") LifeQuoteForm quoteForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/submitLife", params = {"protection"}, method=RequestMethod.POST)
+	public String submitLife(@Valid @ModelAttribute("quoteForm") LifeQuoteForm quoteForm, String protection, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			return "quotes/life";
 		}
 		
-		// No errors, send email and return to view
-		emailQuoteRequest("Life", quoteForm.toEmailString(), redirectAttributes);
+		if (protection.isEmpty())
+		{
+			// No errors, send email and return to view
+			emailQuoteRequest("Life", quoteForm.toEmailString(), redirectAttributes);
+		}
+		else
+		{
+			redirectAttributes.addFlashAttribute("success", true);
+		}
 		
 		return "redirect:/quotes/index";
 	}
 	
-	@RequestMapping(value = "/submitRenters", method=RequestMethod.POST)
-	public String submitRenters(@Valid @ModelAttribute("quoteForm") RentersQuoteForm quoteForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/submitRenters", params = {"protection"}, method=RequestMethod.POST)
+	public String submitRenters(@Valid @ModelAttribute("quoteForm") RentersQuoteForm quoteForm, String protection, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			return "quotes/renters";
 		}
 		
-		// No errors, send email and return to view
-		emailQuoteRequest("Renters", quoteForm.toEmailString(), redirectAttributes);
+		if (protection.isEmpty())
+		{
+			// No errors, send email and return to view
+			emailQuoteRequest("Renters", quoteForm.toEmailString(), redirectAttributes);
+		}
+		else
+		{
+			redirectAttributes.addFlashAttribute("success", true);
+		}
 		
 		return "redirect:/quotes/index";
 	}
 	
-	@RequestMapping(value = "/submitFlood", method=RequestMethod.POST)
-	public String submitFlood(@Valid @ModelAttribute("quoteForm") FloodQuoteForm quoteForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/submitFlood", params = {"protection"}, method=RequestMethod.POST)
+	public String submitFlood(@Valid @ModelAttribute("quoteForm") FloodQuoteForm quoteForm, String protection, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			return "quotes/flood";
 		}
 		
-		// No errors, send email and return to view
-		emailQuoteRequest("Flood", quoteForm.toEmailString(), redirectAttributes);
+		if (protection.isEmpty())
+		{
+			// No errors, send email and return to view
+			emailQuoteRequest("Flood", quoteForm.toEmailString(), redirectAttributes);
+		}
+		else
+		{
+			redirectAttributes.addFlashAttribute("success", true);
+		}
 		
 		return "redirect:/quotes/index";
 	}
 	
-	@RequestMapping(value = "/submitBusiness", method=RequestMethod.POST)
-	public String submitBusiness(@Valid @ModelAttribute("quoteForm") BusinessQuoteForm quoteForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/submitBusiness", params = {"protection"}, method=RequestMethod.POST)
+	public String submitBusiness(@Valid @ModelAttribute("quoteForm") BusinessQuoteForm quoteForm, String protection, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			return "quotes/business";
 		}
 		
-		// No errors, send email and return to view
-		emailQuoteRequest("Business", quoteForm.toEmailString(), redirectAttributes);
+		if (protection.isEmpty())
+		{
+			// No errors, send email and return to view
+			emailQuoteRequest("Business", quoteForm.toEmailString(), redirectAttributes);
+		}
+		else
+		{
+			redirectAttributes.addFlashAttribute("success", true);
+		}
 		
 		return "redirect:/quotes/index";
 	}
 
-	@RequestMapping(value = "/submitOther", method=RequestMethod.POST)
-	public String submitOther(@Valid @ModelAttribute("quoteForm") OtherQuoteForm quoteForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/submitOther", params = {"protection"}, method=RequestMethod.POST)
+	public String submitOther(@Valid @ModelAttribute("quoteForm") OtherQuoteForm quoteForm, String protection, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			return "quotes/other";
 		}
 		
-		// No errors, send email and return to view
-		emailQuoteRequest("Insurnace", quoteForm.toEmailString(), redirectAttributes);
+		if (protection.isEmpty())
+		{
+			// No errors, send email and return to view
+			emailQuoteRequest("Insurnace", quoteForm.toEmailString(), redirectAttributes);
+		}
+		else
+		{
+			redirectAttributes.addFlashAttribute("success", true);
+		}
 		
 		return "redirect:/quotes/index";
 	}

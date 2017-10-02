@@ -42,6 +42,7 @@
 						<input type="radio" th:field="*{contactPreference}" value="Afternoon" />&nbsp;
 						<label th:for="${#ids.next('contactPreference')}">Through Email</label>
 						<input type="radio" th:field="*{contactPreference}" value="Email" />
+						<div th:replace="common/protectionMarkup :: markup"></div>
 					</div>
 				</div>
 			</div>

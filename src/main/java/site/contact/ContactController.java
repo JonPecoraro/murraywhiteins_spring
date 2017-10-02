@@ -31,8 +31,8 @@ public class ContactController {
 		return "contact/index";
 	}
 	
-	@RequestMapping(value="submitContactForm", params = {"firstName", "lastName", "email", "contactMessage"}, method=RequestMethod.POST)
-	public String submitContactForm(String firstName, String lastName, String email, String contactMessage, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+	@RequestMapping(value="submitContactForm", params = {"firstName", "lastName", "email", "contactMessage", "protection"}, method=RequestMethod.POST)
+	public String submitContactForm(String firstName, String lastName, String email, String contactMessage, String protection, RedirectAttributes redirectAttributes, HttpServletRequest request) {
 		String emailInformation = "<p>";
 		
 		emailInformation += "<b>First name:</b> " + firstName + "<br />";
@@ -42,7 +42,10 @@ public class ContactController {
 		emailInformation += "</p>";
 		
 		try {
-			EmailUtil.sendEmail(sender, emailTo, "Website Contact Form Submitted", emailInformation, request.getRemoteAddr());
+			if (protection.isEmpty())
+			{
+				EmailUtil.sendEmail(sender, emailTo, "Website Contact Form Submitted", emailInformation, request.getRemoteAddr());
+			}
 			redirectAttributes.addFlashAttribute("success", "Thank you for your feedback. We have received your message.");
 		} catch(Exception ex) {
 			logger.error("There was a problem sending the email message: {}", ex);
