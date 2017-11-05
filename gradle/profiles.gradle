@@ -15,7 +15,7 @@ if (project.hasProperty('production')) {
 // Appends properties to the application.properties file during compilation,
 // which ensures WARs and JARs always run with the profiles they were built with.
 // Also works with the bootRun task without requiring it to be extended.
-// Defaults to the "production" profile if no -P arguments are provided.
+// Defaults to the "local" profile if no -P arguments are provided.
 classes {
 	doLast {
 		FileTree tree = fileTree(dir: "build/resources/main").include("application.properties")
