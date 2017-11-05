@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layouts/default"
-	th:with="title=${'Life Insurance'},pageHeading=${'Life Insurance Quote'}">
+	th:with="title=${'Life Insurance'},pageHeading=${'Life Insurance Quote'},useRecaptcha=${true}">
 	
 	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/quotes.css}" />
 	

@@ -1,6 +1,6 @@
 <div class="row buttonRow" th:fragment="markup"  xmlns:th="http://www.thymeleaf.org">
 	<div class="col-xs-12">
 		<button type="submit" th:formaction="@{/quotes/cancel}" name="Cancel" class="btn btn-default pull-left">Cancel</button>
-		<input type="submit" value="Get Quote" name="btnSubmitQuote" class="btn btn-primary pull-right" />
+		<button class="btn btn-primary pull-right g-recaptcha" th:attr="data-sitekey=${@reCaptchaConfig.getSite()}" data-callback="globalReCaptchaResponseHandler">Get Quote</button>
 	</div>
 </div>

@@ -21,6 +21,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import site.common.ReCaptchaProcessor;
 import site.common.StateRepository;
 import site.quotes.forms.AutoQuoteForm;
 import site.quotes.forms.BusinessQuoteForm;
@@ -42,6 +43,9 @@ public class QuoteController {
 	
 	@Autowired
 	private JavaMailSender sender;
+	
+	@Autowired
+	private ReCaptchaProcessor recaptchaProcessor;
 	
 	@Value("${email.to}")
 	private String emailTo;
@@ -87,8 +91,8 @@ public class QuoteController {
 		return view;
 	}
 	
-	@RequestMapping(value = "/submitAuto", params = {"protection"}, method=RequestMethod.POST)
-	public String submitAuto(@Valid @ModelAttribute("quoteForm") AutoQuoteForm quoteForm, String protection, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/submitAuto", params = {"protection", "g-recaptcha-response"}, method=RequestMethod.POST)
+	public String submitAuto(@Valid @ModelAttribute("quoteForm") AutoQuoteForm quoteForm, String protection, @RequestParam("g-recaptcha-response") String gReCaptchaResponse, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			redirectAttributes.addFlashAttribute("currentYear", Year.now().getValue());
 			return "quotes/auto";
@@ -97,7 +101,7 @@ public class QuoteController {
 		if (protection.isEmpty())
 		{
 			// No errors, send email and return to view
-			emailQuoteRequest("Auto", quoteForm.toEmailString(), redirectAttributes);
+			emailQuoteRequest("Auto", quoteForm.toEmailString(), redirectAttributes, gReCaptchaResponse);
 		}
 		else
 		{
@@ -108,8 +112,8 @@ public class QuoteController {
 		return "redirect:/quotes/index";
 	}
 	
-	@RequestMapping(value = "/submitHomeowners", params = {"protection"}, method=RequestMethod.POST)
-	public String submitAuto(@Valid @ModelAttribute("quoteForm") HomeownersQuoteForm quoteForm, String protection, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/submitHomeowners", params = {"protection", "g-recaptcha-response"}, method=RequestMethod.POST)
+	public String submitAuto(@Valid @ModelAttribute("quoteForm") HomeownersQuoteForm quoteForm, String protection, @RequestParam("g-recaptcha-response") String gReCaptchaResponse, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			return "quotes/homeowners";
 		}
@@ -117,7 +121,7 @@ public class QuoteController {
 		if (protection.isEmpty())
 		{
 			// No errors, send email and return to view
-			emailQuoteRequest("Homeowners", quoteForm.toEmailString(), redirectAttributes);
+			emailQuoteRequest("Homeowners", quoteForm.toEmailString(), redirectAttributes, gReCaptchaResponse);
 		}
 		else
 		{
@@ -127,8 +131,8 @@ public class QuoteController {
 		return "redirect:/quotes/index";
 	}
 	
-	@RequestMapping(value = "/submitUmbrella", params = {"protection"}, method=RequestMethod.POST)
-	public String submitAuto(@Valid @ModelAttribute("quoteForm") UmbrellaQuoteForm quoteForm, String protection, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/submitUmbrella", params = {"protection", "g-recaptcha-response"}, method=RequestMethod.POST)
+	public String submitAuto(@Valid @ModelAttribute("quoteForm") UmbrellaQuoteForm quoteForm, String protection, @RequestParam("g-recaptcha-response") String gReCaptchaResponse, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			return "quotes/umbrella";
 		}
@@ -136,7 +140,7 @@ public class QuoteController {
 		if (protection.isEmpty())
 		{
 			// No errors, send email and return to view
-			emailQuoteRequest("Umbrella", quoteForm.toEmailString(), redirectAttributes);
+			emailQuoteRequest("Umbrella", quoteForm.toEmailString(), redirectAttributes, gReCaptchaResponse);
 		}
 		else
 		{
@@ -146,8 +150,8 @@ public class QuoteController {
 		return "redirect:/quotes/index";
 	}
 	
-	@RequestMapping(value = "/submitLife", params = {"protection"}, method=RequestMethod.POST)
-	public String submitLife(@Valid @ModelAttribute("quoteForm") LifeQuoteForm quoteForm, String protection, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/submitLife", params = {"protection", "g-recaptcha-response"}, method=RequestMethod.POST)
+	public String submitLife(@Valid @ModelAttribute("quoteForm") LifeQuoteForm quoteForm, String protection, @RequestParam("g-recaptcha-response") String gReCaptchaResponse, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			return "quotes/life";
 		}
@@ -155,7 +159,7 @@ public class QuoteController {
 		if (protection.isEmpty())
 		{
 			// No errors, send email and return to view
-			emailQuoteRequest("Life", quoteForm.toEmailString(), redirectAttributes);
+			emailQuoteRequest("Life", quoteForm.toEmailString(), redirectAttributes, gReCaptchaResponse);
 		}
 		else
 		{
@@ -165,8 +169,8 @@ public class QuoteController {
 		return "redirect:/quotes/index";
 	}
 	
-	@RequestMapping(value = "/submitRenters", params = {"protection"}, method=RequestMethod.POST)
-	public String submitRenters(@Valid @ModelAttribute("quoteForm") RentersQuoteForm quoteForm, String protection, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/submitRenters", params = {"protection", "g-recaptcha-response"}, method=RequestMethod.POST)
+	public String submitRenters(@Valid @ModelAttribute("quoteForm") RentersQuoteForm quoteForm, String protection, @RequestParam("g-recaptcha-response") String gReCaptchaResponse, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			return "quotes/renters";
 		}
@@ -174,7 +178,7 @@ public class QuoteController {
 		if (protection.isEmpty())
 		{
 			// No errors, send email and return to view
-			emailQuoteRequest("Renters", quoteForm.toEmailString(), redirectAttributes);
+			emailQuoteRequest("Renters", quoteForm.toEmailString(), redirectAttributes, gReCaptchaResponse);
 		}
 		else
 		{
@@ -184,8 +188,8 @@ public class QuoteController {
 		return "redirect:/quotes/index";
 	}
 	
-	@RequestMapping(value = "/submitFlood", params = {"protection"}, method=RequestMethod.POST)
-	public String submitFlood(@Valid @ModelAttribute("quoteForm") FloodQuoteForm quoteForm, String protection, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/submitFlood", params = {"protection", "g-recaptcha-response"}, method=RequestMethod.POST)
+	public String submitFlood(@Valid @ModelAttribute("quoteForm") FloodQuoteForm quoteForm, String protection, @RequestParam("g-recaptcha-response") String gReCaptchaResponse, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			return "quotes/flood";
 		}
@@ -193,7 +197,7 @@ public class QuoteController {
 		if (protection.isEmpty())
 		{
 			// No errors, send email and return to view
-			emailQuoteRequest("Flood", quoteForm.toEmailString(), redirectAttributes);
+			emailQuoteRequest("Flood", quoteForm.toEmailString(), redirectAttributes, gReCaptchaResponse);
 		}
 		else
 		{
@@ -203,8 +207,8 @@ public class QuoteController {
 		return "redirect:/quotes/index";
 	}
 	
-	@RequestMapping(value = "/submitBusiness", params = {"protection"}, method=RequestMethod.POST)
-	public String submitBusiness(@Valid @ModelAttribute("quoteForm") BusinessQuoteForm quoteForm, String protection, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/submitBusiness", params = {"protection", "g-recaptcha-response"}, method=RequestMethod.POST)
+	public String submitBusiness(@Valid @ModelAttribute("quoteForm") BusinessQuoteForm quoteForm, String protection, @RequestParam("g-recaptcha-response") String gReCaptchaResponse, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			return "quotes/business";
 		}
@@ -212,7 +216,7 @@ public class QuoteController {
 		if (protection.isEmpty())
 		{
 			// No errors, send email and return to view
-			emailQuoteRequest("Business", quoteForm.toEmailString(), redirectAttributes);
+			emailQuoteRequest("Business", quoteForm.toEmailString(), redirectAttributes, gReCaptchaResponse);
 		}
 		else
 		{
@@ -222,8 +226,8 @@ public class QuoteController {
 		return "redirect:/quotes/index";
 	}
 
-	@RequestMapping(value = "/submitOther", params = {"protection"}, method=RequestMethod.POST)
-	public String submitOther(@Valid @ModelAttribute("quoteForm") OtherQuoteForm quoteForm, String protection, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/submitOther", params = {"protection", "g-recaptcha-response"}, method=RequestMethod.POST)
+	public String submitOther(@Valid @ModelAttribute("quoteForm") OtherQuoteForm quoteForm, String protection, @RequestParam("g-recaptcha-response") String gReCaptchaResponse, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
 			return "quotes/other";
 		}
@@ -231,7 +235,7 @@ public class QuoteController {
 		if (protection.isEmpty())
 		{
 			// No errors, send email and return to view
-			emailQuoteRequest("Insurnace", quoteForm.toEmailString(), redirectAttributes);
+			emailQuoteRequest("Insurnace", quoteForm.toEmailString(), redirectAttributes, gReCaptchaResponse);
 		}
 		else
 		{
@@ -246,10 +250,12 @@ public class QuoteController {
 		return "redirect:/quotes/index";
 	}
 	
-	private void emailQuoteRequest(String quoteType, String emailBody, RedirectAttributes redirectAttributes) {
+	private void emailQuoteRequest(String quoteType, String emailBody, RedirectAttributes redirectAttributes, String gReCaptchaResponse) {
 		try {
+			recaptchaProcessor.processResponse(gReCaptchaResponse);
+			
 			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-
+			
 			String title = "New " + quoteType + " Quote Request"; 
 			EmailUtil.sendEmail(sender, emailTo, title, emailBody, request.getRemoteAddr());
 			redirectAttributes.addFlashAttribute("success", true);

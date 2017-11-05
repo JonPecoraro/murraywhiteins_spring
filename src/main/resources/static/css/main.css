@@ -112,9 +112,14 @@ div.ui-datepicker tbody td:last-child {
   border-right: 0px;
 }
 div.ui-datepicker {
-	z-index: 2 !important; /* because jQuery adds z-index: 1 to the element's style. Using !important is the only way I can think of to override this style */
+	z-index: 2000 !important; /* because jQuery adds z-index: 1 to the element's style. Using !important is the only way I can think of to override this style */
 }
 /* end override bootstrap styles */
+/* override google re-captcha styles */
+.grecaptcha-badge {
+	display: none;
+}
+/* end override google re-captcha styles */
 h2.pageTitle {
 	color: #4A1144;
 	margin-top: 0; /* because main already has top padding of 20px; */

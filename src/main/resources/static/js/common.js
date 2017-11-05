@@ -20,7 +20,7 @@ common.isValid = function($parentElement) {
 	});
 	
 	return valid;
-};
+}
 
 common.toggleMenuHover = function() {
 	// remove the hover capability if screen size is too small.
@@ -62,6 +62,12 @@ common.getTestimonial = function() {
 			.find('.testimonialText').text(defaultTestimonial).end()
 			.find('.testimonialSignature').text(defaultAuthor);
 	});
+}
+
+// Globally available function - not within the common scope
+globalReCaptchaResponseHandler = function(token)
+{
+	$('.g-recaptcha').parents('form').submit();
 }
 
 $(function() {

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layouts/default"
-	th:with="title=${'Quotes'},pageHeading=${'Quotes'}">
+	th:with="title=${'Quotes'},pageHeading=${'Quotes'},useRecaptcha=${true}">
 	
 	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/quotes.css}" />
 	<section layout:fragment="additionalScripts">
