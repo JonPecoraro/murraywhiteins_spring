@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/admin"
+	th:with="title=${'Team'}">
+	
+	<head>
+		<link media="all" type="text/css" rel="stylesheet" th:href="@{/css/team/team.css}" />
+		<link media="all" type="text/css" rel="stylesheet" th:href="@{/css/team/adminTeam.css}" />
+	</head>
+	<section layout:fragment="adminPageScripts">
+		<script th:src="@{/js/team/adminTeam.js}"></script>
+	</section>
+	
+	<div layout:fragment="adminContent" th:inline="text">
+		<div th:replace="team/index :: includeContent"></div>
+	</div>
+</html>

@@ -1,6 +1,6 @@
 <div class="row buttonRow" th:fragment="markup"  xmlns:th="http://www.thymeleaf.org">
 	<div class="col-xs-12">
-		<button type="submit" th:formaction="@{/admin/cancel}" name="Cancel" class="btn btn-default pull-left">Cancel</button>
+		<button type="submit" th:formaction="@{cancelPage == null ? '/admin/cancel' : '/admin/cancel?page=' + ${cancelPage}}" name="Cancel" class="btn btn-default pull-left">Cancel</button>
 		<input type="submit" value="Save" name="btnSave" class="btn btn-primary pull-right" />
 	</div>
 </div>

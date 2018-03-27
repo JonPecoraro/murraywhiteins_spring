@@ -4,7 +4,7 @@
 	layout:decorator="layouts/default"
 	th:with="title=${'Team'},pageHeading=${'Our Team'}">
 	
-	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/team.css}" />
+	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/team/team.css}" />
 
 	<div layout:fragment="content" th:inline="text">
 		<div th:fragment="includeContent">
@@ -33,12 +33,12 @@
 				<div class="col-sm-6">
 					<ul class="listing">
 						<li class="clearfix"
-							th:each="i : ${#numbers.sequence(0, teamMembersWithoutImage.size() / 2.0)}"
+							th:each="i : ${#numbers.sequence(0, T(Math).ceil(teamMembersWithoutImage.size() / 2.0) -1)}"
 							th:with="teamMember=${teamMembersWithoutImage[i]}"
 							th:include="team/teamMemberMarkup :: markup" />
 					</ul>
 				</div>
-				<div class="col-sm-6">
+				<div th:if="${teamMembersWithoutImage.size() > 1}" class="col-sm-6">
 					<ul class="listing">
 						<li class="clearfix"
 							th:each="i : ${#numbers.sequence(T(Math).ceil(teamMembersWithoutImage.size() / 2.0), teamMembersWithoutImage.size() - 1)}"

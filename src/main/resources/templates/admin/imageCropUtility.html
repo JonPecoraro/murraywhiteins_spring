@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/admin"
+	th:with="title=${'File Cropper'},useImageCropper=${true}">
+	
+	<head>
+		<link media="all" type="text/css" rel="stylesheet" th:href="@{/css/imageCropUtility.css}" />
+	</head>
+	<section layout:fragment="adminPageScripts">
+		<script th:src="@{/js/imageCropUtility.js}"></script>
+	</section>
+	
+	<div layout:fragment="adminContent" th:inline="text">
+		<p>
+			The Image Crop Utility allows you to crop and resize JPG images.
+			Select a file to crop from your computer, then you can choose to resize the image to one of the standard images sizes
+			used throughout the website, or you can manually crop the image to any size you'd like. To manually crop the image,
+			resize the crop box to the desired dimensions, then click the "Manually crop image" button to preview and download
+			your cropped image. Similarly, click the "Save as ..." buttons to preview and download the image in the selected size.
+		</p>
+		<form id="imageForm" action="#" method="post" class="form">
+			<input type="file" id="imageInput" name="imageInput" accept=".jpg" />
+			<div class="imageContainer">
+				<img src="" id="image" />
+			</div>
+			<div id="toolbarButtons" class="hidden">
+				<input type="button" class="imageCrop btn btn-primary" data-width="200" data-height="50" value="Save as 200x50 (logo)" />
+				<input type="button" class="imageCrop btn btn-primary" data-width="200" data-height="150" value="Save as 200x150 (profile picture)" />
+				<input type="button" class="imageCrop btn btn-primary" data-width="800" data-height="600" value="Save as 800x600 (large profile picture)" />
+				<input type="button" class="imageCrop btn btn-primary" value="Manually crop image" />
+			</div>
+			<div id="preview"></div>
+		</form>
+		
+		<!-- Modal to display the cropped image -->
+		<div id="croppedImageModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h3 class="modal-title">Cropped Image</h3>
+					</div>
+					<div class="modal-body"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						<a id="download" href="#" class="btn btn-primary" download="croppedImage.jpg">Download</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Modal for when a user uploads something that is not a JPG image -->
+		<div id="invalidImageModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h3 class="modal-title">Invalid Image</h3>
+					</div>
+					<div class="modal-body">
+						<p>The selected file is not a JPG image. Please upload a JPG file for the image.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</html>

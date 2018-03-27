@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/admin"
+	th:with="title=${'Companies'}">
+	
+	<head>
+		<link media="all" type="text/css" rel="stylesheet" th:href="@{/css/companies/companies.css}" />
+		<link media="all" type="text/css" rel="stylesheet" th:href="@{/css/companies/adminCompanies.css}" />
+	</head>
+	<section layout:fragment="adminPageScripts">
+		<script th:src="@{/js/companies/adminCompanies.js}"></script>
+	</section>
+	
+	<div layout:fragment="adminContent" th:inline="text">
+		<div th:replace="companies/index :: includeContent"></div>
+	</div>
+</html>
