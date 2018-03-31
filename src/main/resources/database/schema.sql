@@ -63,4 +63,4 @@ CREATE TABLE testimonial (
 );
 
 REVOKE all ON murraywhiteins.* FROM 'springuser'@'localhost';
-GRANT select, insert, update ON murraywhiteins.* TO 'springuser'@'localhost';
+GRANT select, insert, update, delete ON murraywhiteins.* TO 'springuser'@'localhost';

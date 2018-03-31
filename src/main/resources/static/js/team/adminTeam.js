@@ -27,13 +27,27 @@ $(function() {
 		var $updateTeamMemberLink = $('<a></a>');
 		$updateTeamMemberLink.attr('href', '/team/admin/update?id=' + $this.data('teamMemberId'));
 		$updateTeamMemberLink.append($('<span class="glyphicon glyphicon-edit"></span>'));
+		
+		var $deleteTeamMemberLink = $('<a href="#" class="deleteUser"></a>');
+		$deleteTeamMemberLink.data('teamMemberId', $this.data('teamMemberId'));
+		$deleteTeamMemberLink.append($('<span class="glyphicon glyphicon-trash"></span>'));
+		
 		$this.prepend($updateTeamMemberLink);
+		$this.prepend($deleteTeamMemberLink);
 	}, function() {
-		$(this).find('span.glyphicon-edit').parent().remove();
+		var $this = $(this);
+		$this.find('span.glyphicon-edit').parent().remove();
+		$this.find('span.glyphicon-trash').parent().remove();
 	});
 
 	$('a.profileLink').on('click', function(e) {
 		e.preventDefault();
+	});
+	
+	//////// THIS IS NOT BEING CALLED /////////
+	$('a.deleteUser').on('click', function(e) {
+		$('#confirmDeletionLink').attr('href', '/team/admin/delete?id=' + $this.data('teamMemberId'));
+		$('#deleteUserModal').modal('show');
 	});
 	
 	function getSortOrder() {

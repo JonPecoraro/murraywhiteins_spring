@@ -14,5 +14,27 @@
 	
 	<div layout:fragment="adminContent" th:inline="text">
 		<div th:replace="team/index :: includeContent"></div>
+		<div id="addUserContainer" class="well">
+			<a th:href="@{/team/admin/update}" class="btn btn-primary center-block">Add Team Member</a>
+		</div>
+		
+		<!-- Modal for confirming a user deletion -->
+		<div id="deleteUserModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h3 class="modal-title">Delete User</h3>
+					</div>
+					<div class="modal-body">
+						<p>Are you sure you want to delete the user from the website?</p>
+					</div>
+					<div class="modal-footer">
+						<a id="confirmDeletionLink" class="btn btn-primary" data-dismiss="modal">Yes</a>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </html>

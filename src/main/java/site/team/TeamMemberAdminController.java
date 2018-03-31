@@ -56,7 +56,9 @@ public class TeamMemberAdminController {
 	public String showUpdatePage(@RequestParam(value="id", required=false) Integer id, Model model) {
 		String selectedSuffix = "";
 		if (id == null) {
-			model.addAttribute("teamMember", new TeamMember());
+			TeamMember member = new TeamMember();
+			member.setImage("/img/team/no_image.jpg");
+			model.addAttribute("teamMember", member);
 		}
 		else {
 			TeamMember member = teamMemberRepository.findOne(id);
@@ -68,13 +70,29 @@ public class TeamMemberAdminController {
 		return "team/update";
 	}
 	
+	@RequestMapping(value="/delete", method=RequestMethod.GET)
+	public String deleteUser(@RequestParam(value="id") Integer id, Model model) {
+		try {
+			teamMemberRepository.delete(id);
+			logger.info("Deleted user with ID " + id + " from the website.");
+		} catch (IllegalArgumentException e) {
+			logger.error("Unable to delete user", e);
+		}
+		return "redirect:/team/admin";
+	}
+	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public String save(@ModelAttribute TeamMember teamMember, @RequestParam(value="profilePicture", required=false) MultipartFile profilePicture, @RequestParam(value="profilePictureLarge", required=false) MultipartFile profilePictureLarge) {
 		logger.info("Saving team member");
 		if (profilePicture != null && profilePicture.getSize() > 0) {
 			// A new profile picture was passed in. Update it in the file system
 			try {
-				SaveNewProfilePictureToFileSystem(profilePicture, teamMember.getImage());
+				String relativePath = teamMember.getImage();
+				if (relativePath == null || relativePath == "" || relativePath.equals("/img/team/no_image.jpg")) {
+					relativePath = "/img/team/" + teamMember.getFirstName().toLowerCase() + "_" + teamMember.getLastName().toLowerCase() + ".jpg";
+					teamMember.setImage(relativePath);
+				}
+				SaveNewProfilePictureToFileSystem(profilePicture, relativePath);
 			}
 			catch(Exception e) {
 				logger.error("There was an error updating the profile picture in the file system", e);
@@ -83,7 +101,11 @@ public class TeamMemberAdminController {
 		if (profilePictureLarge != null && profilePictureLarge.getSize() > 0) {
 			// A new large profile picture was passed in. Update it in the file system
 			try {
-				SaveNewProfilePictureToFileSystem(profilePictureLarge, teamMember.getLargeImageUrl());
+				String relativePath = teamMember.getLargeImageUrl();
+				if (relativePath == null || relativePath == "" || relativePath.equals("/img/team/no_image.jpg")) {
+					relativePath = "/img/team/" + teamMember.getFirstName().toLowerCase() + "_" + teamMember.getLastName().toLowerCase() + "_large.jpg"; 
+				}
+				SaveNewProfilePictureToFileSystem(profilePictureLarge, relativePath);
 			}
 			catch(Exception e) {
 				logger.error("There was an error updating the large profile picture in the file system", e);
@@ -97,6 +119,7 @@ public class TeamMemberAdminController {
 		URL staticContentUrl = this.getClass().getClassLoader().getResource("static");
 		URL fullUrl = new URL(staticContentUrl, "static" + relativeImagePath);
 		Path profilePicturePath = Paths.get(fullUrl.toURI());
+		logger.info("profile picture path: " + profilePicturePath);
 		Files.copy(profilePicture.getInputStream(), profilePicturePath, StandardCopyOption.REPLACE_EXISTING);
 	}
 }

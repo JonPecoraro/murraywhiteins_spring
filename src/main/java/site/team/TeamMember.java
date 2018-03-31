@@ -66,7 +66,11 @@ public class TeamMember {
 	}
 	
 	public String getLargeImageUrl() {
-		return image.replace(".jpg", "_large.jpg");
+		String largeImageUrl = "";
+		if (image != null && image.contains(".jpg")) {
+			largeImageUrl = image.replace(".jpg", "_large.jpg");
+		}
+		return largeImageUrl;
 	}
 	
 	@Override

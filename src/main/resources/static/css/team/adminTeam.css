@@ -1,3 +1,6 @@
+ul.listing>li {
+	position: relative;
+}
 ul.listing>li:hover {
 	cursor: move;
 	background-color: #F1F0FF;
@@ -5,7 +8,13 @@ ul.listing>li:hover {
 span.glyphicon-edit {
 	float: right;
 }
-span.glyphicon-edit:hover {
+span.glyphicon-trash {
+	position: absolute;
+	top: 130px;
+	right: 3px;
+}
+span.glyphicon-edit:hover,
+span.glyphicon-trash:hover {
 	color: #45033e;
 	cursor: pointer;
 }
