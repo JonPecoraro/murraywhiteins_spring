@@ -82,7 +82,7 @@ common.getWeather = function() {
 		}).done(function(data) {
 			var weatherData = data.weather[0];
 			var temperature = Math.round(data.main.temp);
-			var iconUrl = 'http://openweathermap.org/img/w/' + weatherData.icon + '.png';		
+			var iconUrl = 'https://openweathermap.org/img/w/' + weatherData.icon + '.png';		
 			$('footer .information .weather').empty().html(
 				'<div class="weatherText">' +
 					'<p>High Point local weather</p>' +
