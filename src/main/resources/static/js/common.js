@@ -64,6 +64,26 @@ common.getTestimonial = function() {
 	});
 }
 
+// Gets the weather in High Point, NC
+common.getWeather = function() {
+	$.ajax({
+		url: 'http://api.openweathermap.org/data/2.5/weather?q=High Point,us&units=imperial&APPID=83ecd15ea5083a22e88b77344a19d380',
+		dataType: 'json'
+	}).done(function(data) {
+		var weatherData = data.weather[0];
+		var temperature = Math.round(data.main.temp);
+		var iconUrl = 'http://openweathermap.org/img/w/' + weatherData.icon + '.png';		
+		$('footer .information .weather').html(
+			'<div class="weatherText">' +
+				'<p>High Point local weather</p>' +
+				'<img src="' + iconUrl + '" /> ' + temperature + ' &deg; F ' + weatherData.description +
+			'</div>'
+		);
+	}).fail(function(jqXHR, textStatus, errorThrown) {
+		$('footer .information .weather').empty();
+	});
+}
+
 $(function() {
 	// Redirect HTTP requests to HTTPS website
 	common.httpsRedirect();
@@ -77,4 +97,7 @@ $(function() {
 	
 	// Display a random testimonial
 	common.getTestimonial();
+	
+	// Get the current weather
+	common.getWeather();
 });
