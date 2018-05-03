@@ -1,6 +1,5 @@
 package site.quotes.forms;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -31,6 +30,7 @@ public class LifeQuoteForm extends QuoteFormBase {
 	public void setAnnualIncome(String newValue) { this.annualIncome = newValue; }
 	public void setBeneficiary(String newValue) { this.beneficiary = newValue; }
 
+	@Override
 	public String toEmailString() {
 		StringBuilder emailBuilder = new StringBuilder();
 
@@ -46,6 +46,20 @@ public class LifeQuoteForm extends QuoteFormBase {
 		return emailBuilder.toString();
 	}
 
+	@Override
+	public String toSmsString() {
+		StringBuilder smsBuilder = new StringBuilder();
+
+		smsBuilder.append(super.toSmsString());
+		smsBuilder.append("Life Insurance Type: " + lifeInsuranceType + "\n");
+		smsBuilder.append("Requested Limit: " + requestedLimit + "\n");
+		smsBuilder.append("Annual Income: " + annualIncome + "\n");
+		smsBuilder.append("Beneficiary: " + beneficiary);
+
+		return smsBuilder.toString();
+	}
+
+	@Override
 	public String toString() {
 		String str = super.toString();
 

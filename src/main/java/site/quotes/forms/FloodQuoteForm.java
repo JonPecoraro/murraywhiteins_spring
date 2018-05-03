@@ -1,6 +1,5 @@
 package site.quotes.forms;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -32,6 +31,7 @@ public class FloodQuoteForm extends QuoteFormBase {
 	public void setStructureType(String newValue) { this.structureType = newValue; }
 	public void setHomeType(String newValue) { this.homeType = newValue; }
 
+	@Override
 	public String toEmailString() {
 		StringBuilder emailBuilder = new StringBuilder();
 
@@ -48,6 +48,21 @@ public class FloodQuoteForm extends QuoteFormBase {
 		return emailBuilder.toString();
 	}
 
+	@Override
+	public String toSmsString() {
+		StringBuilder smsBuilder = new StringBuilder();
+
+		smsBuilder.append(super.toSmsString());
+		smsBuilder.append("Property Address: " + propertyAddress + "\n");
+		smsBuilder.append("Year Built: " + yearBuilt + "\n");
+		smsBuilder.append("Square Footage: " + squareFootage + "\n");
+		smsBuilder.append("Structure Type: " + structureType + "\n");
+		smsBuilder.append("Home Type: " + homeType);
+
+		return smsBuilder.toString();
+	}
+
+	@Override
 	public String toString() {
 		String str = super.toString();
 

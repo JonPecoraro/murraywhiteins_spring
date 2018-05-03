@@ -24,6 +24,7 @@ public class UmbrellaQuoteForm extends QuoteFormBase {
 	public void setPropertyAndWatercraft(String newValue) { this.propertyAndWatercraft = newValue; }
 	public void setLiabilityLimits(String newValue) { this.liabilityLimits = newValue; }
 
+	@Override
 	public String toEmailString() {
 		StringBuilder emailBuilder = new StringBuilder();
 
@@ -39,6 +40,20 @@ public class UmbrellaQuoteForm extends QuoteFormBase {
 		return emailBuilder.toString();
 	}
 
+	@Override
+	public String toSmsString() {
+		StringBuilder smsBuilder = new StringBuilder();
+
+		smsBuilder.append(super.toSmsString());
+		smsBuilder.append("Umbrella Limit: " + umbrellaLimit + "\n");
+		smsBuilder.append("Current Policies: " + currentPolicies + "\n");
+		smsBuilder.append("Property And Watercraft: " + propertyAndWatercraft + "\n");
+		smsBuilder.append("Liability Limits: " + liabilityLimits);
+
+		return smsBuilder.toString();
+	}
+
+	@Override
 	public String toString() {
 		String str = super.toString();
 

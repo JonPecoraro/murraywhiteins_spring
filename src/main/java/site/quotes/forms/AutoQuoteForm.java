@@ -53,6 +53,7 @@ public class AutoQuoteForm extends QuoteFormBase {
 	public void setVehicleUsage(String newValue) { this.vehicleUsage = newValue; }
 	public void setVehicleFeatures(String newValue) { this.vehicleFeatures = newValue; }
 	
+	@Override
 	public String toEmailString() {
 		String delimiter = "////";
 		StringBuilder emailBuilder = new StringBuilder();
@@ -105,7 +106,20 @@ public class AutoQuoteForm extends QuoteFormBase {
 	
 		return emailBuilder.toString();
 	}
+
+	@Override
+	public String toSmsString() {
+		StringBuilder smsBuilder = new StringBuilder();
+
+		smsBuilder.append(super.toSmsString());
+		smsBuilder.append("Current Premium: " + currentPremium + "\n");
+		smsBuilder.append("Garaging Address: " + garagingAddress + "\n");
+		smsBuilder.append("Non-Drivers: " + nonDrivers);
+
+		return smsBuilder.toString();
+	}
 	
+	@Override
 	public String toString() {
 		String str = "";
 	
