@@ -16,7 +16,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import site.common.ICalEvent;
 
 public class EmailUtil {
-	static final Logger logger = LoggerFactory.getLogger(EmailUtil.class);
+	private static final Logger logger = LoggerFactory.getLogger(EmailUtil.class);
 	
 	/*
 	 * sender: The JavaMailSender from the controller who is sending the email

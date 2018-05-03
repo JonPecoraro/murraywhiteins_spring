@@ -18,6 +18,7 @@ public class OtherQuoteForm extends QuoteFormBase {
 	public void setInsuranceTypeRequested(String newValue) { this.insuranceTypeRequested = newValue; }
 	public void setReasonForRequest(String newValue) { this.reasonForRequest = newValue; }
 
+	@Override
 	public String toEmailString() {
 		StringBuilder emailBuilder = new StringBuilder();
 
@@ -31,6 +32,18 @@ public class OtherQuoteForm extends QuoteFormBase {
 		return emailBuilder.toString();
 	}
 
+	@Override
+	public String toSmsString() {
+		StringBuilder smsBuilder = new StringBuilder();
+
+		smsBuilder.append(super.toSmsString());
+		smsBuilder.append("Insurance Type Requested: " + insuranceTypeRequested + "\n");
+		smsBuilder.append("Reason For Request: " + reasonForRequest);
+
+		return smsBuilder.toString();
+	}
+
+	@Override
 	public String toString() {
 		String str = super.toString();
 
