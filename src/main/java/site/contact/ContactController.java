@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import site.util.EmailUtil;
+import site.util.SmsUtil;
 
 @Controller
 @RequestMapping(path="contact")
@@ -33,25 +34,41 @@ public class ContactController {
 	
 	@RequestMapping(value="submitContactForm", params = {"firstName", "lastName", "email", "contactMessage", "protection"}, method=RequestMethod.POST)
 	public String submitContactForm(String firstName, String lastName, String email, String contactMessage, String protection, RedirectAttributes redirectAttributes, HttpServletRequest request) {
-		String emailInformation = "<p>";
+		String emailInformation = generateEmailInformation(firstName, lastName, email, contactMessage);
+		String smsInformation = generateSmsInformation(firstName, lastName, email, contactMessage);
 		
+		try {
+			if (protection.isEmpty())
+			{
+				EmailUtil.sendEmail(sender, emailTo, "Website Contact Form Submitted", emailInformation, request.getRemoteAddr());
+				SmsUtil.sendMessage(smsInformation);
+			}
+			redirectAttributes.addFlashAttribute("success", "Thank you for your feedback. We have received your message.");
+		} catch(Exception ex) {
+			logger.error("There was a problem sending the email or SMS message: {}", ex);
+			redirectAttributes.addFlashAttribute("error", "There was a problem sending the message. Plase contact us directly at murraywhite@murraymwhiteinc.com.");
+		}
+		
+		return "redirect:/contact/index";
+	}
+	
+	private String generateEmailInformation(String firstName, String lastName, String email, String contactMessage) {
+		String emailInformation = "<p>";
 		emailInformation += "<b>First name:</b> " + firstName + "<br />";
 		emailInformation += "<b>Last name:</b> " + lastName + "<br />";
 		emailInformation += "<b>Email address:</b> " + email + "<br />";
 		emailInformation += "<b>Message:</b> " + contactMessage;
 		emailInformation += "</p>";
 		
-		try {
-			if (protection.isEmpty())
-			{
-				EmailUtil.sendEmail(sender, emailTo, "Website Contact Form Submitted", emailInformation, request.getRemoteAddr());
-			}
-			redirectAttributes.addFlashAttribute("success", "Thank you for your feedback. We have received your message.");
-		} catch(Exception ex) {
-			logger.error("There was a problem sending the email message: {}", ex);
-			redirectAttributes.addFlashAttribute("error", "There was a problem sending the email message. Plase contact us directly at murraywhite@murraymwhiteinc.com.<br>" + ex);
-		}
+		return emailInformation;
+	}
+
+	private String generateSmsInformation(String firstName, String lastName, String email, String contactMessage) {
+		String smsInformation = "murraywhiteins.com website contact form submitted" + "\n";
+		smsInformation += "Name: " + firstName + " " + lastName + "\n";
+		smsInformation += "Email: " + email + "\n";
+		smsInformation += "Message: " + contactMessage;
 		
-		return "redirect:/contact/index";
+		return smsInformation;
 	}
 }

@@ -65,6 +65,7 @@ public class HomeownersQuoteForm extends QuoteFormBase {
 	public void setHomeLoanAmount(String newValue) { this.homeLoanAmount = newValue; }
 	public void setQuoteAuto(String newValue) { this.quoteAuto = newValue; }
 	
+	@Override
 	public String toEmailString() {
 		StringBuilder emailBuilder = new StringBuilder();
 
@@ -92,6 +93,32 @@ public class HomeownersQuoteForm extends QuoteFormBase {
 		return emailBuilder.toString();
 	}
 
+	@Override
+	public String toSmsString() {
+		StringBuilder smsBuilder = new StringBuilder();
+
+		smsBuilder.append(super.toSmsString());
+		smsBuilder.append("Property Address: " + propertyAddress + "\n");
+		smsBuilder.append("Year Built: " + yearBuilt + "\n");
+		smsBuilder.append("Square Footage: " + squareFootage + "\n");
+		smsBuilder.append("Updates: " + updates + "\n");
+		smsBuilder.append("Structure Type: " + structureType + "\n");
+		smsBuilder.append("Home Type: " + homeType + "\n");
+		smsBuilder.append("Fireplace: " + fireplace + "\n");
+		smsBuilder.append("Foundation: " + foundation + "\n");
+		smsBuilder.append("Heating And Cooling Type: " + heatingAndCoolingType + "\n");
+		smsBuilder.append("Jewelry: " + jewelry + "\n");
+		smsBuilder.append("Jewelry Worth: " + jewelryWorth + "\n");
+		smsBuilder.append("Alarm System: " + alarmSystem + "\n");
+		smsBuilder.append("Pets: " + pets + "\n");
+		smsBuilder.append("Home Loan: " + homeLoan + "\n");
+		smsBuilder.append("Home Loan Amount: " + homeLoanAmount + "\n");
+		smsBuilder.append("Also Quote Auto: " + quoteAuto);
+
+		return smsBuilder.toString();
+	}
+
+	@Override
 	public String toString() {
 		String str = super.toString();
 
