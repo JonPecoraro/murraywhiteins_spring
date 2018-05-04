@@ -33,6 +33,9 @@ dependencies {
 	
 	// Spring security
 	compile("org.springframework.boot:spring-boot-starter-security")
+
+	// AWS Simple Notification Service (for sending SMS messages)
+	compile('com.amazonaws:aws-java-sdk-sns:1.11.317')
 	
 	// RESTful actuator service
 	compile("org.springframework.boot:spring-boot-starter-actuator")

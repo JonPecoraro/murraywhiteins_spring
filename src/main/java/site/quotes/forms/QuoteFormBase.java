@@ -59,6 +59,20 @@ public class QuoteFormBase {
 
 		return emailBuilder.toString();
 	}
+	
+	public String toSmsString() {
+		String str = "";
+
+		str += "Name: " + name + "\n";
+		str += "Mailing Address: " + mailingAddress + "\n";
+		str += "Birthday: " + birthday + "\n";
+		str += "Phone: " + phone + "\n";
+		str += "County: " + county + "\n";
+		str += "Email: " + email + "\n";
+		str += "Contact Preference: " + contactPreference + "\n";
+
+		return str;
+	}
 
 	public String toString() {
 		String str = "";

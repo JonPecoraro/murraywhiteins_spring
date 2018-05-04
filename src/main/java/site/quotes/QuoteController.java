@@ -31,6 +31,7 @@ import site.quotes.forms.OtherQuoteForm;
 import site.quotes.forms.RentersQuoteForm;
 import site.quotes.forms.UmbrellaQuoteForm;
 import site.util.EmailUtil;
+import site.util.SmsUtil;
 
 @Controller
 @RequestMapping(path="quotes")
@@ -96,7 +97,8 @@ public class QuoteController {
 		
 		if (protection.isEmpty())
 		{
-			// No errors, send email and return to view
+			// No errors, send SMS and email message then return to view
+			textQuoteRequest("Auto", quoteForm.toSmsString());
 			emailQuoteRequest("Auto", quoteForm.toEmailString(), redirectAttributes);
 		}
 		else
@@ -116,7 +118,8 @@ public class QuoteController {
 		
 		if (protection.isEmpty())
 		{
-			// No errors, send email and return to view
+			// No errors, send SMS and email message then return to view
+			textQuoteRequest("Homeowners", quoteForm.toSmsString());
 			emailQuoteRequest("Homeowners", quoteForm.toEmailString(), redirectAttributes);
 		}
 		else
@@ -126,7 +129,7 @@ public class QuoteController {
 		
 		return "redirect:/quotes/index";
 	}
-	
+
 	@RequestMapping(value = "/submitUmbrella", params = {"protection"}, method=RequestMethod.POST)
 	public String submitAuto(@Valid @ModelAttribute("quoteForm") UmbrellaQuoteForm quoteForm, String protection, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
@@ -135,7 +138,8 @@ public class QuoteController {
 		
 		if (protection.isEmpty())
 		{
-			// No errors, send email and return to view
+			// No errors, send SMS and email message then return to view
+			textQuoteRequest("Umbrella", quoteForm.toSmsString());
 			emailQuoteRequest("Umbrella", quoteForm.toEmailString(), redirectAttributes);
 		}
 		else
@@ -154,7 +158,8 @@ public class QuoteController {
 		
 		if (protection.isEmpty())
 		{
-			// No errors, send email and return to view
+			// No errors, send SMS and email message then return to view
+			textQuoteRequest("Life", quoteForm.toSmsString());
 			emailQuoteRequest("Life", quoteForm.toEmailString(), redirectAttributes);
 		}
 		else
@@ -173,7 +178,8 @@ public class QuoteController {
 		
 		if (protection.isEmpty())
 		{
-			// No errors, send email and return to view
+			// No errors, send SMS and email message then return to view
+			textQuoteRequest("Renters", quoteForm.toSmsString());
 			emailQuoteRequest("Renters", quoteForm.toEmailString(), redirectAttributes);
 		}
 		else
@@ -192,7 +198,8 @@ public class QuoteController {
 		
 		if (protection.isEmpty())
 		{
-			// No errors, send email and return to view
+			// No errors, send SMS and email message then return to view
+			textQuoteRequest("Flood", quoteForm.toSmsString());
 			emailQuoteRequest("Flood", quoteForm.toEmailString(), redirectAttributes);
 		}
 		else
@@ -211,7 +218,8 @@ public class QuoteController {
 		
 		if (protection.isEmpty())
 		{
-			// No errors, send email and return to view
+			// No errors, send SMS and email message then return to view
+			textQuoteRequest("Business", quoteForm.toSmsString());
 			emailQuoteRequest("Business", quoteForm.toEmailString(), redirectAttributes);
 		}
 		else
@@ -230,7 +238,8 @@ public class QuoteController {
 		
 		if (protection.isEmpty())
 		{
-			// No errors, send email and return to view
+			// No errors, send SMS and email message then return to view
+			textQuoteRequest("Insurnace", quoteForm.toSmsString());
 			emailQuoteRequest("Insurnace", quoteForm.toEmailString(), redirectAttributes);
 		}
 		else
@@ -255,7 +264,16 @@ public class QuoteController {
 			redirectAttributes.addFlashAttribute("success", true);
 		} catch(Exception ex) {
 			logger.error("There was a problem sending the email message: {}", ex);
-			redirectAttributes.addFlashAttribute("error", "There was a problem sending your quote request. Plase contact us directly at murraywhite@murraymwhiteinc.com.<br>" + ex);
+			redirectAttributes.addFlashAttribute("error", "There was a problem sending your quote request. Plase contact us directly at murraywhite@murraymwhiteinc.com.");
+		}
+	}
+	
+	private void textQuoteRequest(String quoteType, String message) {
+		try {
+			String title = quoteType + " Quote Request" + "\n"; 
+			SmsUtil.sendMessage(title + message);
+		} catch(Exception ex) {
+			logger.error("There was a problem sending the SMS message: {}", ex);
 		}
 	}
 }

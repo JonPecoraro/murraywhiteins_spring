@@ -137,9 +137,10 @@ footer .information {
 footer .information a,
 footer .information .phone,
 footer .information .address,
-footer .information .social {
+footer .information .social,
+footer .information .weather {
 	display: block;
-	padding: 20px;
+	padding: 10px;
 	font-size: 18px;
 }
 footer .information .testimonial {
@@ -148,6 +149,11 @@ footer .information .testimonial {
 	border: 1px solid #380233;
 	border-radius: 15px;
 	padding: 10px;
+}
+footer .information .weatherText {
+	background-color: #380233;
+	border: 1px solid #380233;
+	border-radius: 15px;
 }
 footer .information .social a {
 	padding: 5px;
