@@ -39,6 +39,18 @@ public class AppointmentForm {
 		return emailBuilder.toString();
 	}
 	
+	public String toSmsString() {
+		StringBuilder smsBuilder = new StringBuilder();
+
+		smsBuilder.append("Name: " + name + "\n");
+		smsBuilder.append("Phone: " + phone + "\n");
+		smsBuilder.append("Email: " + email + "\n");
+		smsBuilder.append("Appointment Date: " + appointmentDate + " at " + appointmentTime + "\n");
+		smsBuilder.append("Appointment Type: " + type);
+
+		return smsBuilder.toString();
+	}
+	
 	public String toString() {
 		String str = "";
 
