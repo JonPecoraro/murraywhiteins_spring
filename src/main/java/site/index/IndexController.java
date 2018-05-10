@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import site.common.ICalEvent;
 import site.util.EmailUtil;
+import site.util.SmsUtil;
 
 @Controller
 @RequestMapping(path="")
@@ -65,6 +66,7 @@ public class IndexController {
 				appointmentEndDate
 			);
 			
+			SmsUtil.sendMessage("Appointment Request\n" + appointmentForm.toSmsString());
 			EmailUtil.sendEmail(sender, emailTo, "New Appointment Request", appointmentForm.toEmailString(), request.getRemoteAddr(), appointmentEvent);
 			
 			// If user wants a copy of the appointment request emailed to them
