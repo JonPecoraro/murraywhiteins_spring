@@ -27,13 +27,26 @@ $(function() {
 		var $updateCompanyLink = $('<a></a>');
 		$updateCompanyLink.attr('href', '/companies/admin/update?id=' + $this.data('companyId'));
 		$updateCompanyLink.append($('<span class="glyphicon glyphicon-edit"></span>'));
+		
+		var $deleteCompanyLink = $('<a href="#" class="deleteCompany"></a>');
+		$deleteCompanyLink.data('companyId', $this.data('companyId'));
+		$deleteCompanyLink.append($('<span class="glyphicon glyphicon-trash"></span>'));
+		
 		$this.prepend($updateCompanyLink);
+		$this.prepend($deleteCompanyLink);
 	}, function() {
-		$(this).find('span.glyphicon-edit').parent().remove();
+		var $this = $(this);
+		$this.find('span.glyphicon-edit').parent().remove();
+		$this.find('span.glyphicon-trash').parent().remove();
 	});
 
-	$('a.profileLink').on('click', function(e) {
+	$('a.logoLink').on('click', function(e) {
 		e.preventDefault();
+	});
+	
+	$(document).on('click', 'a.deleteCompany', function(e) {
+		$('#confirmDeletionLink').attr('href', '/companies/admin/delete?id=' + $(this).data('companyId'));
+		$('#deleteCompanyModal').modal('show');
 	});
 	
 	function getSortOrder() {

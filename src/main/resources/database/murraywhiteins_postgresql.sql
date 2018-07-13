@@ -191,6 +191,7 @@ CREATE UNIQUE INDEX "email" ON "public"."user"("email");
 /*
 Dumping data for table 'public.user'
 */
+INSERT INTO "public"."user"("id", "name", "email", "password", "date_created", "date_updated") VALUES (1, 'Jonathan Pecoraro', 'jonpecoraro@gmail.com', '$2a$10$Lz0ZNSGaWQxTuTPvoYdEhe.uFRzr0XBOBSpK7//WqD4wS6WeXIZpy', '2018-07-14 10:44:56', '2018-07-14 10:44:56');
 
 /*
 Table structure for table 'public.testimonial'
@@ -209,6 +210,26 @@ ALTER TABLE "public"."testimonial" ADD CONSTRAINT "PRIMARY" PRIMARY KEY("id");
 Dumping data for table 'public.testimonial'
 */
 
-INSERT INTO "public"."testimonial"("id", "author", "testimonial", "date_created", "date_updated") VALUES (1, 'Jonathan Pecoraro', 'I love Murray White Insurance Agency. They have been serving me well for many years. The agents are always quick to respond and willing to work with my limited budget. They have helped my family and I get back on our feet during trying times.', '2017-08-27 10:44:56', '2017-08-27 10:44:56');
-INSERT INTO "public"."testimonial"("id", "author", "testimonial", "date_created", "date_updated") VALUES (2, 'Linda Trivetta', 'Knowledgeable and always willing to help when you call them. Very friendly staff.', '2017-08-27 10:44:56', '2017-08-27 10:44:56');
-INSERT INTO "public"."testimonial"("id", "author", "testimonial", "date_created", "date_updated") VALUES (3, 'Dr. Joseph Fonke', 'Very helpful staff. Helped me find what our family needed as far as health insurance was concerned. Great team, great people and a group of some of the best people in all of High Point.', '2017-08-27 10:44:56', '2017-08-27 10:44:56');
+INSERT INTO "public"."testimonial"("id", "author", "testimonial", "date_created", "date_updated") VALUES (1, 'Jonathan Pecoraro', 'I love Murray White Insurance Agency. They have been serving me well for many years. The agents are always quick to respond and willing to work with my limited budget. They have helped my family and I get back on our feet during trying times.');
+INSERT INTO "public"."testimonial"("id", "author", "testimonial", "date_created", "date_updated") VALUES (2, 'Linda Trivetta', 'Knowledgeable and always willing to help when you call them. Very friendly staff.');
+INSERT INTO "public"."testimonial"("id", "author", "testimonial", "date_created", "date_updated") VALUES (3, 'Dr. Joseph Fonke', 'Very helpful staff. Helped me find what our family needed as far as health insurance was concerned. Great team, great people and a group of some of the best people in all of High Point.');
+
+/*
+Table structure for table 'public.global_message'
+*/
+
+DROP TABLE IF EXISTS "public"."global_message" CASCADE;
+CREATE TABLE "public"."global_message" (
+	"id" SERIAL NOT NULL,
+	"message" VARCHAR(255) NOT NULL,
+	"start_showing_date" TIMESTAMP NOT NULL,
+	"stop_showing_date" TIMESTAMP NOT NULL
+);
+DROP INDEX IF EXISTS "PRIMARY";
+ALTER TABLE "public"."global_message" ADD CONSTRAINT "PRIMARY" PRIMARY KEY("id");
+
+/*
+Dumping data for table 'public.global_message'
+*/
+
+INSERT INTO "public"."global_message"("id",  "message", "start_showing_date", "stop_showing_date") VALUES (1, '', '2017-08-27 10:44:56', '2017-08-27 10:44:56');

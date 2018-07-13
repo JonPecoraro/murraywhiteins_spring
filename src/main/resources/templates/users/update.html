@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/default"
+	th:with="title=${'Users'},cancelPage=${'/users/admin'}">
+
+	<div layout:fragment="content" th:inline="text">
+		<div th:if="${error}" class="row text-center">
+			<div class="col-xs-6 col-xs-offset-3 alert alert-danger">
+				<h3 class="text-error">
+					<span class="glyphicon glyphicon-remove"></span>
+					There was an error saving the user.
+				</h3>
+				<p th:each="error : ${errors}">[[${error}]]</p>
+			</div>
+		</div>
+		<div class="well">
+			<h4>Password Requirements:</h4>
+			<ul>
+				<li>Password must contain at least 8 characters</li>
+				<li>Password must contain at least 1 letter</li>
+				<li>Password must contain at least 1 number</li>
+				<li>Password must contain at least 1 special character</li>
+			</ul>
+			<p>If the password field is left blank, the user's password will remain the same.</p>
+		</div>
+		<form id="updateForm" th:action="@{/users/admin/save}" th:object="${user}" method="post" class="form">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">User Details</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-6">
+							<label for="name">Name</label>
+							<input type="text" th:field="*{name}" class="form-control" />
+						</div>
+						<div class="col-sm-6">
+							<label for="email">Email</label>
+							<input type="text" th:field="*{email}" class="form-control" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<label for="password">Password</label>
+							<input type="password" th:field="*{password}" class="form-control" />
+						</div>
+						<div class="col-sm-6">
+							<label for="confirmPassword">Confirm Password</label>
+							<input type="password" id="confirmPassword" name="confirmPassword" class="form-control" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<input type="hidden" th:field="*{id}" />
+			<input type="hidden" th:field="*{dateCreated}" />
+			<input type="hidden" th:field="*{dateUpdated}" />
+			<div th:replace="admin/support/buttonRowMarkup:: markup"></div>
+		</form>
+	</div>
+</html>

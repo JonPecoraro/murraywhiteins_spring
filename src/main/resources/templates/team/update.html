@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layouts/admin"
+	layout:decorator="layouts/default"
 	th:with="title=${'Team'},cancelPage=${'/team/admin'}">
 	
 	<head>
 		<link media="all" type="text/css" rel="stylesheet" th:href="@{/css/team/update.css}" />
 	</head>
-	<section layout:fragment="adminPageScripts">
+	<section layout:fragment="additionalScripts">
 		<script th:src="@{/js/team/update.js}"></script>
 	</section>
 
-	<div layout:fragment="adminContent" th:inline="text">
+	<div layout:fragment="content" th:inline="text">
 		<form id="updateForm" th:action="@{/team/admin/save}" th:object="${teamMember}" method="post" class="form" enctype="multipart/form-data">				
 			<div class="panel panel-default">
 				<div class="panel-heading">

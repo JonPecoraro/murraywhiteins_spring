@@ -44,9 +44,8 @@ $(function() {
 		e.preventDefault();
 	});
 	
-	//////// THIS IS NOT BEING CALLED /////////
-	$('a.deleteUser').on('click', function(e) {
-		$('#confirmDeletionLink').attr('href', '/team/admin/delete?id=' + $this.data('teamMemberId'));
+	$(document).on('click', 'a.deleteUser', function(e) {
+		$('#confirmDeletionLink').attr('href', '/team/admin/delete?id=' + $(this).data('teamMemberId'));
 		$('#deleteUserModal').modal('show');
 	});
 	

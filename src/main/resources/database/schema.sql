@@ -62,5 +62,14 @@ CREATE TABLE testimonial (
 	date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE global_message (
+	id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	message VARCHAR(255) NOT NULL,
+	start_showing_date TIMESTAMP NOT NULL,
+	stop_showing_date TIMESTAMP NOT NULL, 
+	date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 REVOKE all ON murraywhiteins.* FROM 'springuser'@'localhost';
 GRANT select, insert, update, delete ON murraywhiteins.* TO 'springuser'@'localhost';

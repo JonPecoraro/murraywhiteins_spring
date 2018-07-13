@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layouts/admin"
+	layout:decorator="layouts/default"
 	th:with="title=${'File Cropper'},useImageCropper=${true}">
 	
 	<head>
 		<link media="all" type="text/css" rel="stylesheet" th:href="@{/css/imageCropUtility.css}" />
 	</head>
-	<section layout:fragment="adminPageScripts">
+	<section layout:fragment="additionalScripts">
 		<script th:src="@{/js/imageCropUtility.js}"></script>
 	</section>
 	
-	<div layout:fragment="adminContent" th:inline="text">
-		<p>
-			The Image Crop Utility allows you to crop and resize JPG images.
-			Select a file to crop from your computer, then you can choose to resize the image to one of the standard images sizes
-			used throughout the website, or you can manually crop the image to any size you'd like. To manually crop the image,
-			resize the crop box to the desired dimensions, then click the "Manually crop image" button to preview and download
-			your cropped image. Similarly, click the "Save as ..." buttons to preview and download the image in the selected size.
-		</p>
+	<div layout:fragment="content" th:inline="text">
+		<div class="well">
+			<p>
+				The Image Crop Utility allows you to crop and resize JPG images.
+				Select a file to crop from your computer, then you can choose to resize the image to one of the standard images sizes
+				used throughout the website, or you can manually crop the image to any size you'd like. To manually crop the image,
+				resize the crop box to the desired dimensions, then click the "Manually crop image" button to preview and download
+				your cropped image. Similarly, click the "Save as ..." buttons to preview and download the image in the selected size.
+			</p>
+		</div>
 		<form id="imageForm" action="#" method="post" class="form">
 			<input type="file" id="imageInput" name="imageInput" accept=".jpg" />
 			<div class="imageContainer">

@@ -24,6 +24,7 @@
 	<link media="all" type="text/css" rel="stylesheet" th:href="@{/lib/bootstrap-3.3.7/css/bootstrap-theme.min.css}" />
 	<link media="all" type="text/css" rel="stylesheet" th:href="@{/lib/jquery-ui-1.12.1/jquery-ui.min.css}" />
 	<link media="all" type="text/css" rel="stylesheet" th:href="@{/lib/genericons/genericons.css}" />
+	<link th:replace="layouts/support/useImageCropper :: styles" />
 	<link media="all" type="text/css" rel="stylesheet" th:href="@{/css/main.css}" />
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
@@ -221,6 +222,7 @@
 	<script th:src="@{/lib/jquery-ui-1.12.1/jquery-ui.min.js}"></script>
 	<script th:src="@{/lib/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
 	<script th:src="@{/js/common.js}"></script>
+	<script th:replace="layouts/support/useImageCropper :: scripts"></script>
 	<section layout:fragment="additionalScripts" th:remove="tag"></section>
 </body>
 </html>

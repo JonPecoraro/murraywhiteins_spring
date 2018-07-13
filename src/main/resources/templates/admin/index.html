@@ -1,10 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layouts/admin"
+	layout:decorator="layouts/default"
 	th:with="title=${'Admin'}">
 	
-	<div layout:fragment="adminContent" th:inline="text">
-		This is the dashboard	
+	<head>
+		<link media="all" type="text/css" rel="stylesheet" th:href="@{/css/admin.css}" />
+	</head>
+	
+	<div layout:fragment="content" th:inline="text">
+		<div class="row">
+			<div class="col-sm-4">
+				<a th:href="@{/team/admin}" class="adminPageLink">
+					<img th:src="@{/img/admin/manage_team.jpg}" class="img-rounded-top" alt="Manage Team" />
+					<span class="linkText">Manage Team Members</span>
+				</a>
+			</div>
+			<div class="col-sm-4">
+				<a th:href="@{/companies/admin}" class="adminPageLink">
+					<img th:src="@{/img/admin/manage_companies.jpg}" class="img-rounded-top" alt="Manage Represented Companies" />
+					<span class="linkText">Manage Companies</span>
+				</a>
+			</div>
+			<div class="col-sm-4">
+				<a th:href="@{/users/admin}" class="adminPageLink">
+					<img th:src="@{/img/admin/manage_users.jpg}" class="img-rounded-top" alt="Manage Users" />
+					<span class="linkText">Manage &nbsp; Users</span>
+				</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4">
+				<a th:href="@{/admin/globalMessage}" class="adminPageLink">
+					<img th:src="@{/img/admin/manage_global_message.jpg}" class="img-rounded-top" alt="Manage Global Message" />
+					<span class="linkText">Manage Global Message</span>
+				</a>
+			</div>
+			<div class="col-sm-4">
+				<a th:href="@{/admin/addTestimonial}" class="adminPageLink">
+					<img th:src="@{/img/admin/manage_testimonials.jpg}" class="img-rounded-top" alt="Add Testimonial" />
+					<span class="linkText">Add Testimonial</span>
+				</a>
+			</div>
+			<div class="col-sm-4">
+				<a th:href="@{/admin/imageCropUtility}" class="adminPageLink">
+					<img th:src="@{/img/admin/image_crop_utility.jpg}" class="img-rounded-top" alt="Image Crop Utility" />
+					<span class="linkText">Image Crop Utility</span>
+				</a>
+			</div>
+		</div>
 	</div>
 </html>

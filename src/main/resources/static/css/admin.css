@@ -1,28 +1,24 @@
-#sideNav {
-	height: 100%; /* reset in JavaScript */
-	padding: 0;
-	margin: 0;
-	background: linear-gradient(to bottom, #732b6b 0%,#45033e 100%);
+.adminPageLink {
+	display: inline-block;
+	border: 2px solid #45033e;
+	border-radius: 5px;
+	color: #4A1144;
+	font-size: 2em;
+	background-color: #F1F0FF;
+	height: 300px;
+	position: relative;
+	margin: 20px 0;
 }
-#sideNav a {
-	padding: 5px 0;
-	font-size: 20px;
-	color: #FFF;
-	display: block;
-	text-align: center;
+
+.adminPageLink:hover {
+	color: #4A1144;
 	text-decoration: none;
 }
-#sideNav a.active {
-	background: linear-gradient(to bottom, #470540 0%,#45033e 100%);
-}
-#sideNav a:hover {
-	color: #CCC;
-}
-div.buttonRow {
-	border-top: 1px solid #CCC;
-	padding: 10px 0;
-}
 
-/* override bootstrap styles */
-
-/* end override bootstrap styles */
+.adminPageLink span {
+	display: block;
+	text-align: center;
+	padding: 30px 5px 5px 5px;
+	position: absolute;
+	bottom: 0;
+}

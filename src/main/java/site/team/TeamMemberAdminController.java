@@ -74,9 +74,9 @@ public class TeamMemberAdminController {
 	public String deleteUser(@RequestParam(value="id") Integer id, Model model) {
 		try {
 			teamMemberRepository.delete(id);
-			logger.info("Deleted user with ID " + id + " from the website.");
+			logger.info("Deleted team member with ID " + id + " from the website.");
 		} catch (IllegalArgumentException e) {
-			logger.error("Unable to delete user", e);
+			logger.error("Unable to delete team member", e);
 		}
 		return "redirect:/team/admin";
 	}

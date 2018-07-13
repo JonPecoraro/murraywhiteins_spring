@@ -37,4 +37,19 @@ public class RepresentedCompany {
 	public void setSortOrder(int newValue) { this.sortOrder = newValue; }
 	public void setDateCreated(Date newValue) { this.dateCreated = newValue; }
 	public void setDateUpdated(Date newValue) { this.dateUpdated = newValue; }
+	
+	public String getNameInCamelCase() {
+		if (name == null || name.length() == 0) {
+			return "";
+		}
+		
+		String[] splitName = name.split(" ");
+		String camelCaseName = splitName[0].substring(0, 1).toLowerCase() + splitName[0].substring(1);
+		for (int i = 1; i < splitName.length; i++) {
+			String word = splitName[i];
+			camelCaseName += word.substring(0, 1).toUpperCase() + word.substring(1);
+		}
+		
+		return camelCaseName;
+	}
 }

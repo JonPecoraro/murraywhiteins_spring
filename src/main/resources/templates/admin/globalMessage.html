@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/default"
+	th:with="title=${'Global Message Configuration'},cancelPage=${'/admin/index'}">
+	
+	<div layout:fragment="content" th:inline="text">
+		<div class="well">
+			<p>The global message can be set by an administrator to display a message on the home page of the website.</p>
+			<ul>
+				<li>The message starts showing at 12:00am on the configured "start date". The message will automatically stop showing</li>
+				<li>at 12:00am on the configured "stop date".</li>
+			</ul>
+		</div>
+		<form id="globalMessageForm" th:action="@{/admin/saveGlobalMessage}" th:object="${globalMessage}" method="post" class="form">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Global Message Configuration</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-6">
+							<label for="startShowingDate">Date to Start Showing Message</label>
+							<input type="text" th:field="*{startShowingDate}" class="form-control dateField" />
+						</div>
+						<div class="col-sm-6">
+							<label for="stopShowingDate">Date to Stop Showing Message</label>
+							<input type="text" th:field="*{stopShowingDate}" class="form-control dateField" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="description">Description</label>
+							<textarea th:field="*{message}" class="form-control" rows="5"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<input type="hidden" th:field="*{id}" />
+			<div th:replace="admin/support/buttonRowMarkup:: markup"></div>
+		</form>
+	</div>
+</html>

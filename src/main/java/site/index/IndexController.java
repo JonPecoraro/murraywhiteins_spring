@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import site.admin.GlobalMessage;
+import site.admin.GlobalMessageRepository;
 import site.common.ICalEvent;
 import site.util.EmailUtil;
 import site.util.SmsUtil;
@@ -29,10 +31,14 @@ import site.util.SmsUtil;
 @Controller
 @RequestMapping(path="")
 public class IndexController {
-	static final Logger logger = LoggerFactory.getLogger(IndexController.class);
+	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
+	private static final int GLOBAL_MESSAGE_ID = 1;
 	
 	@Autowired
 	private JavaMailSender sender;
+	
+	@Autowired
+	private GlobalMessageRepository globalMessageRepository;
 	
 	@Value("${email.to}")
 	private String emailTo;
@@ -41,6 +47,14 @@ public class IndexController {
 	public String getIndex(Model model) {
 		model.addAttribute("timeIntervals", getTimeIntervals());
 		model.addAttribute("appointmentForm", new AppointmentForm());
+		
+		GlobalMessage globalMessage = globalMessageRepository.findOne(GLOBAL_MESSAGE_ID);
+		if (globalMessage != null && globalMessage.shouldShowMessage()) {
+			model.addAttribute("globalMessage", globalMessage.getMessage());
+		} else {
+			model.addAttribute("globalMessage", "");
+		}
+		
 		return "index";
 	}
 	

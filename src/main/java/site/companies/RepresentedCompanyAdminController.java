@@ -54,7 +54,9 @@ private static final Logger logger = LoggerFactory.getLogger(RepresentedCompanyA
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public String showUpdatePage(@RequestParam(value="id", required=false) Integer id, Model model) {
 		if (id == null) {
-			model.addAttribute("company", new RepresentedCompany());
+			RepresentedCompany company = new RepresentedCompany();
+			company.setImage("/img/logos/no_logo.jpg");
+			model.addAttribute("company", company);
 		}
 		else {
 			RepresentedCompany company = representedCompanyRepository.findOne(id);
@@ -63,13 +65,29 @@ private static final Logger logger = LoggerFactory.getLogger(RepresentedCompanyA
 		return "companies/update";
 	}
 	
+	@RequestMapping(value="/delete", method=RequestMethod.GET)
+	public String deleteCompany(@RequestParam(value="id") Integer id, Model model) {
+		try {
+			representedCompanyRepository.delete(id);
+			logger.info("Deleted company with ID " + id + " from the website.");
+		} catch (IllegalArgumentException e) {
+			logger.error("Unable to delete company", e);
+		}
+		return "redirect:/companies/admin";
+	}
+	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public String save(@ModelAttribute RepresentedCompany company, @RequestParam(value="logo", required=false) MultipartFile logo) {
 		logger.info("Saving company");
 		if (logo != null && logo.getSize() > 0) {
 			// A new company logo was passed in. Update it in the file system
 			try {
-				SaveNewLogoToFileSystem(logo, company.getImage());
+				String relativePath = company.getImage();
+				if (relativePath == null || relativePath == "" || relativePath.equals("/img/logos/no_logo.jpg")) {
+					relativePath = "/img/logos/" + company.getNameInCamelCase() + ".jpg";
+					company.setImage(relativePath);
+				}
+				SaveNewLogoToFileSystem(logo, relativePath);
 			}
 			catch(Exception e) {
 				logger.error("There was an error updating the company logo in the file system", e);
@@ -83,6 +101,7 @@ private static final Logger logger = LoggerFactory.getLogger(RepresentedCompanyA
 		URL staticContentUrl = this.getClass().getClassLoader().getResource("static");
 		URL fullUrl = new URL(staticContentUrl, "static" + relativeImagePath);
 		Path logoPath = Paths.get(fullUrl.toURI());
+		logger.info("company logo path: " + logoPath);
 		Files.copy(logo.getInputStream(), logoPath, StandardCopyOption.REPLACE_EXISTING);
 	}
 }

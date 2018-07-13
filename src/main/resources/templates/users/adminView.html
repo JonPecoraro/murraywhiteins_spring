@@ -2,22 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layouts/default"
-	th:with="title=${'Team'},pageHeading=${'Manage Team'}">
+	th:with="title=${'Users'},pageHeading=${'Manage Users'}">
 	
-	<head>
-		<link media="all" type="text/css" rel="stylesheet" th:href="@{/css/team/team.css}" />
-		<link media="all" type="text/css" rel="stylesheet" th:href="@{/css/team/adminTeam.css}" />
-	</head>
 	<section layout:fragment="additionalScripts">
-		<script th:src="@{/js/team/adminTeam.js}"></script>
+		<script th:src="@{/js/users.js}"></script>
 	</section>
 	
 	<div layout:fragment="content" th:inline="text">
 		<div id="addUserContainer" class="well">
-			<a th:href="@{/team/admin/update}" class="btn btn-primary center-block">Add Team Member</a>
+			<a th:href="@{/users/admin/update}" class="btn btn-primary center-block">Add User</a>
 		</div>
 		
-		<div th:replace="team/index :: includeContent"></div>
+		<div class="row">
+			<div class="col-sm-6">
+				<ul>
+					<li th:each="user : ${users}">
+						<a th:href="@{/users/admin/update(id=${user.id})}">[[${user.name}]]</a> ([[${user.email}]])
+						<a href="#" class="deleteUser" th:attr="data-user-id=${user.id}"><span class="glyphicon glyphicon-trash"></span></a>
+					</li>
+				</ul>
+			</div>
+		</div>
 		
 		<!-- Modal for confirming a user deletion -->
 		<div id="deleteUserModal" class="modal fade">

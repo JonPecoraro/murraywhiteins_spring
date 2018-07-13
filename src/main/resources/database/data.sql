@@ -102,3 +102,10 @@ INSERT INTO `testimonial` (`id`,  `author`, `testimonial`) VALUES
 (1, 'Jonathan Pecoraro', 'I love Murray White Insurance Agency. They have been serving me well for many years. The agents are always quick to respond and willing to work with my limited budget. They have helped my family and I get back on our feet during trying times.'),
 (2, 'Linda Trivetta', 'Knowledgeable and always willing to help when you call them. Very friendly staff.'),
 (3, 'Dr. Joseph Fonke', 'Very helpful staff. Helped me find what our family needed as far as health insurance was concerned. Great team, great people and a group of some of the best people in all of High Point.');
+
+INSERT INTO `global_message` (`id`,  `message`, `start_showing_date`, `stop_showing_date`) VALUES
+(1, '', NOW(), NOW());
+
+INSERT INTO `user` (`id`, `name`, `email`, `password`, `date_created`, `date_updated`) VALUES
+(1, 'Jonathan Pecoraro', 'jonpecoraro@gmail.com', '$2a$10$Lz0ZNSGaWQxTuTPvoYdEhe.uFRzr0XBOBSpK7//WqD4wS6WeXIZpy', NOW(), NOW());
+
