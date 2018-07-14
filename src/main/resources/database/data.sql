@@ -107,5 +107,9 @@ INSERT INTO `global_message` (`id`,  `message`, `start_showing_date`, `stop_show
 (1, '', NOW(), NOW());
 
 INSERT INTO `user` (`id`, `name`, `email`, `password`, `date_created`, `date_updated`) VALUES
-(1, 'Jonathan Pecoraro', 'jonpecoraro@gmail.com', '$2a$10$Lz0ZNSGaWQxTuTPvoYdEhe.uFRzr0XBOBSpK7//WqD4wS6WeXIZpy', NOW(), NOW());
+(1, 'Jonathan Pecoraro', 'jonpecoraro@gmail.com', '$2a$10$Lz0ZNSGaWQxTuTPvoYdEhe.uFRzr0XBOBSpK7//WqD4wS6WeXIZpy', NOW(), NOW()),
+(2, 'Murray White IV', 'm4@murraymwhiteinc.com', '$2a$10$Srpp8TMh6BN7/P7ZsqBSm.NgAdPk23EcuRgecN6NxY9Zu2FAMq6TC', NOW(), NOW()),
+(3, 'Kim Milan', 'kim@murraymwhiteinc.com', '$2a$10$Srpp8TMh6BN7/P7ZsqBSm.NgAdPk23EcuRgecN6NxY9Zu2FAMq6TC', NOW(), NOW()),
+(4, 'Robin White', 'rmwhite0119@gmail.com', '$2a$10$Srpp8TMh6BN7/P7ZsqBSm.NgAdPk23EcuRgecN6NxY9Zu2FAMq6TC', NOW(), NOW());
+
 

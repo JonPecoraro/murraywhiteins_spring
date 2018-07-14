@@ -192,6 +192,9 @@ CREATE UNIQUE INDEX "email" ON "public"."user"("email");
 Dumping data for table 'public.user'
 */
 INSERT INTO "public"."user"("id", "name", "email", "password", "date_created", "date_updated") VALUES (1, 'Jonathan Pecoraro', 'jonpecoraro@gmail.com', '$2a$10$Lz0ZNSGaWQxTuTPvoYdEhe.uFRzr0XBOBSpK7//WqD4wS6WeXIZpy', '2018-07-14 10:44:56', '2018-07-14 10:44:56');
+INSERT INTO "public"."user"("id", "name", "email", "password", "date_created", "date_updated") VALUES (2, 'Murray White IV', 'm4@murraymwhiteinc.com', '$2a$10$Srpp8TMh6BN7/P7ZsqBSm.NgAdPk23EcuRgecN6NxY9Zu2FAMq6TC', '2018-07-14 10:44:56', '2018-07-14 10:44:56');
+INSERT INTO "public"."user"("id", "name", "email", "password", "date_created", "date_updated") VALUES (3, 'Kim Milan', 'kim@murraymwhiteinc.com', '$2a$10$Srpp8TMh6BN7/P7ZsqBSm.NgAdPk23EcuRgecN6NxY9Zu2FAMq6TC', '2018-07-14 10:44:56', '2018-07-14 10:44:56');
+INSERT INTO "public"."user"("id", "name", "email", "password", "date_created", "date_updated") VALUES (4, 'Robin White', 'rmwhite0119@gmail.com', '$2a$10$Srpp8TMh6BN7/P7ZsqBSm.NgAdPk23EcuRgecN6NxY9Zu2FAMq6TC', '2018-07-14 10:44:56', '2018-07-14 10:44:56');
 
 /*
 Table structure for table 'public.testimonial'
