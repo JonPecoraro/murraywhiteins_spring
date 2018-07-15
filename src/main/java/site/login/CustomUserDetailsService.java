@@ -14,14 +14,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import site.users.User;
-import site.users.UserRepository;
+import site.users.Users;
+import site.users.UsersRepository;
 
 @Service("userDetailsService")
 @Transactional
 public class CustomUserDetailsService implements UserDetailsService {
 	@Autowired
-	private UserRepository userRepository;
+	private UsersRepository usersRepository;
 	
 	@Autowired
 	private LoginAttemptService loginAttemptService;
@@ -37,14 +37,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 		}
 		
 		try {
-			final User user = userRepository.findByEmail(username);
-			if (user == null) {
+			final Users users = usersRepository.findByEmail(username);
+			if (users == null) {
 				throw new UsernameNotFoundException("No user found with username: " + username);
 			}
 			
 			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 			authorities.add(new SimpleGrantedAuthority("ADMIN"));
-			return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), true, true, true, true, authorities);
+			return new org.springframework.security.core.userdetails.User(users.getEmail(), users.getPassword(), true, true, true, true, authorities);
 		} catch(Exception e) {
 			throw new RuntimeException(e);
 		}

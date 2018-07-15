@@ -17,67 +17,67 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(path="users/admin")
-public class UserAdminController {
-	private static final Logger logger = LoggerFactory.getLogger(UserAdminController.class);
+public class UsersAdminController {
+	private static final Logger logger = LoggerFactory.getLogger(UsersAdminController.class);
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UsersRepository usersRepository;
 	
 	@Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String showIndexPage(Model model) {
-		model.addAttribute("users", userRepository.findAll());
+		model.addAttribute("users", usersRepository.findAll());
 		return "users/adminView";
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public String showUpdatePage(@RequestParam(value="id", required=false) Integer id, Model model) {
-		User user = null;
+		Users users = null;
 		if (id == null) {
-			user = new User();
-			user.setDateCreated(new java.sql.Date(new Date().getTime()));
+			users = new Users();
+			users.setDateCreated(new java.sql.Date(new Date().getTime()));
 		}
 		else {
-			user = userRepository.findOne(id);
+			users = usersRepository.findOne(id);
 		}
-		user.setDateUpdated(new java.sql.Date(new Date().getTime()));
+		users.setDateUpdated(new java.sql.Date(new Date().getTime()));
 		
-		model.addAttribute("user", user);
+		model.addAttribute("user", users);
 		return "users/update";
 	}
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
-	public String save(@ModelAttribute User user, @RequestParam String confirmPassword, Model model) {
-		User currentUser = userRepository.findOne(user.getId());;
+	public String save(@ModelAttribute Users users, @RequestParam String confirmPassword, Model model) {
+		Users currentUser = usersRepository.findOne(users.getId());;
 		if (currentUser == null) {
-			currentUser = user;
+			currentUser = users;
 		}
-		currentUser.setDateUpdated(user.getDateUpdated());
-		currentUser.setEmail(user.getEmail());
-		currentUser.setName(user.getName());
+		currentUser.setDateUpdated(users.getDateUpdated());
+		currentUser.setEmail(users.getEmail());
+		currentUser.setName(users.getName());
 		
-		if (user.getPassword().length() > 0) {
-			List<String> errors = validatePassword(user.getPassword(), confirmPassword);
+		if (users.getPassword().length() > 0) {
+			List<String> errors = validatePassword(users.getPassword(), confirmPassword);
 			if (errors.size() > 0) {
-				model.addAttribute("user", user);
+				model.addAttribute("user", users);
 				model.addAttribute("error", true);
 				model.addAttribute("errors", errors);
 				return "users/update";
 			}
 			
-			currentUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+			currentUser.setPassword(bCryptPasswordEncoder.encode(users.getPassword()));
 		}
 		
-		userRepository.save(currentUser);
+		usersRepository.save(currentUser);
 		return "redirect:/users/admin";
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public String deleteUser(@RequestParam(value="id") Integer id, Model model) {
 		try {
-			userRepository.delete(id);
+			usersRepository.delete(id);
 			logger.info("Deleted user with ID " + id + " from the website.");
 		} catch (IllegalArgumentException e) {
 			logger.error("Unable to delete user", e);
