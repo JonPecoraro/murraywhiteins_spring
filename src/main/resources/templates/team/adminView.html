@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/default"
+	th:with="title=${'Team'},pageHeading=${'Manage Team'}">
+	
+	<head>
+		<link media="all" type="text/css" rel="stylesheet" th:href="@{/css/team/team.css}" />
+		<link media="all" type="text/css" rel="stylesheet" th:href="@{/css/team/adminTeam.css}" />
+	</head>
+	<section layout:fragment="additionalScripts">
+		<script th:src="@{/js/team/adminTeam.js}"></script>
+	</section>
+	
+	<div layout:fragment="content" th:inline="text">
+		<div id="addUserContainer" class="well">
+			<a th:href="@{/team/admin/update}" class="btn btn-primary center-block">Add Team Member</a>
+		</div>
+		
+		<div th:replace="team/index :: includeContent"></div>
+		
+		<!-- Modal for confirming a user deletion -->
+		<div id="deleteUserModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h3 class="modal-title">Delete User</h3>
+					</div>
+					<div class="modal-body">
+						<p>Are you sure you want to delete the user from the website?</p>
+					</div>
+					<div class="modal-footer">
+						<a id="confirmDeletionLink" class="btn btn-primary">Yes</a>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</html>

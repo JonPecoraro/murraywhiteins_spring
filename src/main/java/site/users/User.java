@@ -31,4 +31,13 @@ public class User {
 	public void setPassword(String newValue) { this.password = newValue; }
 	public void setDateCreated(Date newValue) { this.dateCreated = newValue; }
 	public void setDateUpdated(Date newValue) { this.dateUpdated = newValue; }
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", dateCreated="
+				+ dateCreated + ", dateUpdated=" + dateUpdated + "]";
+	}
 }

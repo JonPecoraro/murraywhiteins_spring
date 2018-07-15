@@ -32,6 +32,7 @@ CREATE TABLE represented_company (
 	phone VARCHAR(255) NOT NULL,
 	url VARCHAR(255) NOT NULL,
 	image VARCHAR(255) NOT NULL,
+	sort_order int NULL,
 	date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -48,6 +49,7 @@ CREATE TABLE team_member (
 	description VARCHAR(1023),
 	image VARCHAR(255),
 	employment_date VARCHAR(255),
+	sort_order int NULL,
 	date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -60,5 +62,14 @@ CREATE TABLE testimonial (
 	date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE global_message (
+	id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	message VARCHAR(255) NOT NULL,
+	start_showing_date TIMESTAMP NOT NULL,
+	stop_showing_date TIMESTAMP NOT NULL, 
+	date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	date_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 REVOKE all ON murraywhiteins.* FROM 'springuser'@'localhost';
-GRANT select, insert, update ON murraywhiteins.* TO 'springuser'@'localhost';
+GRANT select, insert, update, delete ON murraywhiteins.* TO 'springuser'@'localhost';

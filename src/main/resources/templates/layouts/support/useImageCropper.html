@@ -1,0 +1,7 @@
+<head xmlns:th="http://www.thymeleaf.org" th:fragment="styles" th:remove="tag" th:if="${useImageCropper != null}">
+	<link media="all" type="text/css" rel="stylesheet" th:href="@{/lib/cropperjs-1.2.2/dist/cropper.min.css}" />
+</head>
+
+<section xmlns:th="http://www.thymeleaf.org" th:fragment="scripts" th:remove="tag" th:if="${useImageCropper != null}">
+	<script th:src="@{/lib/cropperjs-1.2.2/dist/cropper.min.js}"></script>
+</section>

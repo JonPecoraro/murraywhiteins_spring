@@ -1,34 +1,34 @@
-INSERT INTO `represented_company` (`id`, `name`, `phone`, `url`, `image`) VALUES
-(1, 'Aetna', '800-872-3862', 'https://www.aetna.com', '/img/logos/aetna.jpg'),
-(2, 'AlwaysCare Benefits', '888-729-5433', 'http://www.alwayscarebenefits.com', '/img/logos/alwaysCareBenefits.jpg'),
-(3, 'American Strategic Insurance', '866-274-8765', 'http://www.americanstrategic.com', '/img/logos/americanStrategicInsurance.jpg'),
-(4, 'Auto-Owners Insurance', '800-346-0346', 'http://www.auto-owners.com/', '/img/logos/autoOwners.jpg'),
-(5, 'Blue Cross Blue Shield', '800-446-8053', 'http://www.bcbsnc.com', '/img/logos/blueCrossBlueShield.jpg'),
-(6, 'Builders Mutual', '800-809-4859', 'https://www.buildersmutual.com', '/img/logos/buildersMutual.jpg'),
-(7, 'Community Eye Care', '888-254-4290', 'http://www.communityeyecare.net', '/img/logos/communityEyeCare.jpg'),
-(8, 'Companion Life', '800-753-0404', 'http://www.companionlife.com', '/img/logos/companionLife.jpg'),
-(9, 'Foremost Insurance Group', '800-527-3907', 'http://www.foremost.com', '/img/logos/foremostInsuranceGroup.jpg'),
-(10, 'Guardian Life Insurance', '888-482-7342', 'https://www.guardianlife.com', '/img/logos/guardian.jpg'),
-(11, 'Isurity', '336-869-3000', 'http://www.isurity.com', '/img/logos/isurity.jpg'),
-(12, 'Jackson Sumner', '800-342-5572', 'https://www.jsausa.com', '/img/logos/jacksonSumner.jpg'),
-(13, 'Jefferson Pilot / Lincoln Financial', '800-487-1485', 'https://www.lfg.com/public/individual', '/img/logos/jeffersonPilotFinancial.jpg'),
-(14, 'Kansas City Life', '800-821-6164', 'https://www.kclife.com', '/img/logos/kansasCityLife.jpg'),
-(15, 'Kemper Insurance Group', '866-860-9348', 'https://www.kemper.com', '/img/logos/kemperInsuranceGroup.jpg'),
-(16, 'Liberty Mutual', '888-398-8924', 'https://www.libertymutual.com', '/img/logos/libertyMutual.jpg'),
-(17, 'Main Street America Group', '800-226-0875', 'http://www.msagroup.com', '/img/logos/mainStreetAmericaGroup.jpg'),
-(18, 'MetLife', '800-438-6388', 'https://www.metlife.com', '/img/logos/metlife.jpg'),
-(19, 'Mutual of Omaha', '800-769-7159', 'http://www.mutualofomaha.com', '/img/logos/mutualOfOmaha.jpg'),
-(20, 'National Flood Insurance Program', '800-638-6620', 'https://www.fema.gov/national-flood-insurance-program', '/img/logos/nationalFloodInsuranceProgram.jpg'),
-(21, 'National General Insurance Company', '800-462-2123', 'http://www.nationalgeneral.com', '/img/logos/nationalGeneralInsuranceCompany.jpg'),
-(22, 'Nationwide', '877-669-6877', 'http://www.nationwide.com', '/img/logos/nation.jpg'),
-(23, 'Pennsylvania Lumbermens', '800-752-1895', 'http://www.plmilm.com', '/img/logos/pennsylvaniaLumbermens.jpg'),
-(24, 'Progressive', '800-776-4737', 'http://www.progressive.com', '/img/logos/progressive.jpg'),
-(25, 'SafeCo', '800-332-3226', 'http://www.safeco.com', '/img/logos/safeCo.jpg'),
-(26, 'State Auto', '614-464-5000', 'https://www.stateauto.com', '/img/logos/stateAuto.jpg'),
-(27, 'Tapco', '800-334-5579', 'http://www.gotapco.com', '/img/logos/tapco.jpg'),
-(28, 'United Healthcare', '866-633-2446', 'http://www.uhc.com', '/img/logos/unitedHealthCare.jpg'),
-(29, 'Utica National', '804-560-6600', 'http://www.uticanational.com/Insurance', '/img/logos/uticaNational.jpg'),
-(30, 'United States Liability Insurance Group', '800-523-5545', 'http://www.usli.com', '/img/logos/unitedStatesLiabilityInsuranceGroup.jpg');
+INSERT INTO `represented_company` (`id`, `name`, `phone`, `url`, `image`, `sort_order`) VALUES
+(1, 'Aetna', '800-872-3862', 'https://www.aetna.com', '/img/logos/aetna.jpg', 1),
+(2, 'AlwaysCare Benefits', '888-729-5433', 'http://www.alwayscarebenefits.com', '/img/logos/alwaysCareBenefits.jpg', 2),
+(3, 'American Strategic Insurance', '866-274-8765', 'http://www.americanstrategic.com', '/img/logos/americanStrategicInsurance.jpg', 3),
+(4, 'Auto-Owners Insurance', '800-346-0346', 'http://www.auto-owners.com/', '/img/logos/autoOwners.jpg', 4),
+(5, 'Blue Cross Blue Shield', '800-446-8053', 'http://www.bcbsnc.com', '/img/logos/blueCrossBlueShield.jpg', 5),
+(6, 'Builders Mutual', '800-809-4859', 'https://www.buildersmutual.com', '/img/logos/buildersMutual.jpg', 6),
+(7, 'Community Eye Care', '888-254-4290', 'http://www.communityeyecare.net', '/img/logos/communityEyeCare.jpg', 7),
+(8, 'Companion Life', '800-753-0404', 'http://www.companionlife.com', '/img/logos/companionLife.jpg', 8),
+(9, 'Foremost Insurance Group', '800-527-3907', 'http://www.foremost.com', '/img/logos/foremostInsuranceGroup.jpg', 9),
+(10, 'Guardian Life Insurance', '888-482-7342', 'https://www.guardianlife.com', '/img/logos/guardian.jpg', 10),
+(11, 'Isurity', '336-869-3000', 'http://www.isurity.com', '/img/logos/isurity.jpg', 11),
+(12, 'Jackson Sumner', '800-342-5572', 'https://www.jsausa.com', '/img/logos/jacksonSumner.jpg', 12),
+(13, 'Jefferson Pilot / Lincoln Financial', '800-487-1485', 'https://www.lfg.com/public/individual', '/img/logos/jeffersonPilotFinancial.jpg', 13),
+(14, 'Kansas City Life', '800-821-6164', 'https://www.kclife.com', '/img/logos/kansasCityLife.jpg', 14),
+(15, 'Kemper Insurance Group', '866-860-9348', 'https://www.kemper.com', '/img/logos/kemperInsuranceGroup.jpg', 15),
+(16, 'Liberty Mutual', '888-398-8924', 'https://www.libertymutual.com', '/img/logos/libertyMutual.jpg', 2),
+(17, 'Main Street America Group', '800-226-0875', 'http://www.msagroup.com', '/img/logos/mainStreetAmericaGroup.jpg', 16),
+(18, 'MetLife', '800-438-6388', 'https://www.metlife.com', '/img/logos/metlife.jpg', 17),
+(19, 'Mutual of Omaha', '800-769-7159', 'http://www.mutualofomaha.com', '/img/logos/mutualOfOmaha.jpg', 18),
+(20, 'National Flood Insurance Program', '800-638-6620', 'https://www.fema.gov/national-flood-insurance-program', '/img/logos/nationalFloodInsuranceProgram.jpg', 19),
+(21, 'National General Insurance Company', '800-462-2123', 'http://www.nationalgeneral.com', '/img/logos/nationalGeneralInsuranceCompany.jpg', 20),
+(22, 'Nationwide', '877-669-6877', 'http://www.nationwide.com', '/img/logos/nation.jpg', 21),
+(23, 'Pennsylvania Lumbermens', '800-752-1895', 'http://www.plmilm.com', '/img/logos/pennsylvaniaLumbermens.jpg', 22),
+(24, 'Progressive', '800-776-4737', 'http://www.progressive.com', '/img/logos/progressive.jpg', 23),
+(25, 'SafeCo', '800-332-3226', 'http://www.safeco.com', '/img/logos/safeCo.jpg', 24),
+(26, 'State Auto', '614-464-5000', 'https://www.stateauto.com', '/img/logos/stateAuto.jpg', 25),
+(27, 'Tapco', '800-334-5579', 'http://www.gotapco.com', '/img/logos/tapco.jpg', 26),
+(28, 'United Healthcare', '866-633-2446', 'http://www.uhc.com', '/img/logos/unitedHealthCare.jpg', 27),
+(29, 'Utica National', '804-560-6600', 'http://www.uticanational.com/Insurance', '/img/logos/uticaNational.jpg', 28),
+(30, 'United States Liability Insurance Group', '800-523-5545', 'http://www.usli.com', '/img/logos/unitedStatesLiabilityInsuranceGroup.jpg', 29);
 
 INSERT INTO `state` (`id`, `abbreviation`, `name`) VALUES
 (1, 'AL', 'Alabama'),
@@ -90,7 +90,7 @@ INSERT INTO `team_member` (`id`, `first_name`, `last_name`, `suffix`, `email`, `
 (4, 'Kim', 'Milan', NULL, 'kim@murraymwhiteinc.com', '644', 'Accounting / Office Manager', NULL, 'Kim is one of the longest running associates at Murray White Insurance Agency. She’s been assisting the office in all accounting activities and Office Manager duties for over 30 years. Kim knows the business inside and out, and can be counted on by her coworkers for anything. Being a native of the Triad, Kim grew up in Trinity and then moved to Lexington with her husband to start her family. She has two wonderful grown children, and loves to read, crochet, and do crafts in her spare time. In addition, Kim is an animal lover, especially her Lab Noodles!', '/img/team/kim_milan.jpg', null, 4),
 (5, 'Cindi', 'Michael', NULL, 'cindi@murraymwhiteinc.com', '634', 'Commercial Lines Customer Service Representative', 'CIC, CPIW', 'Cindi is a tenured associate at Murray White Insurance Agency. She has been assisting clients for the past 21 years. Cindi is a native to the Triad, having spent her whole life in Lexington. In her free time, she enjoys spending time with her family, especially her granddaughter.', '/img/team/cindi_michael.jpg', null, 5),
 (6, 'Sharon', 'Idol', NULL, 'sharon@murraymwhiteinc.com', '636', 'Commercial Lines Customer Service Representative', 'CISR', 'Sharon is a welcomed new addition to Murray White Insurance! She’s been with the Agency for a year, but comes with 32+ years of insurance experience! Sharon is familiar with the area, having grown up in Forsyth County; she now resides in Davie County with her loving husband. In her free time, you can find Sharon camping, cooking, gardening, or decorating. She has one son who is currently in college studying Fire Protection and Technology.', '/img/team/sharon_idol.jpg', null, 6),
-(7, 'Emily', 'Smith', NULL, 'emily@murraymwhiteinc.com', '639', 'Commercial Lines Customer Service Representative', NULL, 'Emily is a new employee at Murray White Insurance. We gladly welcome her to the company!', '/img/team/emily_smith.jpg', null, 7);
+(7, 'Emily', 'Smith', NULL, 'emily@murraymwhiteinc.com', '639', 'Commercial Lines Customer Service Representative', NULL, 'Emily is a new employee at Murray White Insurance. We gladly welcome her to the company!', '/img/team/emily_smith.jpg', null, 7),
 (8, 'Phillis', 'Butcher', NULL, 'phillis@murraymwhiteinc.com', '642', 'Personal Lines Customer Service Representative', 'CPIA', 'Phillis has been a familiar face with Murray White Insurance for 20+ years. She is originally from Georgia, but has spent the last 25 years making North Carolina home. In her spare time, you can find Phillis enjoying family time at the beach or cheering on the local baseball and softball teams. She has 2 wonderful children and 4 grandchildren that bring her and her husband great joy.', '/img/team/phillis_butcher.jpg', null, 8),
 (9, 'Tara', 'Alexander', NULL, 'tara@murraymwhiteinc.com', '637', 'Personal Lines Customer Service Representative', NULL, 'Tara is a new employee at Murray White Insurance. We gladly welcome her to the company! She has been in the insurance industry for 14 years', '/img/team/tara_alexander.jpg', null, 9),
 (10, 'Angie', 'McClure', NULL, 'angie@murraymwhiteinc.com', '630', 'Life &amp; Health Benefit Analyst', 'RHU, CIIP', 'Angie has been with Murray White Insurance for more than 14 years and brings over 30 years of experience in group health, life, disability, and dental insurance. At Murray White Insurance she specializes in Benefits. She’s an active member of the International Association of Insurance Professionals, and previously served as NC Association of Insurance Professionals State President. Outside of the Agency, Angie enjoys line dancing, crafts, traveling, and spending time with friends and family, especially her 4 children and 4 grand-children.', '/img/team/angie_mcClure.jpg', null, 10),
@@ -102,3 +102,14 @@ INSERT INTO `testimonial` (`id`,  `author`, `testimonial`) VALUES
 (1, 'Jonathan Pecoraro', 'I love Murray White Insurance Agency. They have been serving me well for many years. The agents are always quick to respond and willing to work with my limited budget. They have helped my family and I get back on our feet during trying times.'),
 (2, 'Linda Trivetta', 'Knowledgeable and always willing to help when you call them. Very friendly staff.'),
 (3, 'Dr. Joseph Fonke', 'Very helpful staff. Helped me find what our family needed as far as health insurance was concerned. Great team, great people and a group of some of the best people in all of High Point.');
+
+INSERT INTO `global_message` (`id`,  `message`, `start_showing_date`, `stop_showing_date`) VALUES
+(1, '', NOW(), NOW());
+
+INSERT INTO `user` (`id`, `name`, `email`, `password`, `date_created`, `date_updated`) VALUES
+(1, 'Jonathan Pecoraro', 'jonpecoraro@gmail.com', '$2a$10$Lz0ZNSGaWQxTuTPvoYdEhe.uFRzr0XBOBSpK7//WqD4wS6WeXIZpy', NOW(), NOW()),
+(2, 'Murray White IV', 'm4@murraymwhiteinc.com', '$2a$10$Srpp8TMh6BN7/P7ZsqBSm.NgAdPk23EcuRgecN6NxY9Zu2FAMq6TC', NOW(), NOW()),
+(3, 'Kim Milan', 'kim@murraymwhiteinc.com', '$2a$10$Srpp8TMh6BN7/P7ZsqBSm.NgAdPk23EcuRgecN6NxY9Zu2FAMq6TC', NOW(), NOW()),
+(4, 'Robin White', 'rmwhite0119@gmail.com', '$2a$10$Srpp8TMh6BN7/P7ZsqBSm.NgAdPk23EcuRgecN6NxY9Zu2FAMq6TC', NOW(), NOW());
+
+

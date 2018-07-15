@@ -1,6 +1,6 @@
-<li class="clearfix" th:fragment="markup" xmlns:th="http://www.thymeleaf.org">
+<li th:fragment="markup" xmlns:th="http://www.thymeleaf.org">
 	<div class="pull-left" th:if="${teamMember.image != null}">
-		<a th:href="@{/team/profile(id=${teamMember.id})}">
+		<a th:href="@{/team/profile(id=${teamMember.id})}" class="profileLink">
 			<img th:src="${teamMember.image}" th:alt="${teamMember.fullName}" />
 		</a>
 	</div>

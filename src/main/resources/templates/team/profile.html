@@ -4,7 +4,7 @@
 	layout:decorator="layouts/default"
 	th:with="title=${'Team Member'},pageHeading=${teamMember.fullName + ' Profile'}">
 	
-	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/team.css}" />
+	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/team/team.css}" />
 
 	<div layout:fragment="content" th:inline="text">
 		<div class="row">

@@ -11,6 +11,9 @@
 				<img th:src="@{/img/buildingScaled.jpg}" alt="Murray White Insurance Agency, Inc. office building" class="img-responsive img-rounded" />
 			</div>
 			<div class="col-sm-5">
+				<div class="well" th:if="${globalMessage.length() > 0}">
+					<p><strong>Attention!</strong> [[${globalMessage}]]</p>
+				</div>
 				<div class="clearfix" th:include="quotes/support/requestQuoteMarkup :: markup"></div>
 				<div>
 					<div th:if="${success}" class="row text-center">
@@ -25,7 +28,7 @@
 							</p>
 						</div>
 					</div>
-					<h2>Request an Appointment</h2>
+					<h3>Request an Appointment</h3>
 					<form th:action="@{/appointments/showAppointmentForm}" class="form">
 						<select id="category" name="category" class="form-control">
 							<option value="personal">Personal</option>
