@@ -29,7 +29,7 @@ Dumping data for table 'public.represented_company'
 */
 
 INSERT INTO "public"."represented_company"("id", "name", "phone", "url", "image", "sort_order", "date_created", "date_updated") VALUES (1, 'Aetna', '800-872-3862', 'https://www.aetna.com', '/img/logos/aetna.jpg', 1, '2017-07-09 10:42:41', '2017-07-09 10:42:41');
-INSERT INTO "public"."represented_company"("id", "name", "phone", "url", "image", "sort_order", "date_created", "date_updated") VALUES (2, 'AlwaysCare Benefits', '888-729-5433', 'http://www.alwayscarebenefits.com', 2, '/img/logos/alwaysCareBenefits.jpg', '2017-07-09 10:42:41', '2017-07-09 10:42:41');
+INSERT INTO "public"."represented_company"("id", "name", "phone", "url", "image", "sort_order", "date_created", "date_updated") VALUES (2, 'AlwaysCare Benefits', '888-729-5433', 'http://www.alwayscarebenefits.com', '/img/logos/alwaysCareBenefits.jpg', 2, '2017-07-09 10:42:41', '2017-07-09 10:42:41');
 INSERT INTO "public"."represented_company"("id", "name", "phone", "url", "image", "sort_order", "date_created", "date_updated") VALUES (3, 'American Strategic Insurance', '866-274-8765', 'http://www.americanstrategic.com', '/img/logos/americanStrategicInsurance.jpg', 3, '2017-07-09 10:42:41', '2017-07-09 10:42:41');
 INSERT INTO "public"."represented_company"("id", "name", "phone", "url", "image", "sort_order", "date_created", "date_updated") VALUES (4, 'Auto-Owners Insurance', '800-346-0346', 'http://www.auto-owners.com/', '/img/logos/autoOwners.jpg', 4, '2017-09-30 10:42:41', '2017-09-30 10:42:41');
 INSERT INTO "public"."represented_company"("id", "name", "phone", "url", "image", "sort_order", "date_created", "date_updated") VALUES (5, 'Blue Cross Blue Shield', '800-446-8053', 'http://www.bcbsnc.com', '/img/logos/blueCrossBlueShield.jpg', 5, '2017-07-09 10:42:41', '2017-07-09 10:42:41');
@@ -228,8 +228,8 @@ CREATE TABLE "public"."global_message" (
 	"start_showing_date" TIMESTAMP NOT NULL,
 	"stop_showing_date" TIMESTAMP NOT NULL
 );
-DROP INDEX IF EXISTS "PRIMARY";
-ALTER TABLE "public"."global_message" ADD CONSTRAINT "PRIMARY" PRIMARY KEY("id");
+DROP INDEX IF EXISTS "GLOBAL_MESSAGE";
+ALTER TABLE "public"."global_message" ADD CONSTRAINT "GLOBAL_MESSAGE" PRIMARY KEY("id");
 
 /*
 Dumping data for table 'public.global_message'
