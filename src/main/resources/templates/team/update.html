@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/default"
+	th:with="title=${'Team'},cancelPage=${'/team/admin'}">
+	
+	<head>
+		<link media="all" type="text/css" rel="stylesheet" th:href="@{/css/team/update.css}" />
+	</head>
+	<section layout:fragment="additionalScripts">
+		<script th:src="@{/js/team/update.js}"></script>
+	</section>
+
+	<div layout:fragment="content" th:inline="text">
+		<form id="updateForm" th:action="@{/team/admin/save}" th:object="${teamMember}" method="post" class="form" enctype="multipart/form-data">				
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Team Member Details</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="row">
+								<div class="col-xs-6">
+									<div class="img-container">
+										<img id="teamMemberImage" th:src="*{image}" alt="Team member image" />
+									</div>
+									<p>Change profile picture. The image must be a .jpg file that is 200 pixels wide and 150 pixels high (200x150)</p>
+									<input type="file" id="profilePicture" name="profilePicture" accept=".jpg" />
+								</div>
+								<div class="col-xs-6">
+									<div class="img-container">
+										<img id="teamMemberImageLarge" th:src="*{largeImageUrl}" width="200" height="150" alt="Large team member image" />
+									</div>
+									<p>Change large profile picture. The image must be a .jpg file that is 800 pixels wide and 600 pixels high (800x600)</p>
+									<input type="file" id="profilePictureLarge" name="profilePictureLarge" accept=".jpg" />
+								</div>
+							</div>
+							<p>For help getting the correct file size, use the <a th:href="@{/admin/imageCropUtility}">image cropping utility</a></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-5">
+							<label for="firstName">First Name</label>
+							<input type="text" th:field="*{firstName}" class="form-control" />
+						</div>
+						<div class="col-sm-5">
+							<label for="lastName">Last Name</label>
+							<input type="text" th:field="*{lastName}" class="form-control" />
+						</div>
+						<div class="col-sm-2">
+							<label for="suffix">Suffix</label>
+							<select th:field="*{suffix}" class="form-control">
+								<option
+									th:each="option : ${suffixOptions}"
+									th:value="${option}"
+									th:text="${option}"
+									th:selected="${option == selectedSuffix}" >
+								</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<label for="email">Email</label>
+							<input type="text" th:field="*{email}" class="form-control" />
+						</div>
+						<div class="col-sm-6">
+							<label for="extension">Extension</label>
+							<input type="text" th:field="*{extension}" class="form-control" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<label for="position">Position</label>
+							<input type="text" th:field="*{position}" class="form-control" />
+						</div>
+						<div class="col-sm-6">
+							<label for="employmentDate">Employment Date</label>
+							<input type="text" th:field="*{employmentDate}" class="form-control dateField" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="qualifications">Qualifications</label>
+							<input type="text" th:field="*{qualifications}" class="form-control" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<label for="description">Description</label>
+							<textarea th:field="*{description}" class="form-control" rows="5"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<input type="hidden" th:field="*{id}" />
+			<input type="hidden" th:field="*{image}" />
+			<input type="hidden" th:field="*{sortOrder}" />
+			<div th:replace="admin/support/buttonRowMarkup:: markup"></div>
+		</form>
+		
+		<!-- Modal for when a user uploads something that is not a JPG image -->
+		<div id="invalidImageModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h3 class="modal-title">Invalid Image</h3>
+					</div>
+					<div class="modal-body">
+						<p>The selected file is not a JPG image. Please upload a JPG file for the team member image.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Modal for when a user uploads incorrectly sized file -->
+		<div id="invalidImageSizeModal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h3 class="modal-title">Invalid Image Size</h3>
+					</div>
+					<div class="modal-body">
+						<p>
+							The selected file is not the correct size. Please upload a file that is
+							<span id="imageWidth">200</span>x<span id="imageHeight">150</span>px.
+							For assistance in creating a file with the correct size, use the image cropping tool.
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</html>

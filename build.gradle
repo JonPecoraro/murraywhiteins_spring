@@ -33,9 +33,15 @@ dependencies {
 	
 	// Spring security
 	compile("org.springframework.boot:spring-boot-starter-security")
+	
+	// Guava library used for caching
+	compile('com.google.guava:guava:25.1-jre')
 
 	// AWS Simple Notification Service (for sending SMS messages)
 	compile('com.amazonaws:aws-java-sdk-sns:1.11.317')
+	
+	// RESTful actuator service
+	compile("org.springframework.boot:spring-boot-starter-actuator")
 	
 	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 	testCompile('org.springframework.boot:spring-boot-starter-test')

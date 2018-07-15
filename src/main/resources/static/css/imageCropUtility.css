@@ -1,0 +1,12 @@
+/* Limit image width to avoid overflow the container */
+img {
+  max-width: 100%; /* This rule is very important, please do not ignore this! */
+}
+
+.imageContainer {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	max-height: 900px;
+	width: 100%;
+	text-align: center;
+}

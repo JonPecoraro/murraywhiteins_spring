@@ -4,25 +4,29 @@
 	layout:decorator="layouts/default"
 	th:with="title=${'Companies'},pageHeading=${'Represented Companies'}">
 	
-	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/companies.css}" />
+	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/companies/companies.css}" />
 	
 	<div layout:fragment="content" th:inline="text">
-		<div class="row">
-			<div class="col-sm-6">
-				<ul class="listing">
-					<li class="clearfix"
-						th:each="i : ${#numbers.sequence(0, T(Math).ceil(companies.size() / 2.0) - 1)}"
-						th:with="company=${companies[i]}"
-						th:include="companies/companyMarkup :: markup" />
-				</ul>
-			</div>
-			<div class="col-sm-6">
-				<ul class="listing">
-					<li class="clearfix"
-						th:each="i : ${#numbers.sequence(T(Math).ceil(companies.size() / 2.0), companies.size() - 1)}"
-						th:with="company=${companies[i]}"
-						th:include="companies/companyMarkup :: markup" />
-				</ul>
+		<div th:fragment="includeContent">
+			<div class="row">
+				<div class="col-sm-6">
+					<ul class="listing">
+						<li class="clearfix"
+							th:each="i : ${#numbers.sequence(0, T(Math).ceil(companies.size() / 2.0) - 1)}"
+							th:with="company=${companies[i]}"
+							th:attr="data-company-id=${company.id}"
+							th:include="companies/companyMarkup :: markup" />
+					</ul>
+				</div>
+				<div class="col-sm-6">
+					<ul class="listing">
+						<li class="clearfix"
+							th:each="i : ${#numbers.sequence(T(Math).ceil(companies.size() / 2.0), companies.size() - 1)}"
+							th:with="company=${companies[i]}"
+							th:attr="data-company-id=${company.id}"
+							th:include="companies/companyMarkup :: markup" />
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(path="team")
-public class TeamMemberController {
+public class TeamMemberController {	
 	@Autowired
 	private TeamMemberRepository teamMemberRepository;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String getTeamMemberIndex(Model model) {
-		model.addAttribute("teamMembersWithImage", teamMemberRepository.findByImageNotNull());
-		model.addAttribute("teamMembersWithoutImage", teamMemberRepository.findByImageNull());
+		model.addAttribute("teamMembersWithImage", teamMemberRepository.findByImageNotNullOrderBySortOrder());
+		model.addAttribute("teamMembersWithoutImage", teamMemberRepository.findByImageNullOrderBySortOrder());
 		return "team/index";
 	}
 	

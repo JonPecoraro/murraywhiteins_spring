@@ -36,7 +36,7 @@ import site.util.SmsUtil;
 @Controller
 @RequestMapping(path="quotes")
 public class QuoteController {
-	static final Logger logger = LoggerFactory.getLogger(QuoteController.class);
+	private static final Logger logger = LoggerFactory.getLogger(QuoteController.class);
 	
 	@Autowired
 	StateRepository stateRepository;

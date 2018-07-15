@@ -2,90 +2,54 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layouts/default"
-	th:with="title=${'Admin'},pageHeading=${'Admin Home'}">
+	th:with="title=${'Admin'}">
 	
-	<link layout:fragment="additionalStyle" media="all" type="text/css" rel="stylesheet" th:href="@{/css/admin.css}" />
-	<section layout:fragment="additionalScripts">
-		<script th:src="@{/js/admin.js}"></script>
-	</section>
+	<head>
+		<link media="all" type="text/css" rel="stylesheet" th:href="@{/css/admin.css}" />
+	</head>
 	
 	<div layout:fragment="content" th:inline="text">
 		<div class="row">
-			<div id="sideNav" class="col-xs-2">
-				<a href="#">Companies</a>
-				<a href="#">Quotes</a>
-				<a href="#">Team</a>
-				<a href="#">Users</a>
+			<div class="col-sm-4">
+				<a th:href="@{/team/admin}" class="adminPageLink">
+					<img th:src="@{/img/admin/manage_team.jpg}" class="img-rounded-top" alt="Manage Team" />
+					<span class="linkText">Manage Team Members</span>
+				</a>
 			</div>
-			<div class="col-xs-10">
-				<form th:action="@{/admin/saveTeamMember(id=0)}" th:object="${teamMember}" method="post" class="form">				
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">Team Member Details</h3>
-						</div>
-						<div class="panel-body">
-							<div class="row">
-								<div class="col-sm-5">
-									<label for="firstName">First Name</label>
-									<input type="text" th:field="*{firstName}" class="form-control" />
-								</div>
-								<div class="col-sm-5">
-									<label for="lastName">Last Name</label>
-									<input type="text" th:field="*{lastName}" class="form-control" />
-								</div>
-								<div class="col-sm-2">
-									<label for="suffix">Suffix</label>
-									<select th:fielf="*{suffix}" class="form-control">
-										<option value=""></option>
-										<option value="Sr.">Sr.</option>
-										<option value="Jr.">Jr.</option>
-										<option value="lll">lll</option>
-										<option value="lV">lV</option>
-										<option value="V">V</option>
-									</select>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-6">
-									<label for="email">Email</label>
-									<input type="text" th:field="*{email}" class="form-control" />
-								</div>
-								<div class="col-sm-6">
-									<label for="extension">Extension</label>
-									<input type="text" th:field="*{extension}" class="form-control" />
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-6">
-									<label for="position">Position</label>
-									<input type="text" th:field="*{position}" class="form-control" />
-								</div>
-								<div class="col-sm-6">
-									<label for="qualifications">Qualifications</label>
-									<input type="text" th:field="*{qualifications}" class="form-control" />
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-6">
-									<label for="image">Image</label>
-									<input type="text" th:field="*{image}" class="form-control" />
-								</div>
-								<div class="col-sm-6">
-									<label for="employmentDate">Employment Date</label>
-									<input type="text" th:field="*{employmentDate}" class="form-control dateField" />
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-xs-12">
-									<label for="description">Description</label>
-									<textarea th:field="*{description}" class="form-control" rows="5"></textarea>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div th:replace="admin/support/buttonRowMarkup:: markup"></div>
-				</form>
+			<div class="col-sm-4">
+				<a th:href="@{/companies/admin}" class="adminPageLink">
+					<img th:src="@{/img/admin/manage_companies.jpg}" class="img-rounded-top" alt="Manage Represented Companies" />
+					<span class="linkText">Manage Companies</span>
+				</a>
 			</div>
-		</div>	
+			<div class="col-sm-4">
+				<a th:href="@{/users/admin}" class="adminPageLink">
+					<img th:src="@{/img/admin/manage_users.jpg}" class="img-rounded-top" alt="Manage Users" />
+					<span class="linkText">Manage &nbsp; Users</span>
+				</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4">
+				<a th:href="@{/admin/globalMessage}" class="adminPageLink">
+					<img th:src="@{/img/admin/manage_global_message.jpg}" class="img-rounded-top" alt="Manage Global Message" />
+					<span class="linkText">Manage Global Message</span>
+				</a>
+			</div>
+			<div class="col-sm-8">
+				<a th:href="@{/admin/addTestimonial}" class="adminPageLink">
+					<img th:src="@{/img/admin/manage_testimonials.jpg}" class="img-rounded-top" alt="Add Testimonial" />
+					<span class="linkText">Add Testimonial</span>
+				</a>
+			</div>
+			<!-- 
+			<div class="col-sm-4">
+				<a th:href="@{/admin/imageCropUtility}" class="adminPageLink">
+					<img th:src="@{/img/admin/image_crop_utility.jpg}" class="img-rounded-top" alt="Image Crop Utility" />
+					<span class="linkText">Image Crop Utility</span>
+				</a>
+			</div>
+			 -->
+		</div>
 	</div>
 </html>

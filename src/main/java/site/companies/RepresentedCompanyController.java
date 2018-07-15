@@ -14,7 +14,7 @@ public class RepresentedCompanyController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String getCompanies(Model model) {
-		model.addAttribute("companies", representedCompanyRepository.findAll());
+		model.addAttribute("companies", representedCompanyRepository.findAllByOrderBySortOrder());
 		return "companies/index";
 	}
 }
