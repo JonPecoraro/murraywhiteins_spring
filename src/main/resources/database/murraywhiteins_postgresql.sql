@@ -171,11 +171,11 @@ INSERT INTO "public"."team_member"("id", "first_name", "last_name", "suffix", "e
 INSERT INTO "public"."team_member"("id", "first_name", "last_name", "suffix", "email", "extension", "position", "qualifications", "description", "image", "employment_date", "sort_order", "date_created", "date_updated") VALUES (13, 'Jane', 'Day', NULL, 'murraywhite@murraymwhiteinc.com', '747', 'Part Time Receptionist', NULL, 'Jane is a new employee at Murray White Insurance. We gladly welcome her to the company!', '/img/team/jane_day.jpg', '0000-00-00', 13, '2018-03-26 10:44:56', '2018-03-26 10:44:56');
 
 /*
-Table structure for table 'public.user'
+Table structure for table 'public.users'
 */
 
-DROP TABLE IF EXISTS "public"."user" CASCADE;
-CREATE TABLE "public"."user" (
+DROP TABLE IF EXISTS "public"."users" CASCADE;
+CREATE TABLE "public"."users" (
 	"id" SERIAL NOT NULL,
 	"name" VARCHAR(255)  NOT NULL,
 	"email" VARCHAR(255)  NOT NULL,
@@ -183,18 +183,18 @@ CREATE TABLE "public"."user" (
 	"date_created" TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	"date_updated" TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 ) WITH OIDS;
-DROP INDEX IF EXISTS "PRIMARY";
-ALTER TABLE "public"."user" ADD CONSTRAINT "PRIMARY" PRIMARY KEY("id");
+DROP INDEX IF EXISTS "USERS_INDEX";
+ALTER TABLE "public"."users" ADD CONSTRAINT "USERS_INDEX" PRIMARY KEY("id");
 DROP INDEX IF EXISTS "email";
-CREATE UNIQUE INDEX "email" ON "public"."user"("email");
+CREATE UNIQUE INDEX "email" ON "public"."users"("email");
 
 /*
-Dumping data for table 'public.user'
+Dumping data for table 'public.users'
 */
-INSERT INTO "public"."user"("id", "name", "email", "password", "date_created", "date_updated") VALUES (1, 'Jonathan Pecoraro', 'jonpecoraro@gmail.com', '$2a$10$Lz0ZNSGaWQxTuTPvoYdEhe.uFRzr0XBOBSpK7//WqD4wS6WeXIZpy', '2018-07-14 10:44:56', '2018-07-14 10:44:56');
-INSERT INTO "public"."user"("id", "name", "email", "password", "date_created", "date_updated") VALUES (2, 'Murray White IV', 'm4@murraymwhiteinc.com', '$2a$10$Srpp8TMh6BN7/P7ZsqBSm.NgAdPk23EcuRgecN6NxY9Zu2FAMq6TC', '2018-07-14 10:44:56', '2018-07-14 10:44:56');
-INSERT INTO "public"."user"("id", "name", "email", "password", "date_created", "date_updated") VALUES (3, 'Kim Milan', 'kim@murraymwhiteinc.com', '$2a$10$Srpp8TMh6BN7/P7ZsqBSm.NgAdPk23EcuRgecN6NxY9Zu2FAMq6TC', '2018-07-14 10:44:56', '2018-07-14 10:44:56');
-INSERT INTO "public"."user"("id", "name", "email", "password", "date_created", "date_updated") VALUES (4, 'Robin White', 'rmwhite0119@gmail.com', '$2a$10$Srpp8TMh6BN7/P7ZsqBSm.NgAdPk23EcuRgecN6NxY9Zu2FAMq6TC', '2018-07-14 10:44:56', '2018-07-14 10:44:56');
+INSERT INTO "public"."users"("id", "name", "email", "password", "date_created", "date_updated") VALUES (1, 'Jonathan Pecoraro', 'jonpecoraro@gmail.com', '$2a$10$Lz0ZNSGaWQxTuTPvoYdEhe.uFRzr0XBOBSpK7//WqD4wS6WeXIZpy', '2018-07-14 10:44:56', '2018-07-14 10:44:56');
+INSERT INTO "public"."users"("id", "name", "email", "password", "date_created", "date_updated") VALUES (2, 'Murray White IV', 'm4@murraymwhiteinc.com', '$2a$10$Srpp8TMh6BN7/P7ZsqBSm.NgAdPk23EcuRgecN6NxY9Zu2FAMq6TC', '2018-07-14 10:44:56', '2018-07-14 10:44:56');
+INSERT INTO "public"."users"("id", "name", "email", "password", "date_created", "date_updated") VALUES (3, 'Kim Milan', 'kim@murraymwhiteinc.com', '$2a$10$Srpp8TMh6BN7/P7ZsqBSm.NgAdPk23EcuRgecN6NxY9Zu2FAMq6TC', '2018-07-14 10:44:56', '2018-07-14 10:44:56');
+INSERT INTO "public"."users"("id", "name", "email", "password", "date_created", "date_updated") VALUES (4, 'Robin White', 'rmwhite0119@gmail.com', '$2a$10$Srpp8TMh6BN7/P7ZsqBSm.NgAdPk23EcuRgecN6NxY9Zu2FAMq6TC', '2018-07-14 10:44:56', '2018-07-14 10:44:56');
 
 /*
 Table structure for table 'public.testimonial'

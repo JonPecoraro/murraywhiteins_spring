@@ -7,7 +7,7 @@ CREATE USER 'springuser'@'localhost' IDENTIFIED BY 'password';
 GRANT all ON murraywhiteins.* to 'springuser'@'localhost';
 USE murraywhiteins;
 
-CREATE TABLE user (
+CREATE TABLE users (
 	id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	name VARCHAR(255) NOT NULL,
 	email VARCHAR(255) NOT NULL,
