@@ -221,6 +221,7 @@
 	<script th:src="@{/lib/jquery-3.2.1/jquery.min.js}"></script>
 	<script th:src="@{/lib/jquery-ui-1.12.1/jquery-ui.min.js}"></script>
 	<script th:src="@{/lib/bootstrap-3.3.7/js/bootstrap.min.js}"></script>
+	<script th:replace="common/useRecaptcha :: scripts"></script>
 	<script th:src="@{/js/common.js}"></script>
 	<script th:replace="layouts/support/useImageCropper :: scripts"></script>
 	<section layout:fragment="additionalScripts" th:remove="tag"></section>
