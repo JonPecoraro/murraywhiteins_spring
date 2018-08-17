@@ -1,6 +1,8 @@
 package site.team;
 
+import java.sql.Date;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -109,6 +111,10 @@ public class TeamMemberAdminController {
 				logger.error("There was an error updating the large profile picture", e);
 			}
 		}
+		
+		Date now = new Date(Calendar.getInstance().getTime().getTime());
+		teamMember.setDateCreated(now);
+		teamMember.setDateUpdated(now);
 		teamMemberRepository.save(teamMember);
 		return "redirect:/team/admin";
 	}

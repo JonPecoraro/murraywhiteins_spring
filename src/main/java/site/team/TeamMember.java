@@ -1,5 +1,7 @@
 package site.team;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,8 +25,8 @@ public class TeamMember {
 	private String image;
 	private String employmentDate;
 	private int sortOrder;
-	private String dateCreated;
-	private String dateUpdated;
+	private Date dateCreated;
+	private Date dateUpdated;
 	
 	public int getId() { return id; }
 	public String getFirstName() { return firstName; }
@@ -38,8 +40,8 @@ public class TeamMember {
 	public String getImage() { return image; }
 	public String getEmploymentDate() { return employmentDate; }
 	public int getSortOrder() { return sortOrder; }
-	public String getDateCreated() { return dateCreated; }
-	public String getDateUpdated() { return dateUpdated; }
+	public Date getDateCreated() { return dateCreated; }
+	public Date getDateUpdated() { return dateUpdated; }
 	
 	public void setId(int newValue) { this.id = newValue; }
 	public void setFirstName(String newValue) { this.firstName = newValue; }
@@ -53,8 +55,8 @@ public class TeamMember {
 	public void setImage(String newValue) { this.image = newValue; }
 	public void setEmploymentDate(String newValue) { this.employmentDate = newValue; }
 	public void setSortOrder(int newValue) { this.sortOrder = newValue; }
-	public void setDateCreated(String newValue) { this.dateCreated = newValue; }
-	public void setDateUpdated(String newValue) { this.dateUpdated = newValue; }
+	public void setDateCreated(Date newValue) { this.dateCreated = newValue; }
+	public void setDateUpdated(Date newValue) { this.dateUpdated = newValue; }
 	
 	public String getFullName() {
 		String fullName = firstName + " " + lastName;

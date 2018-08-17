@@ -1,6 +1,8 @@
 package site.companies;
 
+import java.sql.Date;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -90,6 +92,10 @@ private static final Logger logger = LoggerFactory.getLogger(RepresentedCompanyA
 				logger.error("There was an error updating the company logo in the file system", e);
 			}
 		}
+		
+		Date now = new Date(Calendar.getInstance().getTime().getTime());
+		company.setDateCreated(now);
+		company.setDateUpdated(now);
 		representedCompanyRepository.save(company);
 		return "redirect:/companies/admin";
 	}
