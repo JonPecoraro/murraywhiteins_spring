@@ -10,7 +10,7 @@ import javax.persistence.Id;
 @Entity
 public class Testimonial {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String author;
 	private String testimonial;

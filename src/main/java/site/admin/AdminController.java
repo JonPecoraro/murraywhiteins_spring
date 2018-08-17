@@ -1,5 +1,8 @@
 package site.admin;
 
+import java.sql.Date;
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,6 +55,9 @@ public class AdminController {
 		Testimonial testimonialObject = new Testimonial();
 		testimonialObject.setAuthor(author);
 		testimonialObject.setTestimonial(testimonial);
+		Date now = new Date(Calendar.getInstance().getTime().getTime());
+		testimonialObject.setDateCreated(now);
+		testimonialObject.setDateUpdated(now);
 		testimonialRepository.save(testimonialObject);
 		return "redirect:/admin/index";
 	}
