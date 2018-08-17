@@ -1,12 +1,5 @@
 package site.companies;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import site.util.S3Util;
 
 @Controller
 @RequestMapping(path="companies/admin")
@@ -55,7 +50,7 @@ private static final Logger logger = LoggerFactory.getLogger(RepresentedCompanyA
 	public String showUpdatePage(@RequestParam(value="id", required=false) Integer id, Model model) {
 		if (id == null) {
 			RepresentedCompany company = new RepresentedCompany();
-			company.setImage("/img/logos/no_logo.jpg");
+			company.setImage("/logos/no_logo.jpg");
 			model.addAttribute("company", company);
 		}
 		else {
@@ -68,7 +63,9 @@ private static final Logger logger = LoggerFactory.getLogger(RepresentedCompanyA
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public String deleteCompany(@RequestParam(value="id") Integer id, Model model) {
 		try {
+			RepresentedCompany company = representedCompanyRepository.findOne(id);
 			representedCompanyRepository.delete(id);
+			S3Util.deleteFile(company.getImage());
 			logger.info("Deleted company with ID " + id + " from the website.");
 		} catch (IllegalArgumentException e) {
 			logger.error("Unable to delete company", e);
@@ -83,11 +80,11 @@ private static final Logger logger = LoggerFactory.getLogger(RepresentedCompanyA
 			// A new company logo was passed in. Update it in the file system
 			try {
 				String relativePath = company.getImage();
-				if (relativePath == null || relativePath == "" || relativePath.equals("/img/logos/no_logo.jpg")) {
-					relativePath = "/img/logos/" + company.getNameInCamelCase() + ".jpg";
+				if (relativePath == null || relativePath == "" || relativePath.equals("/logos/no_logo.jpg")) {
+					relativePath = "/logos/" + company.getNameInCamelCase() + ".jpg";
 					company.setImage(relativePath);
 				}
-				SaveNewLogoToFileSystem(logo, relativePath);
+				S3Util.uploadFile(logo, relativePath);
 			}
 			catch(Exception e) {
 				logger.error("There was an error updating the company logo in the file system", e);
@@ -95,13 +92,5 @@ private static final Logger logger = LoggerFactory.getLogger(RepresentedCompanyA
 		}
 		representedCompanyRepository.save(company);
 		return "redirect:/companies/admin";
-	}
-	
-	private void SaveNewLogoToFileSystem(MultipartFile logo, String relativeImagePath) throws URISyntaxException, IOException {	
-		URL staticContentUrl = this.getClass().getClassLoader().getResource("static");
-		URL fullUrl = new URL(staticContentUrl, "static" + relativeImagePath);
-		Path logoPath = Paths.get(fullUrl.toURI());
-		logger.info("company logo path: " + logoPath);
-		Files.copy(logo.getInputStream(), logoPath, StandardCopyOption.REPLACE_EXISTING);
 	}
 }

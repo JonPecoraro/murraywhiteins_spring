@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import site.util.S3Util;
+
 @Entity
 public class RepresentedCompany {
 	@Id
@@ -51,5 +53,9 @@ public class RepresentedCompany {
 		}
 		
 		return camelCaseName;
+	}
+	
+	public String getImageUrl() {
+		return S3Util.getS3ImageLink(image);
 	}
 }

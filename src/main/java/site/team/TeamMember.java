@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import site.util.S3Util;
+
 @Entity
 public class TeamMember {
 	@Id
@@ -56,21 +58,33 @@ public class TeamMember {
 	
 	public String getFullName() {
 		String fullName = firstName + " " + lastName;
-		if (suffix != null) {
+		if (suffix != null && !suffix.isEmpty()) {
 			fullName += ", " + suffix;
 		}
-		if (qualifications != null) {
+		if (qualifications != null && !qualifications.isEmpty()) {
 			fullName += ", " + qualifications;
 		}
 		return fullName;
 	}
 	
-	public String getLargeImageUrl() {
-		String largeImageUrl = "";
+	public String getLrageImagePath() {
+		String largeImageRelativeUrl = "";
 		if (image != null && image.contains(".jpg")) {
-			largeImageUrl = image.replace(".jpg", "_large.jpg");
+			largeImageRelativeUrl = image.replace(".jpg", "_large.jpg");
+		}
+		return largeImageRelativeUrl;
+	}
+	
+	public String getLargeImageUrl() {
+		String largeImageUrl = getLrageImagePath();
+		if (!largeImageUrl.equals("")) {
+			largeImageUrl = S3Util.getS3ImageLink(getLrageImagePath());
 		}
 		return largeImageUrl;
+	}
+	
+	public String getImageUrl() {
+		return S3Util.getS3ImageLink(image);
 	}
 	
 	@Override

@@ -1,12 +1,5 @@
 package site.team;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import site.util.S3Util;
 
 @Controller
 @RequestMapping(path="team/admin")
@@ -57,7 +52,7 @@ public class TeamMemberAdminController {
 		String selectedSuffix = "";
 		if (id == null) {
 			TeamMember member = new TeamMember();
-			member.setImage("/img/team/no_image.jpg");
+			member.setImage("/team/no_image.jpg");
 			model.addAttribute("teamMember", member);
 		}
 		else {
@@ -73,7 +68,10 @@ public class TeamMemberAdminController {
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public String deleteUser(@RequestParam(value="id") Integer id, Model model) {
 		try {
+			TeamMember teamMember = teamMemberRepository.findOne(id);
 			teamMemberRepository.delete(id);
+			S3Util.deleteFile(teamMember.getImage());
+			S3Util.deleteFile(teamMember.getLrageImagePath());
 			logger.info("Deleted team member with ID " + id + " from the website.");
 		} catch (IllegalArgumentException e) {
 			logger.error("Unable to delete team member", e);
@@ -88,38 +86,30 @@ public class TeamMemberAdminController {
 			// A new profile picture was passed in. Update it in the file system
 			try {
 				String relativePath = teamMember.getImage();
-				if (relativePath == null || relativePath == "" || relativePath.equals("/img/team/no_image.jpg")) {
-					relativePath = "/img/team/" + teamMember.getFirstName().toLowerCase() + "_" + teamMember.getLastName().toLowerCase() + ".jpg";
+				if (relativePath == null || relativePath == "" || relativePath.equals("/team/no_image.jpg")) {
+					relativePath = "/team/" + teamMember.getFirstName().toLowerCase() + "_" + teamMember.getLastName().toLowerCase() + ".jpg";
 					teamMember.setImage(relativePath);
 				}
-				SaveNewProfilePictureToFileSystem(profilePicture, relativePath);
+				S3Util.uploadFile(profilePicture, relativePath);
 			}
 			catch(Exception e) {
-				logger.error("There was an error updating the profile picture in the file system", e);
+				logger.error("There was an error updating the profile picture", e);
 			}
 		}
 		if (profilePictureLarge != null && profilePictureLarge.getSize() > 0) {
 			// A new large profile picture was passed in. Update it in the file system
 			try {
-				String relativePath = teamMember.getLargeImageUrl();
-				if (relativePath == null || relativePath == "" || relativePath.equals("/img/team/no_image.jpg")) {
-					relativePath = "/img/team/" + teamMember.getFirstName().toLowerCase() + "_" + teamMember.getLastName().toLowerCase() + "_large.jpg"; 
+				String relativePath = teamMember.getLrageImagePath();
+				if (relativePath == null || relativePath == "" || relativePath.equals("/team/no_image.jpg")) {
+					relativePath = "/team/" + teamMember.getFirstName().toLowerCase() + "_" + teamMember.getLastName().toLowerCase() + "_large.jpg"; 
 				}
-				SaveNewProfilePictureToFileSystem(profilePictureLarge, relativePath);
+				S3Util.uploadFile(profilePicture, relativePath);
 			}
 			catch(Exception e) {
-				logger.error("There was an error updating the large profile picture in the file system", e);
+				logger.error("There was an error updating the large profile picture", e);
 			}
 		}
 		teamMemberRepository.save(teamMember);
 		return "redirect:/team/admin";
-	}
-	
-	private void SaveNewProfilePictureToFileSystem(MultipartFile profilePicture, String relativeImagePath) throws URISyntaxException, IOException {	
-		URL staticContentUrl = this.getClass().getClassLoader().getResource("static");
-		URL fullUrl = new URL(staticContentUrl, "static" + relativeImagePath);
-		Path profilePicturePath = Paths.get(fullUrl.toURI());
-		logger.info("profile picture path: " + profilePicturePath);
-		Files.copy(profilePicture.getInputStream(), profilePicturePath, StandardCopyOption.REPLACE_EXISTING);
 	}
 }
