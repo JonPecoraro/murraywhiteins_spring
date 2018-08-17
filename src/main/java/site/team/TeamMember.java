@@ -10,7 +10,7 @@ import site.util.S3Util;
 @Entity
 public class TeamMember {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String firstName;
 	private String lastName;
