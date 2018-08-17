@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import site.common.ReCaptchaProcessor;
 import site.util.EmailUtil;
 import site.util.SmsUtil;
 
@@ -24,6 +26,9 @@ public class ContactController {
 	@Autowired
 	private JavaMailSender sender;
 	
+	@Autowired
+	private ReCaptchaProcessor recaptchaProcessor;
+	
 	@Value("${email.to}")
 	private String emailTo;
 	
@@ -32,14 +37,15 @@ public class ContactController {
 		return "contact/index";
 	}
 	
-	@RequestMapping(value="submitContactForm", params = {"firstName", "lastName", "email", "contactMessage", "protection"}, method=RequestMethod.POST)
-	public String submitContactForm(String firstName, String lastName, String email, String contactMessage, String protection, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+	@RequestMapping(value="submitContactForm", params = {"firstName", "lastName", "email", "contactMessage", "protection", "g-recaptcha-response"}, method=RequestMethod.POST)
+	public String submitContactForm(String firstName, String lastName, String email, String contactMessage, String protection, @RequestParam("g-recaptcha-response") String gReCaptchaResponse, RedirectAttributes redirectAttributes, HttpServletRequest request) {
 		String emailInformation = generateEmailInformation(firstName, lastName, email, contactMessage);
 		String smsInformation = generateSmsInformation(firstName, lastName, email, contactMessage);
 		
 		try {
 			if (protection.isEmpty())
 			{
+				recaptchaProcessor.processResponse(gReCaptchaResponse);
 				EmailUtil.sendEmail(sender, emailTo, "Website Contact Form Submitted", emailInformation, request.getRemoteAddr());
 				SmsUtil.sendMessage(smsInformation);
 			}
