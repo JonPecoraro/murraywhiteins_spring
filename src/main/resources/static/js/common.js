@@ -95,6 +95,14 @@ common.getWeather = function() {
 	}
 }
 
+// Globally available function - not within the common scope
+// This is called by any button callback that uses Re-captcha in the button's data-callback attribute
+// E.g. <button class="g-recaptcha" th:attr="data-sitekey=${@reCaptchaConfig.getSite()}" data-callback="globalReCaptchaResponseHandler">Send</button>
+globalReCaptchaResponseHandler = function(token)
+{
+	$('.g-recaptcha').parents('form').submit();
+}
+
 $(function() {
 	// Redirect HTTP requests to HTTPS website
 	common.httpsRedirect();

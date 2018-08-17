@@ -1,7 +1,7 @@
 <li th:fragment="markup" xmlns:th="http://www.thymeleaf.org">
 	<div class="pull-left" th:if="${teamMember.image != null}">
 		<a th:href="@{/team/profile(id=${teamMember.id})}" class="profileLink">
-			<img th:src="${teamMember.image}" th:alt="${teamMember.fullName}" />
+			<img th:src="${teamMember.imageUrl}" th:alt="${teamMember.fullName}" />
 		</a>
 	</div>
 	<div>
@@ -9,8 +9,8 @@
 			<li>
 				[[${teamMember.fullName}]]
 			</li>
-			<li>[[${teamMember.position}]]</li>
-			<li th:if="${teamMember.extension != null}">Extension: [[${teamMember.extension}]]</li>
+			<li th:if="${teamMember.position.length() > 0}">[[${teamMember.position}]]</li>
+			<li th:if="${teamMember.extension.length() > 0}">Extension: [[${teamMember.extension}]]</li>
 			<li><a th:href="${'mailto:' + teamMember.email}">Email [[${teamMember.firstName}]]</a></li>
 		</ul>
 	</div>

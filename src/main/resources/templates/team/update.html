@@ -23,7 +23,7 @@
 							<div class="row">
 								<div class="col-xs-6">
 									<div class="img-container">
-										<img id="teamMemberImage" th:src="*{image}" alt="Team member image" />
+										<img id="teamMemberImage" th:src="*{imageUrl}" alt="Team member image" />
 									</div>
 									<p>Change profile picture. The image must be a .jpg file that is 200 pixels wide and 150 pixels high (200x150)</p>
 									<input type="file" id="profilePicture" name="profilePicture" accept=".jpg" />
@@ -32,7 +32,7 @@
 									<div class="img-container">
 										<img id="teamMemberImageLarge" th:src="*{largeImageUrl}" width="200" height="150" alt="Large team member image" />
 									</div>
-									<p>Change large profile picture. The image must be a .jpg file that is 800 pixels wide and 600 pixels high (800x600)</p>
+									<p>Change large profile picture. The image must be a .jpg file.</p>
 									<input type="file" id="profilePictureLarge" name="profilePictureLarge" accept=".jpg" />
 								</div>
 							</div>
