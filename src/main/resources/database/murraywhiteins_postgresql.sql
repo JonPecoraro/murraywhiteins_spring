@@ -224,7 +224,7 @@ Table structure for table 'public.global_message'
 DROP TABLE IF EXISTS "public"."global_message" CASCADE;
 CREATE TABLE "public"."global_message" (
 	"id" SERIAL NOT NULL,
-	"message" VARCHAR(255) NOT NULL,
+	"message" VARCHAR(4095) NOT NULL,
 	"start_showing_date" TIMESTAMP NOT NULL,
 	"stop_showing_date" TIMESTAMP NOT NULL
 );
