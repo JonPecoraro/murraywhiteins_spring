@@ -12,7 +12,7 @@
 			</div>
 			<div class="col-sm-5">
 				<div class="well" th:if="${globalMessage.length() > 0}">
-					<p><strong>Attention!</strong> [${globalMessage}]</p>
+					<p><strong>Attention!</strong> [(${globalMessage})]</p>
 				</div>
 				<div class="clearfix" th:include="quotes/support/requestQuoteMarkup :: markup"></div>
 				<div>
