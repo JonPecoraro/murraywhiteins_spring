@@ -5,9 +5,9 @@ Murray White Insurance website using Spring Boot
 * Git (latest version)
 * Java 8 SDK or higher
 * Gradle
-* MySQL
+* Docker
 
-## Optional Pre
+## Optional Prerequisites
 * Spring Tool Suite (STS)
 * Heroku CLI
 * postgresql (for testing production settings)
@@ -50,6 +50,12 @@ git push origin develop
 * Create a pull request on the github website
 * Merge the code into master
   * Upon a successful merge, the code will be automatically built and deployed to heroku
+  
+### Running the docker container
+* docker pull postgres:11-alpine
+* docker pull adminer
+* docker container run -d -it --rm -p 5432:5432 --name murraywhiteins -e POSTGRES_PASSWORD=example -e POSTGRES_DB=murraywhiteins postgres:11-alpine
+* docker container run -d -it --rm -p 8001:8080 --link murraywhiteins:db --name adminer adminer
 
 ### Building from the command line
 * To just build, use:
