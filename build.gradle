@@ -35,6 +35,9 @@ dependencies {
 	// JPA Data (We are going to use Repositories, Entities, Hibernate, etc...)
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	
+	// Use Postgresql
+    compile('org.postgresql:postgresql:9.4-1201-jdbc4')
+	
 	// Email support
 	compile('org.springframework.boot:spring-boot-starter-mail')
 	

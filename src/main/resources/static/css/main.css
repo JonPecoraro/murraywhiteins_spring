@@ -30,6 +30,10 @@ header .contact .genericon {
 	font-size: 22px;
 	color: #4A1144;
 }
+header .contact a:hover,
+footer .social a:hover {
+	text-decoration: none;
+}
 header .navbar-nav li>a {
 	padding: 20px 0; /* top & bottom padding of 20px, right & left padding of 0 */
 }
