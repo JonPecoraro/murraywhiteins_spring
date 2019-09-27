@@ -32,23 +32,3 @@ function contactFormIsValid() {
 
 	return isValid;
 }
-
-/* Begin Google Maps related code */
-function initialize() {
-	var canvas = $('#map')[0];
-	var companyLatLong = new google.maps.LatLng(35.980192, -80.022366);
-	var mapOptions = {
-		center: companyLatLong,
-		zoom: 15,
-		mapTypeId: google.maps.MapTypeId.ROADMAP
-	};
-	var map = new google.maps.Map(canvas, mapOptions);
-
-	var marker = new google.maps.Marker({
-		position: companyLatLong,
-		map: map,
-		title: 'Murray White Insurance Agency'
-	});
-}
-google.maps.event.addDomListener(window, 'load', initialize);
-/* End Google Maps related code */
