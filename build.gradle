@@ -34,9 +34,9 @@ dependencyManagement {
 dependencies {
 	// JPA Data (We are going to use Repositories, Entities, Hibernate, etc...)
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	
-	// Use Postgresql
-    compile('org.postgresql:postgresql:9.4-1201-jdbc4')
+
+	// Use MySQL
+	compile('mysql:mysql-connector-java:8.0.20')
 	
 	// Email support
 	compile('org.springframework.boot:spring-boot-starter-mail')
@@ -57,7 +57,6 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-actuator")
 	
 	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 apply from: rootProject.file('gradle/profiles.gradle');
