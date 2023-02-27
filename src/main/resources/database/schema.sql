@@ -3,7 +3,7 @@ DROP USER IF EXISTS 'springuser'@'localhost';
 
 CREATE DATABASE murraywhiteins;
 
-CREATE USER 'springuser'@'localhost' IDENTIFIED BY 'password';
+CREATE USER 'springuser'@'localhost' IDENTIFIED BY 'TheSecretPassword';
 GRANT all ON murraywhiteins.* to 'springuser'@'localhost';
 USE murraywhiteins;
 
