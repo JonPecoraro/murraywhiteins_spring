@@ -1,13 +1,13 @@
 #teamMemberImage {
-	max-width: 100%;
+  max-width: 100%;
 }
 
 #image {
-	padding-top: 10px;
-	padding-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .img-container {
-	height: 150px;
-	width: 200px;
+  height: 225px;
+  width: 150px;
 }
